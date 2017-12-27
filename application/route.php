@@ -9,10 +9,11 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 use think\Route;
+
 /**
- * 默认路由
+ * 后台主页路由
  */
-Route::resource('index','admin/index');
+Route::resource('index','admin/main');
 
 /**
  * 分类路由
@@ -27,6 +28,8 @@ Route::resource('Rbac','admin/Rabc');
 /**
  * 角色管理路由
  */
+Route::get('node/[:id]','admin/Role/nodeList');
+Route::post('UpNode','admin/Role/UpdataNode');
 Route::resource('Role','admin/Role');
 
 /**

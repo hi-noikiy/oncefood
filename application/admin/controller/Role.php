@@ -53,16 +53,15 @@ class role extends Controller
             // 提交事务
             Db::commit();
 
-            $result = 1;
         } catch (\Exception $e) {
-             $result = 2;
             // 回滚事务
             Db::rollback();
+
         }
 
-        if ($result == 1) {
+        if (empty($e)) {
             return $this->success('成功',url('admin/role/index'));
-        }elseif($result == 2){
+        }else{
             return $this->error('失败');
         }
     }
@@ -117,11 +116,11 @@ class role extends Controller
 
         $list = db('role')->where('id',$id)->update($data);
 
-       if ($list) {
-           return $this->success('成功',url('admin/role/index'));
-       }else{
-            return $this->error('失败');
-       }
+        if ($list) {
+           return $this->success('更新成功',url('admin/role/index'));
+        }else{
+            return $this->error('更新失败');
+        }
     }
 
     /**
@@ -216,11 +215,12 @@ class role extends Controller
             } catch (Exception $e) {
                 
                 Db::rollback();
+                
             }
 
             if (empty($e)) {
                 return $this->success('分配成功',url('admin/role/index'));
-            } else {
+            }else{
                 return $this->error('分配失败');
             }
 

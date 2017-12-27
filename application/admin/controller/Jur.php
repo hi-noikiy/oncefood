@@ -44,9 +44,18 @@ class jur extends Controller
     public function save(Request $request)
     {
         $data = $request->post();
-        $list = db('node')->insert($data);
+        
+        Db::startTrans();
+        try{
+            $list = db('node')->insert($data);
 
-        if ($list) {
+            Db::commit();
+        } catch (\Exception $e) {
+            // 回滚事务
+            Db::rollback();
+        }
+
+        if (empty($e)) {
             return $this->success('成功',url('admin/jur/index'));
         }else{
             return $this->error('失败');
@@ -119,6 +128,16 @@ class jur extends Controller
      */
     public function delete($id)
     {
+        // 判断$id 在 user_role里是否存在?
+        $data = Db::name('role_node')->where('nid', $id)->find();
+        if ($data) {
+            // 存在则提示无法删除
+            $info['status'] = false;
+            $info['id'] = $id;
+            $info['info'] = '该权限已绑定角色,无法删除!';
+            return json($info);
+        }
+
         $result = db('node')->delete($id);
         if ($result > 0) {
             $info['status'] = true;
@@ -128,7 +147,7 @@ class jur extends Controller
             $info['status'] = false;
             $info['id'] = $id;
             $info['info'] = 'ID为: ' . $id . '的用户删除失败,请重试!';
-        }
+        };
         return json($info);
         
     }
