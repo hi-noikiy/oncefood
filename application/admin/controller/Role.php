@@ -48,7 +48,7 @@ class role extends Controller
         Db::startTrans();
         try{
             $id = db('role')->insertGetId($data);
-            $data = ['rid' => $id , 'c' => '1'];
+            $data = ['rid' => $id , 'nid' => '1'];
             Db::name('role_node')->insert($data);
             // 提交事务
             Db::commit();
@@ -132,7 +132,40 @@ class role extends Controller
      */
     public function delete($id)
     {
-        //
+        // 判断$id 在 user_role里是否存在?
+        $data = Db::name('user_role')->where('rid', $id)->find();
+
+        if ($data) {
+            // 存在则提示无法删除
+            $info['status'] = false;
+            $info['id'] = $id;
+            $info['info'] = '该角色已绑定用户,无法删除!';
+            return json($info);
+        }else{
+            // 开启事务删除表关联
+            Db::startTrans();
+            try {
+                $result = db('role')->delete($id);
+                $res = db('role_node')->where('rid', $id)->delete();
+
+                Db::commit();
+            } catch (Exception $e) {
+                Db::rollback();
+            }
+
+        }
+        if (empty($e)) {
+            $info['status'] = true;
+            $info['id'] = $id;
+            $info['info'] = 'ID为: ' . $id . '的用户删除成功!';
+            return json($info);
+        } else {
+            $info['status'] = false;
+            $info['id'] = $id;
+            $info['info'] = '数据出错,已回调!';
+            return json($info);
+            // 这里问下老师,为什么没有进入回这个区间?
+        }
     }
 
     /**
@@ -145,7 +178,6 @@ class role extends Controller
         $name = Db::name('role')->field('id,name')->where('id',$id)->find();
         $nid = Db::name('role_node')->field('nid')->where('rid',$id)->group('nid')->select();
         $node = Db::name('node')->field('id,name')->where('status','1')->select();
-
 
         foreach ($nid as $v) {
           $list[] = $v['nid'];

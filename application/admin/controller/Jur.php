@@ -119,7 +119,6 @@ class jur extends Controller
      */
     public function delete($id)
     {
-        
         $result = db('node')->delete($id);
         if ($result > 0) {
             $info['status'] = true;
@@ -131,6 +130,7 @@ class jur extends Controller
             $info['info'] = 'ID为: ' . $id . '的用户删除失败,请重试!';
         }
         return json($info);
+        
     }
        
 }
