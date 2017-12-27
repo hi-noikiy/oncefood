@@ -5,6 +5,7 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use think\Db;
+
 class role extends Controller
 {
     /**
@@ -44,11 +45,24 @@ class role extends Controller
     {
         $data = $request->post();
 
-        $list = db('role')->insert($data);
+        Db::startTrans();
+        try{
+            $id = db('role')->insertGetId($data);
+            $data = ['rid' => $id , 'c' => '1'];
+            Db::name('role_node')->insert($data);
+            // 提交事务
+            Db::commit();
 
-        if ($list) {
+            $result = 1;
+        } catch (\Exception $e) {
+             $result = 2;
+            // 回滚事务
+            Db::rollback();
+        }
+
+        if ($result == 1) {
             return $this->success('成功',url('admin/role/index'));
-        }else{
+        }elseif($result == 2){
             return $this->error('失败');
         }
     }
@@ -89,8 +103,17 @@ class role extends Controller
      */
     public function update(Request $request, $id)
     {
+        $result = Db::name('role')->where('id',$id)->find();
         $data = $request->post();
         unset($data['_method']);
+        $data['id'] = $id;
+        // 比较传入数据 和 数据库数据是否一致
+        $diff = array_diff($result,$data);
+        
+        if (empty($diff)) {
+            return $this->success('数据未修改,保存成功!',url('admin/role/index'));
+        }
+
 
         $list = db('role')->where('id',$id)->update($data);
 
@@ -111,6 +134,7 @@ class role extends Controller
     {
         //
     }
+
     /**
      * [加载权限明细]
      * @param  [type] $id [用户ID]
@@ -126,8 +150,7 @@ class role extends Controller
         foreach ($nid as $v) {
           $list[] = $v['nid'];
         }
-        // var_dump($list);
-        // die;
+
         return view('admin@role/nodeList',[
             'title' => '分配权限',
             'name' => $name, 
@@ -136,10 +159,10 @@ class role extends Controller
         ]);
     }
 
-    /**
-     * [执行变更权限]
-     * @param [type] $id [description]
-     */
+   /**
+    * 执行权限分配
+    * @param Request $Request [请求]
+    */
     public function UpdataNode(Request $Request)
     {
         $data = $Request->post();
@@ -147,26 +170,27 @@ class role extends Controller
         if (empty($data['node'])) {
             return $this->error('权限不能为空');
         }
+            Db::startTrans();
+            try {
+                $result = db('role_node')->where('rid',$data['id'])->delete();
 
+                foreach ($data['node'] as $v) {
+                    $res['nid'] = $v;
+                    $res['rid'] = $data['id'];
+                    $result = db('role_node')->insert($res);
+                }
 
-            $result = db('role_node')->where('rid',$data['id'])->delete();
-
-            foreach ($data['node'] as $v) {
-                $res['nid'] = $v;
-                $res['rid'] = $data['id'];
-                $result = db('role_node')->insert($res);
+                Db::commit();
+            } catch (Exception $e) {
+                
+                Db::rollback();
             }
 
-            if ($result) {
+            if (empty($e)) {
                 return $this->success('分配成功',url('admin/role/index'));
             } else {
                 return $this->error('分配失败');
             }
-            
-           
-
-            
-
 
     }
 }

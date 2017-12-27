@@ -4,6 +4,7 @@ namespace app\admin\controller;
 
 use think\Controller;
 use think\Request;
+use think\Db;
 
 class jur extends Controller
 {
@@ -89,15 +90,23 @@ class jur extends Controller
      */
     public function update(Request $request, $id)
     {
-       $data = $request->post();
-       unset($data['_method']);
+        $result = Db::name('node')->where('id',$id)->find();
+        $data = $request->post();
+        unset($data['_method']);
+        $data['id'] = $id;
+        // 比较传入数据 和 数据库数据是否一致
+        $diff = array_diff($result,$data);
+        
+        if (empty($diff)) {
+            return $this->success('数据未修改,保存成功!',url('admin/jur/index'));
+        }
 
        $list = db('node')->where('id',$id)->update($data);
 
        if ($list) {
-           return $this->success('成功',url('admin/jur/index'));
+           return $this->success('编辑成功',url('admin/jur/index'));
        }else{
-            return $this->error('失败');
+            return $this->error('编辑失败');
        }
          
     }
