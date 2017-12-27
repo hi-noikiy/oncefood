@@ -1,0 +1,63 @@
+{extend name="main/index" /}
+{block name="main"}
+<!-- Start right content -->
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <!-- Page Heading Start -->
+        <div class="page-heading">
+
+            <!-- Page Heading End-->                <!-- Your awesome content goes here -->
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="widget">
+                        <div class="widget-header transparent">
+                            <h2><strong>{$title}</strong></h2>
+                            <div class="additional-btn">
+                                <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                                <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                                <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                            </div>
+                        </div>
+                        <div class="widget-content">
+                            <div class="table-responsive">
+                                <table data-sortable class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>账户</th>
+                                        <th>名称</th>
+                                        <th>职能</th>
+                                        <th data-sortable="false">操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {volist name="list" id="v"}
+                                    <tr>
+                                        <td>{$v.id}</td>
+                                        <td>{$v.username}</td>
+                                        <td>{$v.name}</td>
+                                        <td>{$v.role}</td>
+                                        
+                                        <td>
+                                            <button class="btn btn-success">修改</button>
+                                            <button class="btn btn-danger">删除</button>
+                                            <button class="btn btn-info">分配权限</button>
+                                        </td>
+                                    </tr>
+                                    {/volist}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
