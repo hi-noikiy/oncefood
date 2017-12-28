@@ -86,7 +86,7 @@ class role extends Controller
     public function edit($id)
     {
         $list = db('role')->where('id',$id)->find();
-
+        
         return view('admin@role/edit',[
             'title' => '角色修改',
             'list' => $list

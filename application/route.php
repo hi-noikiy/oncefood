@@ -23,7 +23,7 @@ Route::resource('cate','admin/Cate');
 /**
  * 用户管理路由
  */
-Route::resource('Rbac','admin/Rabc');
+Route::resource('Rabc','admin/Rabc');
 
 /**
  * 角色管理路由

@@ -18,16 +18,17 @@
                     </div>
                     <div class="widget-content padding">
                         <div id="basic-form">
-                            <form role="form" action="{:url('admin/Rabc/save')}" method="post">
+                            <form role="form" action="{:url('admin/Rabc/update', ['id'=>$list['id']])}" method="post">
+                                <input type="hidden" name="_method" value="PUT">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">用户名</label>
                                     <input type="text" class="form-control" id="exampleInputEmail1"
-                                           placeholder="username" name="username">
+                                           placeholder="name" name="username" value="{$list.username}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">真实姓名</label>
+                                    <label for="exampleInputEmail1">姓名</label>
                                     <input type="text" class="form-control" id="exampleInputEmail1"
-                                           placeholder="name" name="name">
+                                           placeholder="username" name="name" value="{$list.name}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">密码</label>
@@ -39,16 +40,18 @@
                                     <input type="password" class="form-control" id="exampleInputPassword1"
                                            placeholder="Password" name="repass">
                                 </div>
-                                <button type="submit" class="btn btn-info">添加</button>
+                                      <button class="btn btn-info">编辑</button>
                             </form>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 </div>
+
 {/block}
+
+
+
+

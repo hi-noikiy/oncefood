@@ -48,7 +48,23 @@ class Rabc extends Controller
      */
     public function save(Request $request)
     {
-        //
+       $data = $request->post();
+       
+       if ($data['userpass'] !== $data['repass']) {
+           return $this->error('两次输入不一致',url('admin/Rabc/create'));
+       }
+       unset($data['repass']);
+       $data['userpass'] = md5($data['userpass']);
+
+       $result = db('user')->insertGetId($data);
+
+        if ($result) {
+            // 创建成功后,默认给一个角色;
+            Db::name('user_role')->insert(['uid' => $result,'rid' => '4']);
+            return $this->success('创建成功',url('admin/Rabc/index'));
+        }else{
+            return $this->error('创建失败');
+        }
     }
 
     /**
@@ -70,7 +86,12 @@ class Rabc extends Controller
      */
     public function edit($id)
     {
-        //
+        $list = db('user')->where('id',$id)->find();
+
+        return view('admin@Rabc/edit',[
+            'title' => '用户修改',
+            'list' => $list
+        ]);
     }
 
     /**
@@ -82,7 +103,42 @@ class Rabc extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->post();
+        $data['id'] = $id;
+        unset($data['_method']);
+        $result = Db::name('user')->where('id',$id)->find();
+        // 如果传入的数据,密码为空;就把数据库密码赋值给它;
+        if (empty($data['userpass'])) {
+            $data['userpass'] = $result['userpass'];
+            unset($data['repass']);
+
+            // 比较其他数据是否一致
+            $diff = array_diff($result,$data);
+            // 一致则不更新直接返回
+            if (empty($diff)) {
+                return $this->success('数据未修改,保存成功!',url('admin/Rabc/index'));
+            }
+
+            // 有更新则更新返回
+            $list = db('user')->where('id',$id)->update($data);
+
+            if ($list) {
+               return $this->success('更新成功',url('admin/Rabc/index'));
+            }else{
+                return $this->error('更新失败');
+            }
+        }
+        // 如果密码不为空,用JS验证表单;确保提交的数据是正常的;有更新则更新返回;
+        unset($data['repass']);
+
+        $list = db('user')->where('id',$id)->update($data);
+
+        if ($list) {
+           return $this->success('更新成功',url('admin/Rabc/index'));
+        }else{
+            return $this->error('更新失败');
+        }
+
     }
 
     /**
@@ -93,6 +149,29 @@ class Rabc extends Controller
      */
     public function delete($id)
     {
-        //
+        // 先判断有没有表关联
+        $uid = Db::name('user_role')->where('uid',$id)->select();
+
+        if (empty($uid)) {
+            // 没有关联项,直接删除;
+            Db::name('user')->delete($id);
+
+            $info['status'] = true;
+            $info['id'] = $id;
+            $info['info'] = 'ID为: ' . $id . '删除成功!';
+            return json($info);
+        }else{
+            // 有关联删除关联;
+            Db::name('user')->delete($id);
+            Db::name('user_role')->where('uid',$id)->delete();
+
+            $info['status'] = true;
+            $info['id'] = $id;
+            $info['info'] = '删除了ID为: ' . $id . '的账号及角色!';
+            return json($info);
+        }
+
+
+        
     }
 }
