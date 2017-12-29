@@ -30,7 +30,9 @@ class Cate extends AdminBase
      */
     public function create()
     {
-        
+        return view('admin@Cate/create',[
+            'title' => '添加分类'
+        ]);
     }
 
     /**
@@ -41,7 +43,7 @@ class Cate extends AdminBase
      */
     public function save(Request $request)
     {
-        return '6666';
+        return '执行添加分类页面';
     }
 
     /**

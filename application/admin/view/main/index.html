@@ -24,7 +24,7 @@
     <link href="/static/admin/assets/libs/jquery-icheck/skins/all.css" rel="stylesheet"/>
     <!-- Code Highlighter for Demo -->
     <link href="/static/admin/assets/libs/prettify/github.css" rel="stylesheet"/>
-    
+
     <!-- Extra CSS Libraries Start -->
     <link href="/static/admin/assets/libs/rickshaw/rickshaw.min.css" rel="stylesheet" type="text/css"/>
     <link href="/static/admin/assets/libs/morrischart/morris.css" rel="stylesheet" type="text/css"/>
@@ -48,7 +48,7 @@
     <![endif]-->
 
     <link rel="shortcut icon" href="/static/admin/assets/img/favicon.ico">
-    
+
 </head>
 <body class="fixed-left">
 <!-- Modal Start -->
@@ -65,42 +65,8 @@
         </div>
     </div>
 </div>
-<!-- Modal fade in scale up -->
-<div class="md-modal md-fade-in-scale-up" id="md-fade-in-scale-up">
-    <div class="md-content">
-        <h3>分类添加</h3>
-        <div>
-              <div class="widget-content padding">
-                        <div id="basic-form">
-                            <form role="form" action="{:url('admin/Cate/save')}" method="post">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">用户名</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                           placeholder="username">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">真实姓名</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                           placeholder="name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">密码</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1"
-                                           placeholder="Password">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">确认密码</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1"
-                                           placeholder="Password">
-                                </div>
-                                <button class="btn btn-success">提交</button>
-                            </form>
-                        </div>
-                            <button class="btn btn-danger md-close">关闭</button>
-                    </div>
-        </div>
-    </div><!-- End div .md-content -->
-</div><!-- End div .md-modal .md-fade-in-scale-up -->
+
+
 
 <!-- Modal Logout -->
 <div class="md-modal md-just-me" id="logout-modal">
@@ -127,7 +93,8 @@
     <div class="topbar">
         <div class="topbar-left">
             <div class="logo">
-                <h1><a href="{:url('admin/main/index')}"><img src="/static/admin/assets/img/logo.png" alt="Logo"></a></h1>
+                <h1><a href="{:url('admin/main/index')}"><img src="/static/admin/assets/img/logo.png" alt="Logo"></a>
+                </h1>
             </div>
             <button class="button-menu-mobile open-left">
                 <i class="fa fa-bars"></i>
@@ -276,7 +243,8 @@
             <!--- Profile -->
             <div class="profile-info">
                 <div class="col-xs-4">
-                    <a data-toggle="tooltip" title="See task progress" class="md-trigger" data-modal="task-progress"><img
+                    <a data-toggle="tooltip" title="See task progress" class="md-trigger"
+                       data-modal="task-progress"><img
                             src="/static/index/face/batman.jpg" class="img-responsive rounded-image profile-image"></a>
                 </div>
                 <div class="col-xs-8">
@@ -299,8 +267,7 @@
                         <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
                         <ul>
                             <li><a href="{:url('admin/cate/index')}"><span>分类列表</span></a></li>
-                            <!-- <li><a href="{:url('admin/cate/create')}"><span>添加分类</span></a></li> -->
-                            <li><a data-modal="md-fade-in-scale-up" class="btn btn-default btn-sm md-trigger">添加分类</a></li>
+                            <li><a href="{:url('admin/cate/create')}"><span>添加分类</span></a></li>
                         </ul>
                     </li>
                     <li class="has_sub"><a href="javascript:void(0);"><i
@@ -311,7 +278,7 @@
                             <li><a href="{:url('admin/Rabc/create')}"><span>添加用户</span></a></li>
                         </ul>
                     </li>
-                     <li class="has_sub"><a href="javascript:void(0);"><i
+                    <li class="has_sub"><a href="javascript:void(0);"><i
                             class="icon-feather"></i><span>角色管理</span> <span class="pull-right"><i
                             class="fa fa-angle-down"></i></span></a>
                         <ul>
@@ -319,7 +286,7 @@
                             <li><a href="{:url('admin/Role/create')}"><span>添加角色</span></a></li>
                         </ul>
                     </li>
-                     <li class="has_sub"><a href="javascript:void(0);"><i
+                    <li class="has_sub"><a href="javascript:void(0);"><i
                             class="icon-feather"></i><span>权限管理</span> <span class="pull-right"><i
                             class="fa fa-angle-down"></i></span></a>
                         <ul>
@@ -335,7 +302,7 @@
         </div>
     </div>
     <!-- Left Sidebar End -->
-{block name="main"}
+    {block name="main"}
     <!-- Start right content -->
     <div class="content-page">
         <!-- ============================================================== -->
@@ -1027,19 +994,23 @@
 
     </div>
     <!-- End right content -->
-{/block}
+    {/block}
 
 </div>
 <div id="contextMenu" class="dropdown clearfix">
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"
         style="display:block;position:static;margin-bottom:5px;">
-        <li><a tabindex="-1" href="javascript:void(0)" data-priority="high"><i class="fa fa-circle-o text-red-1"></i> High
+        <li><a tabindex="-1" href="javascript:void(0)" data-priority="high"><i class="fa fa-circle-o text-red-1"></i>
+            High
             Priority</a></li>
-        <li><a tabindex="-1" href="javascript:void(0)" data-priority="medium"><i class="fa fa-circle-o text-orange-3"></i>
+        <li><a tabindex="-1" href="javascript:void(0)" data-priority="medium"><i
+                class="fa fa-circle-o text-orange-3"></i>
             Medium Priority</a></li>
-        <li><a tabindex="-1" href="javascript:void(0)" data-priority="low"><i class="fa fa-circle-o text-yellow-1"></i> Low
+        <li><a tabindex="-1" href="javascript:void(0)" data-priority="low"><i class="fa fa-circle-o text-yellow-1"></i>
+            Low
             Priority</a></li>
-        <li><a tabindex="-1" href="javascript:void(0)" data-priority="none"><i class="fa fa-circle-o text-lightblue-1"></i>
+        <li><a tabindex="-1" href="javascript:void(0)" data-priority="none"><i
+                class="fa fa-circle-o text-lightblue-1"></i>
             None</a></li>
     </ul>
 </div>
@@ -1051,28 +1022,28 @@
     var resizefunc = [];
 </script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="/static/admin/assets/libs/jquery/jquery-1.11.1.min.js"></script>
-    <script src="/static/admin/assets/libs/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/static/admin/assets/libs/jqueryui/jquery-ui-1.10.4.custom.min.js"></script>
-    <script src="/static/admin/assets/libs/jquery-ui-touch/jquery.ui.touch-punch.min.js"></script>
-    <script src="/static/admin/assets/libs/jquery-detectmobile/detect.js"></script>
-    <script src="/static/admin/assets/libs/jquery-animate-numbers/jquery.animateNumbers.js"></script>
-    <script src="/static/admin/assets/libs/ios7-switch/ios7.switch.js"></script>
-    <script src="/static/admin/assets/libs/fastclick/fastclick.js"></script>
-    <script src="/static/admin/assets/libs/jquery-blockui/jquery.blockUI.js"></script>
-    <script src="/static/admin/assets/libs/bootstrap-bootbox/bootbox.min.js"></script>
-    <script src="/static/admin/assets/libs/jquery-slimscroll/jquery.slimscroll.js"></script>
-    <script src="/static/admin/assets/libs/jquery-sparkline/jquery-sparkline.js"></script>
-    <script src="/static/admin/assets/libs/nifty-modal/js/classie.js"></script>
-    <script src="/static/admin/assets/libs/nifty-modal/js/modalEffects.js"></script>
-    <script src="/static/admin/assets/libs/sortable/sortable.min.js"></script>
-    <script src="/static/admin/assets/libs/bootstrap-fileinput/bootstrap.file-input.js"></script>
-    <script src="/static/admin/assets/libs/bootstrap-select/bootstrap-select.min.js"></script>
-    <script src="/static/admin/assets/libs/bootstrap-select2/select2.min.js"></script>
-    <script src="/static/admin/assets/libs/magnific-popup/jquery.magnific-popup.min.js"></script> 
-    <script src="/static/admin/assets/libs/pace/pace.min.js"></script>
-    <script src="/static/admin/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="/static/admin/assets/libs/jquery-icheck/icheck.min.js"></script>
+<script src="/static/admin/assets/libs/jquery/jquery-1.11.1.min.js"></script>
+<script src="/static/admin/assets/libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/admin/assets/libs/jqueryui/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="/static/admin/assets/libs/jquery-ui-touch/jquery.ui.touch-punch.min.js"></script>
+<script src="/static/admin/assets/libs/jquery-detectmobile/detect.js"></script>
+<script src="/static/admin/assets/libs/jquery-animate-numbers/jquery.animateNumbers.js"></script>
+<script src="/static/admin/assets/libs/ios7-switch/ios7.switch.js"></script>
+<script src="/static/admin/assets/libs/fastclick/fastclick.js"></script>
+<script src="/static/admin/assets/libs/jquery-blockui/jquery.blockUI.js"></script>
+<script src="/static/admin/assets/libs/bootstrap-bootbox/bootbox.min.js"></script>
+<script src="/static/admin/assets/libs/jquery-slimscroll/jquery.slimscroll.js"></script>
+<script src="/static/admin/assets/libs/jquery-sparkline/jquery-sparkline.js"></script>
+<script src="/static/admin/assets/libs/nifty-modal/js/classie.js"></script>
+<script src="/static/admin/assets/libs/nifty-modal/js/modalEffects.js"></script>
+<script src="/static/admin/assets/libs/sortable/sortable.min.js"></script>
+<script src="/static/admin/assets/libs/bootstrap-fileinput/bootstrap.file-input.js"></script>
+<script src="/static/admin/assets/libs/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="/static/admin/assets/libs/bootstrap-select2/select2.min.js"></script>
+<script src="/static/admin/assets/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="/static/admin/assets/libs/pace/pace.min.js"></script>
+<script src="/static/admin/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="/static/admin/assets/libs/jquery-icheck/icheck.min.js"></script>
 
 <!-- Demo Specific JS Libraries -->
 <script src="/static/admin/assets/libs/prettify/prettify.js"></script>
