@@ -78,6 +78,7 @@ class role extends AdminBase
         $nid = Db::name('role_node')->field('nid')->where('rid',$id)->group('nid')->select();
         $node = Db::name('node')->field('id,name')->where('status','1')->select();
 
+
         foreach ($nid as $v) {
           $list[] = $v['nid'];
         }

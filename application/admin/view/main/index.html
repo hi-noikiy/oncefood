@@ -65,7 +65,42 @@
         </div>
     </div>
 </div>
-
+<!-- Modal fade in scale up -->
+<div class="md-modal md-fade-in-scale-up" id="md-fade-in-scale-up">
+    <div class="md-content">
+        <h3>分类添加</h3>
+        <div>
+              <div class="widget-content padding">
+                        <div id="basic-form">
+                            <form role="form" action="{:url('admin/Cate/save')}" method="post">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">用户名</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                           placeholder="username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">真实姓名</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                           placeholder="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">密码</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1"
+                                           placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">确认密码</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1"
+                                           placeholder="Password">
+                                </div>
+                                <button class="btn btn-success">提交</button>
+                            </form>
+                        </div>
+                            <button class="btn btn-danger md-close">关闭</button>
+                    </div>
+        </div>
+    </div><!-- End div .md-content -->
+</div><!-- End div .md-modal .md-fade-in-scale-up -->
 
 <!-- Modal Logout -->
 <div class="md-modal md-just-me" id="logout-modal">
@@ -264,7 +299,8 @@
                         <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
                         <ul>
                             <li><a href="{:url('admin/cate/index')}"><span>分类列表</span></a></li>
-                            <li><a href="{:url('admin/cate/create')}"><span>添加分类</span></a></li>
+                            <!-- <li><a href="{:url('admin/cate/create')}"><span>添加分类</span></a></li> -->
+                            <li><a data-modal="md-fade-in-scale-up" class="btn btn-default btn-sm md-trigger">添加分类</a></li>
                         </ul>
                     </li>
                     <li class="has_sub"><a href="javascript:void(0);"><i
