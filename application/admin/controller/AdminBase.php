@@ -38,11 +38,11 @@ class AdminBase extends controller
             }
             $Acl = array_combine($A,$B);
             
-            // var_dump($Acl);
+            
             // var_dump($this->Contr);die;
 
             // 判断用户请求的控制器是否在Acl里
-            if (empty($Acl[$this->Contr]) || !in_array($Func,$Acl[$this->Contr])) {
+            if (empty($Acl[$this->Contr]) || !in_array($this->Func,$Acl[$this->Contr])) {
                $this->error("抱歉！没有操作权限！");
 
             }

@@ -14,10 +14,15 @@ use think\Route;
  */
 
 Route::rule('/','index/index/index');
+
+
+
 /**
- * 后台默认路由
+ * 后台默认静态路由
  */
 Route::get('admin','admin/index/index');
+
+
 
 /**
  * 后台主页路由
@@ -34,7 +39,7 @@ Route::resource('cate','admin/Cate');
 /**
  * 用户管理路由
  */
-Route::post('UpRole','admin/Rabc/UpRloe');
+Route::post('UpRole','admin/rabc/UpRole');
 Route::resource('Rabc','admin/Rabc');
 
 /**
