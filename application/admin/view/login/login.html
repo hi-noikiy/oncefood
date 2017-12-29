@@ -100,23 +100,30 @@
         <div class="login-wrap animated flipInX">
             <div class="login-block">
                 <img src="/static/index/face/batman.jpg" class="img-circle not-logged-avatar">
-                <form role="form" action="{:url('admin/main/logindo')}">
+                <form role="form" action="{:url('admin/main/logindo')}" method="post">
                     <div class="form-group login-input">
                         <i class="fa fa-user overlay"></i>
-                        <input type="text" class="form-control text-input" placeholder="Username">
+                        <input type="text" class="form-control text-input" placeholder="账号" name="username">
                     </div>
                     <div class="form-group login-input">
                         <i class="fa fa-key overlay"></i>
-                        <input type="password" class="form-control text-input" placeholder="********">
+                        <input type="password" class="form-control text-input" placeholder="密码" name="userpass">
                     </div>
-
+                    <div class="form-group login-input">
+                        <div><img src="/captcha" alt="点击更新验证码" onclick="reloadcode(this)" /></div>
+                        <script>
+                          function reloadcode(obj) {
+                             obj.src="/captcha?id="+Math.random()
+                          }
+                        </script>
+                    </div>
+                    <div class="form-group login-input">
+                        <i class="fa fa-key overlay"></i>
+                        <input type="password" class="form-control text-input" placeholder="输入验证码" name="code">
+                    </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <button type="submit" class="btn btn-success btn-block">LOGIN</button>
-                        </div>
-                        <div class="col-sm-12">
-                            <p class="text-right h4">后台'暂不开放'注册功能!</p>
-                        </div>
                     </div>
                 </form>
             </div>
@@ -124,6 +131,8 @@
 
     </div>
 </div>
+
+
 <!-- the overlay modal element -->
 <div class="md-overlay"></div>
 <!-- End of eoverlay modal -->

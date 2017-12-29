@@ -6,7 +6,7 @@ use think\Controller;
 use think\Request;
 use think\Db;
 
-class jur extends Controller
+class jur extends AdminBase
 {
     /**
      * 显示资源列表

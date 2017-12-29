@@ -6,3 +6,4 @@ return [
     //默认成功跳转对应的模板文件
     'dispatch_success_tmpl' => APP_PATH . 'admin/view/main/jump.html'
 ];
+

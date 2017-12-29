@@ -5,7 +5,7 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use think\Db;
-class Rabc extends Controller
+class Rabc extends AdminBase
 {
     /**
      * 显示资源列表
@@ -68,14 +68,28 @@ class Rabc extends Controller
     }
 
     /**
-     * 显示指定的资源
+     * 加载角色列表
      *
      * @param  int  $id
      * @return \think\Response
      */
     public function read($id)
     {
-        //
+        $name = Db::name('user')->field('id,name')->find($id);
+        $role = Db::name('role')->field('id,name')->where('status','1')->select();
+        $rid = Db::name('user_role')->field('rid')->where('uid',$id)->select();
+        
+        foreach ($rid as $v) {
+          $list[] = $v['rid'];
+        }
+
+
+        return view('admin@Rabc/rolelist',[
+            'title' => '角色列表', 
+            'name' => $name,
+            'role' => $role,
+            'rid' => $list
+        ]);
     }
 
     /**
@@ -130,7 +144,8 @@ class Rabc extends Controller
         }
         // 如果密码不为空,用JS验证表单;确保提交的数据是正常的;有更新则更新返回;
         unset($data['repass']);
-
+        $data['userpass'] = md5($data['userpass']);
+        
         $list = db('user')->where('id',$id)->update($data);
 
         if ($list) {
@@ -170,8 +185,39 @@ class Rabc extends Controller
             $info['info'] = '删除了ID为: ' . $id . '的账号及角色!';
             return json($info);
         }
+    }
 
+    /**
+     * [UpRole description]
+     */
+    public function UpRole(Request $Request)
+    {
+        $data = $Request->post();
 
-        
+        if (empty($data['role'])) {
+            return $this->error('权限不能为空');
+        }
+        Db::startTrans();
+        try {
+            $result = db('user_role')->where('uid',$data['id'])->delete();
+
+            foreach ($data['role'] as $v) {
+                $res['rid'] = $v;
+                $res['uid'] = $data['id'];
+                $result = db('user_role')->insert($res);
+            }
+
+            Db::commit();
+        } catch (Exception $e) {
+            
+            Db::rollback();
+            
+        }
+
+        if (empty($e)) {
+            return $this->success('分配成功',url('admin/Rabc/index'));
+        }else{
+            return $this->error('分配失败');
+        }
     }
 }
