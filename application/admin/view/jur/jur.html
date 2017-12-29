@@ -1,0 +1,100 @@
+{extend name="main/index" /}
+{block name="main"}
+<!-- Start right content -->
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <!-- Page Heading Start -->
+        <div class="page-heading">
+
+            <!-- Page Heading End-->                <!-- Your awesome content goes here -->
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="widget">
+                        <div class="widget-header transparent">
+                            <h2><strong>{$title}</strong></h2>
+                            <div class="additional-btn">
+                                <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                                <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                                <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                            </div>
+                        </div>
+                        <div class="widget-content">
+                            <div class="table-responsive">
+                                <table data-sortable class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>权限</th>
+                                        <th>控制器</th>
+                                        <th>方法</th>
+                                        <th>状态</th>
+                                        <th data-sortable="false">操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {volist name="list" id="v"}
+                                    <tr>
+                                        <td>{$v.id}</td>
+                                        <td>{$v.name}</td>
+                                        <td>{$v.mname}</td>
+                                        <td>{$v.aname}</td>
+                                        <td>{$v.status ? '启用' : '停用'}</td>
+                                        <td>
+                                            <a href="{:url('admin/Jur/edit', ['id'=>$v['id']])}" class="btn btn-success">编辑</a>
+                                            <button class="btn btn-danger del-btn" data-id="{$v.id}">删除</button>
+                                        </td>
+                                    </tr>
+                                    {/volist}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/admin/assets/js/jquery.min.js"></script>
+<script src="/static/admin/assets/js/toastr.min.js"></script>
+<script>
+        $(function() {
+          $('.del-btn').click(function(){
+                var ac_id = $(this).attr('data-id');
+                // console.log(ac_id);
+                if (confirm('您确定要 [ 删 除 ] 该用户吗?')) {
+                var obj = $(this).parents('tr');
+                
+                delAjax(ac_id, obj); // 执行AJAX删除
+            }
+          });
+        });
+
+        // 执行AJAX删除
+        function delAjax(id, obj) {
+            $.ajax({
+                type: 'delete',
+                url: '/Jur/' + id,
+                dataType : 'json',
+                success : function (data){
+                    console.log(data);
+                    if (data.status) {
+                        toastr.success(data.info);
+                        obj.remove();
+                    } else {
+                        toastr.error(data.info, '警告 :');
+                    }
+                },
+                error : function () {
+                    alert('AJAX执行失败!');
+                }
+            });
+        }
+
+</script>
+{/block}
