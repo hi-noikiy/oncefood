@@ -5,7 +5,7 @@ namespace app\home\controller;
 use think\Controller;
 use think\Request;
 use think\Db;
-
+use kuange\qqconnect\QC;
 class Login extends Controller
 {
     /**
@@ -59,19 +59,42 @@ class Login extends Controller
 
     }
     /**
-     * 手机短信登录
+     * 手机短信登录待修改
      */
-    public function phone(){
+    public function phone($phone){
 
-        var_dump('3333333333333');
-       $data = sendTemplateSMS('18291042861',array(1234,3),1);
-       var_dump('33333344444444444444444');
-       var_dump($data);die;
+        $tempId = 1;
+        $datas = array(mt_rand(0000,9999),3);
+        $to = $phone;
+        $result = sendTemplateSMS($to, $datas, $tempId);
+//        var_dump($result);
+        if ($result){
+            $info['status'] = true;
+            $info['info'] = '发送成功';
+        }else{
+            $info['status'] = false;
+            $info['info'] = '发送失败';
+        }
+        return json($info);
 
 
     }
+//    qq登录
+//    public function qqlogin(){
+//        $qq = new QC();
+//        $url = $qq->qq_login();
+//        $this->redirect($url);
+//    }
+//    public function qqcallback(UserModel $user){
+//        $qq = new QC();
+//        $qq->qq_callback();
+//        $qq->get_openid();
+//        $qq = new QC();
+//        $datas = $qq->get_user_info();
+//
+//    }
     /**
-     * 登录
+     * 用户名登录
      */
     public function log(Request $request){
 //        var_dump('2222222222');die;
