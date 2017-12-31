@@ -35,7 +35,7 @@ class Login extends Controller
         }
         $p = $request->post();
         $data = [
-            'ydemo' => $p['ydemo'],
+            'name' => $p['name'],
             'tel' => $p['tel'],
             'qq' => $p['qq'],
             'email' => $p['email'],
@@ -80,9 +80,9 @@ class Login extends Controller
         }
         $p = $request->post();
 //        var_dump($p);die;
-        $name = $p['ydemo'];
+        $name = $p['name'];
         $pwd = md5($p['pwd']);
-        $company = Db::name('company')->where(['ydemo'=>$name,'pwd'=>$pwd])->find();
+        $company = Db::name('company')->where(['name'=>$name,'pwd'=>$pwd])->find();
         if($company > 0){
             $this->success('登录成功','home/login/top');
         }else{

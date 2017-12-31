@@ -8,20 +8,18 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-<<<<<<< HEAD
 
-return [
-    '__pattern__' => [
-        'name' => '\w+',
-    ],
-    '[hello]'     => [
-        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
-        ':name' => ['index/hello', ['method' => 'post']],
-    ],
-
-];
-=======
 use think\Route;
+/**
+ * yzw 商户
+ */
+Route::post('home/log','home/login/log');
+Route::get('home/login','home/login/index');
+
+Route::get('home/top','home/login/top');
+Route::get(':name$','home/login/index');
+Route::resource('login','home/Login');
+/********************************************************************/
 /**
  * 前台默认路由
  */
@@ -64,4 +62,4 @@ Route::resource('Jur','admin/Jur');
 
 
 
->>>>>>> dev
+
