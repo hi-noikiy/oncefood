@@ -1,5 +1,4 @@
 <?php
-
 namespace app\home\controller;
 
 use think\Controller;
@@ -106,6 +105,7 @@ class Login extends Controller
         $name = $p['name'];
         $pwd = md5($p['pwd']);
         $company = Db::name('company')->where(['name'=>$name,'pwd'=>$pwd])->find();
+//        var_dump($company['id']);die;
         if($company > 0){
             $this->success('登录成功','home/login/top');
         }else{
@@ -114,7 +114,7 @@ class Login extends Controller
     }
 
     public function top(){
-        return view('home@top/index',[
+        return view('home@main/index',[
             'title'=>'商家后台管理系统'
         ]);
     }

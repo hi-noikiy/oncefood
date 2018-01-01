@@ -18,7 +18,10 @@ Route::get('home/login','home/login/index');
 
 Route::get('home/top','home/login/top');
 Route::get(':name$','home/login/index');
+//登录界面的资源路由
 Route::resource('login','home/Login');
+//商家后台ycompany的路由
+Route::resource('home/ycompany','home/Ycompany');
 /********************************************************************/
 /**
  * 前台默认路由
