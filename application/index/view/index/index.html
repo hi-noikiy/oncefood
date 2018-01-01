@@ -13,12 +13,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="/static/index/js/bootstrap.min.js"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/static/index/js/jquery.min.js"></script>
+<script src="/static/index/js/banner.js"></script>
 <!-- Custom Theme files -->
+<link href="/static/index/css/banner.css" rel='stylesheet' type='text/css'/>
 <link href="/static/index/css/style.css" rel='stylesheet' type='text/css' />
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-</script>
+
 <!----webfonts---->
 <link href='http://fonts.googleapis.com/css?family=Exo+2:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
 </head>
@@ -94,9 +96,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 {block name="main"}
     <div class="main">
 		<div class="container">
-		   <div class="banner">
-			 <img src="/static/index/images/banner.jpg" class="img-responsive" alt=""/>
-		   </div>
+		   	<div id="banner" class="banner">
+				<img src="/static/index/images/banner/0.jpg" class="img-responsive" alt=""/>
+				<img src="/static/index/images/banner/1.jpg" class="img-responsive" alt=""/>
+				<img src="/static/index/images/banner/2.jpg" class="img-responsive" alt=""/>
+
+				<div id="banner_left"></div>
+				<div id="banner_right"></div>
+
+				<div id="list">
+					<div class="item"></div>
+					<div class="item"></div>
+					<div class="item"></div>
+				</div>
+			</div>
 		   <div class="row content">
 		   	<div class="col-md-3 content_top">
 		   	   <div class="category_box">

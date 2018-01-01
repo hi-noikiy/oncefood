@@ -1,0 +1,18 @@
+/* 案例 */
+#banner{
+    position: relative;
+    overflow: hidden;
+}
+#banner_left, #banner_right{width: 41px; height: 69px; }
+#banner_left{background: url('./icon-slides.png') -84px 0; position: absolute; left: 6px; top: 45%; }
+
+#banner_right{background: url('./icon-slides.png') -123px 0; position: absolute; right: 6px; top: 45%; }
+
+#banner_left:hover{background-position: 0 0;}
+#banner_right:hover{background-position: -42px 0;}
+
+#list{width: 200px; height: 50px; position: absolute; right:50px; bottom:20px;}
+
+#list .item{width: 8px; height: 8px; background-color: rgba(0,0,0,0.1); border-radius:100%; float:left; margin-right: 10px; border:2px solid rgba(0,0,0,0.3)}
+
+#list .item:hover{background-color: rgba(255,255,255, 0.5); border-color:#333;}
