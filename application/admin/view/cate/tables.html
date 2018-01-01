@@ -31,7 +31,7 @@
                                         <th>分类名:</th>
                                         <th>pid</th>
                                         <th>path</th>
-                                        <th>sort</th>
+                                        <th>状态</th>
                                         <th data-sortable="false">操作</th>
                                     </tr>
                                     </thead>
@@ -43,16 +43,18 @@
                                         <td>{$vo.name}</td>
                                         <td>{$vo.pid}</td>
                                         <td>{$vo.path}</td>
-                                        <td>{$vo.sort}</td>
+                                        <td>{$vo.display == 1? '显示' : '隐藏'}</td>
                                         <td>
-                                            <button class="btn btn-success">编辑</button>
-                                            <button class="btn btn-danger">删除</button>
+                                            <a href="{:url('admin/cate/edit', ['id'=>$vo['id']])}" class="btn btn-success">编辑</a>
+                                            <button class="btn btn-danger del-btn" data-id="{$vo.id}">删除</button>
+                                            <a href="{:url('admin/cate/read',['id' => $vo['id']])}" class="btn btn-info">添加子分类</a>
                                         </td>
                                     </tr>
                                     {/volist}
                                     </tbody>
                                 </table>
                             </div>
+                            {$list->render()}
                         </div>
                     </div>
                 </div>
@@ -60,4 +62,40 @@
         </div>
     </div>
 </div>
+<script src="/static/admin/assets/js/jquery.min.js"></script>
+<script src="/static/admin/assets/js/toastr.min.js"></script>
+<script>
+$(function() {
+  $('.del-btn').click(function(){
+        var ac_id = $(this).attr('data-id');
+        // console.log(ac_id);
+        if (confirm('您确定要 [ 删 除 ] 该用户吗?')) {
+        var obj = $(this).parents('tr');
+        
+        delAjax(ac_id, obj); // 执行AJAX删除
+    }
+  });
+});
+
+// 执行AJAX删除
+function delAjax(id, obj) {
+    $.ajax({
+        type: 'delete',
+        url: '/Cate/' + id,
+        dataType : 'json',
+        success : function (data){
+            console.log(data);
+            if (data.status) {
+                toastr.success(data.info);
+                obj.remove();
+            } else {
+                toastr.error(data.info, '警告 :');
+            }
+        },
+        error : function () {
+            alert('AJAX执行失败!');
+        }
+    });
+}
+</script>
 {/block}

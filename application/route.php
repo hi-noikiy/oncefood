@@ -21,7 +21,7 @@ Route::rule('/','index/index/index');
  * 后台默认静态路由
  */
 Route::get('admin','admin/index/index');
-
+Route::get('getMsg','admin/main/getMsg');
 
 
 /**
@@ -35,7 +35,6 @@ Route::post('logindo','admin/main/logindo');
  * 分类路由
  */
 Route::resource('cate','admin/Cate');
-
 /**
  * 用户管理路由
  */

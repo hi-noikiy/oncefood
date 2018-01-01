@@ -15,7 +15,7 @@ class jur extends AdminBase
      */
     public function index()
     {
-        $list = db('node')->field(true)->select();
+        $list = db('node')->field(true)->paginate(10);
 
         return view('admin@jur/jur',[
             'title' => '权限列表',

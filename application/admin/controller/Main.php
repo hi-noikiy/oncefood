@@ -7,6 +7,7 @@ use think\Request;
 use think\Db;
 use think\Session;
 
+
 class Main extends controller
 {
     /**
@@ -61,6 +62,19 @@ class Main extends controller
     public function index()
     {
         return view('admin@main/index');
+    }
+
+    public function getMsg()
+    {   
+
+        $result = sendTemplateSMS('15021343181',array('1234',5),"1");
+        
+        if ($result) {
+            $data['status'] = true;
+
+            return json($data);
+        }
+        
     }
 
 }

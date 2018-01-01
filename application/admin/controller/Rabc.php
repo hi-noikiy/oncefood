@@ -164,6 +164,7 @@ class Rabc extends AdminBase
      */
     public function delete($id)
     {
+        // 判断是否是admin超级管理员?
         // 先判断有没有表关联
         $uid = Db::name('user_role')->where('uid',$id)->select();
 

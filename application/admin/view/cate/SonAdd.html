@@ -15,18 +15,18 @@
                     </div>
                     <div class="widget-content padding">
                         <div id="basic-form">
-                            <form role="form" action="{:url('admin/Cate/save')}" method="post">
+                            <form role="form" action="{:url('admin/Cate/doAdd')}" method="post">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">分类名</label>
                                     <input type="text" class="form-control" name="name">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">pid</label>
-                                    <input type="text" class="form-control" name="pid" value="0" readonly>
+                                    <input type="text" class="form-control" name="pid" value="{$list.pid}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">path</label>
-                                    <input type="text" class="form-control" name="path" value="0," readonly>
+                                    <input type="text" class="form-control" name="path" value="{$list.path}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-4 col-sm-offset-2">
