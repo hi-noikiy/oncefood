@@ -53,5 +53,18 @@ Route::resource('Role','admin/Role');
  */
 Route::resource('Jur','admin/Jur');
 
+/**
+ * 注册页面路由
+ */
 
+Route::resource('reg','index/Register');
 
+Route::get('getMessage','index/Register/getMsg');
+
+Route::post('check','index/Register/check');
+
+/**
+ * 登录页面路由
+ */
+Route::resource('login','index/login');
+Route::post('login','index/Login/login');

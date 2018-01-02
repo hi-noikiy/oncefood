@@ -49,3 +49,60 @@ function sendTemplateSMS($to,$datas,$tempId)
     $result = $rest->sendTemplateSMS($to,$datas,$tempId);
     return $result;
 }
+
+
+function randCode()
+{
+     $chars = 'abcdefghijkmnpqrstuvwxyzABCDEFGHIJKLMNPRSTUVWXYZ23456789';         //需要用到的验证码字符，如需更多请自行添加
+        /* 随机生成4位字符的验证码字符 */
+        $randCode = '';
+        for ( $i = 0; $i < 4; $i++ ){
+            $randCode.= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+        }
+        return $randCode;
+}
+
+function https_request($url)
+{
+    // 初始化
+    $ch = curl_init();
+    // 设置
+    curl_setopt($ch,CURLOPT_URL,$url);
+    // 检查ssl证书
+    curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+    // 从检查本地证书检查是否ssl加密
+    curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,$url);
+
+    // 判断$data 判断是否post
+    // 返回结果 是文件流的方式返回
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $res = curl_exec($ch);
+    curl_close($ch); // close curl res
+    return $res;
+}
+
+//QQ 登录
+function forQQ($code)
+{
+    $token_url = 'https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=101448051&client_secret=64e74ebc83a1b0c0f6647ba23c0d2bcf&code='.$code.'&state=s68&redirect_uri=http://tp5.com/index/Login/qqLogin';
+    $token_res = https_request($token_url);
+    $data = explode('&', $token_res);
+    $data = explode('=', $data[0]);
+    $token = $data[1];
+    $openid_url = 'https://graph.qq.com/oauth2.0/me?access_token='.$token;
+    $openid_res = https_request($openid_url);
+    if (strpos($openid_res, "callback") !== false)
+    {
+        $lpos = strpos($openid_res, "(");
+        $rpos = strrpos($openid_res, ")");
+        $openid_res  = substr($openid_res, $lpos + 1, $rpos - $lpos -1);
+        $msg = json_decode($openid_res,true);
+    }
+    $openid = $msg['openid'];
+    $userinfo_url = 'https://graph.qq.com/user/get_user_info?access_token='.$token.'&oauth_consumer_key=101448051&openid='.$openid;
+    $info = json_decode(https_request($userinfo_url),true);
+    $QQ['token'] = $token;
+    $QQ['nickname']   = $info['nickname'];
+    return $QQ;
+}
