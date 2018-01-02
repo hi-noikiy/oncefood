@@ -49,3 +49,15 @@ function sendTemplateSMS($to,$datas,$tempId)
     $result = $rest->sendTemplateSMS($to,$datas,$tempId);
     return $result;
 }
+
+
+function randCode()
+{
+     $chars = 'abcdefghijkmnpqrstuvwxyzABCDEFGHIJKLMNPRSTUVWXYZ23456789';         //需要用到的验证码字符，如需更多请自行添加
+        /* 随机生成4位字符的验证码字符 */
+        $randCode = '';
+        for ( $i = 0; $i < 4; $i++ ){
+            $randCode.= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+        }
+        return $randCode;
+}

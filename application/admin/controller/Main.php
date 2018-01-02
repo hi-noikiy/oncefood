@@ -66,8 +66,9 @@ class Main extends controller
 
     public function getMsg()
     {   
+        $code = randCode();
 
-        $result = sendTemplateSMS('15021343181',array('1234',5),"1");
+        $result = sendTemplateSMS('15021343181',array($code,5),"1");
         
         if ($result) {
             $data['status'] = true;

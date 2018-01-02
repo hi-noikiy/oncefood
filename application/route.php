@@ -16,7 +16,6 @@ use think\Route;
 Route::rule('/','index/index/index');
 
 
-
 /**
  * 后台默认静态路由
  */
@@ -53,5 +52,7 @@ Route::resource('Role','admin/Role');
  */
 Route::resource('Jur','admin/Jur');
 
-
-
+/**
+ * 商户管理路由
+ */
+Route::resource('Mer','admin/Merchant');
