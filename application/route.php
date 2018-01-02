@@ -9,6 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 use think\Route;
+
 /**
  * 前台默认路由
  */
@@ -56,3 +57,8 @@ Route::resource('Jur','admin/Jur');
  * 商户管理路由
  */
 Route::resource('Mer','admin/Merchant');
+
+/**
+ * 商铺管理路由
+ */
+Route::resource('Shops','admin/Shops');
