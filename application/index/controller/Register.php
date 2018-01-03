@@ -23,6 +23,12 @@
         	}
 		}
 
+    public function email(){
+       $email = qqemail();
+       Session::set('email',$email);
+       return json($email);
+    }
+
 		public function check(Request $request)
 		{
 			    $info = $request->post();
@@ -44,7 +50,7 @@
           }
 
           $info['pwd'] = md5($info['pwd']);
-       		unset($info['repass'],$info['msg']);
+       		unset($info['repass'],$info['msg'],$info['msg1']);
        		$data = db('zuser')->insert($info);
 
        		if($data>0){

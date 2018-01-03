@@ -12,7 +12,7 @@ use think\Route;
 /**
  * 前台默认路由
  */
-
+Route::get('log','index/login/login');
 Route::rule('/','index/index/index');
 
 
@@ -62,9 +62,9 @@ Route::resource('reg','index/Register');
 Route::get('getMessage','index/Register/getMsg');
 
 Route::post('check','index/Register/check');
+Route::get('email','index/Register/email');
 
 /**
  * 登录页面路由
  */
 Route::resource('login','index/login');
-Route::post('login','index/Login/login');

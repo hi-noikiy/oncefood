@@ -12,22 +12,19 @@
 			return view('index@Login/login'); 
 		}
 
-		public function login(Request $request)
+		public function login()
 		{
 
-			$info = $request->post();
-			$data = db('zuser')->where('name',$info['name'])->where('pwd',md5($info['pwd']))->find();
-			if ($data === null) {
-          	  	$info['status'] = true;
-            	$info['data'] ='* 账号密码不匹配';
-	        } else {
-	            $info['status'] = false;
-	          	
-	        }
-	        return json($info);
-	        var_dump($info);die;
+			$name = $_GET['name'];
+			$pwd = $_GET['pwd'];
+    		// $pwd = md5($pwd);
+			$data = db('zuser')->where('name',$name)->where('pwd',md5($pwd))->find();
+			if ($data > 0 ) {
+            $list['status'] = false;
+       		} else {
+            $list['status'] = true;
+  			}
+            return json($list);
 
-		}
-
-
+        }
 	}
