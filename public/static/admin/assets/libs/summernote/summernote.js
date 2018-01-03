@@ -3588,7 +3588,7 @@
     var tplDialogs = function (lang, options) {
       var tplImageDialog = function () {
         var body = '<h5>' + lang.image.selectFromFiles + '</h5>' +
-                   '<input class="note-image-input" type="file" ydemo="files" accept="image/*" />' +
+                   '<input class="note-image-input" type="file" name="files" accept="image/*" />' +
                    '<h5>' + lang.image.url + '</h5>' +
                    '<input class="note-image-url form-control span12" type="text" />';
         var footer = '<button href="#" class="btn btn-primary note-image-btn disabled" disabled>' + lang.image.insert + '</button>';

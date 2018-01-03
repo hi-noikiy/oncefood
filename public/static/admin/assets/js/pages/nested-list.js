@@ -7,7 +7,7 @@ $(document).ready(function(){
         if (window.JSON) {
             output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
         } else {
-            output.val('JSON browser support required for this ydemo.');
+            output.val('JSON browser support required for this demo.');
         }
     };
 

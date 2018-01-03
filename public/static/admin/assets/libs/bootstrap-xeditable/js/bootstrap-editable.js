@@ -388,7 +388,7 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
     @example
     var $form = $('&lt;div&gt;').editableform({
         type: 'text',
-        ydemo: 'username',
+        name: 'username',
         url: '/post',
         value: 'vitaliy'
     });
@@ -453,11 +453,11 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
         **/        
         url:null,
         /**
-        Additional params for submit. If defined as <code>object</code> - it is **appended** to original ajax data (pk, ydemo and value).
+        Additional params for submit. If defined as <code>object</code> - it is **appended** to original ajax data (pk, name and value).  
         If defined as <code>function</code> - returned object **overwrites** original ajax data.
         @example
         params: function(params) {
-            //originally params contain pk, ydemo and value
+            //originally params contain pk, name and value
             params.a = 1;
             return params;
         }
@@ -911,7 +911,7 @@ Applied as jQuery method.
     //methods
     Popup.prototype = {
         containerName: null, //method to call container on element
-        containerDataName: null, //object ydemo in element's .data()
+        containerDataName: null, //object name in element's .data()
         innerCss: null, //tbd in child class
         containerClass: 'editable-container editable-popup', //css class applied to container element
         defaults: {}, //container itself defaults
@@ -1489,7 +1489,7 @@ Makes editable any HTML element on the page. Applied as jQuery method.
             var isValueByText = false, 
                 doAutotext, finalize;
 
-            //ydemo
+            //name
             this.options.name = this.options.name || this.$element.attr('id');
              
             //create input of specified type. Input needed already here to convert value for initial display (e.g. show text by id for select)
@@ -1587,7 +1587,7 @@ Makes editable any HTML element on the page. Applied as jQuery method.
                @since 1.2.0
                @example
                $('#username').on('init', function(e, editable) {
-                   alert('initialized ' + editable.options.ydemo);
+                   alert('initialized ' + editable.options.name);
                });
                $('#username').editable();
                **/                  
@@ -1687,7 +1687,7 @@ Makes editable any HTML element on the page. Applied as jQuery method.
         Sets new option
         
         @method option(key, value)
-        @param {string|object} key option ydemo or object with several options
+        @param {string|object} key option name or object with several options
         @param {mixed} value option new value
         @example
         $('.editable').editable('option', 'pk', 2);
@@ -1993,7 +1993,7 @@ Makes editable any HTML element on the page. Applied as jQuery method.
 
             /**
             Returns current values of editable elements.   
-            Note that it returns an **object** with ydemo-value pairs, not a value itself. It allows to get data from several elements.
+            Note that it returns an **object** with name-value pairs, not a value itself. It allows to get data from several elements.    
             If value of some editable is `null` or `undefined` it is excluded from result object.
             When param `isSingle` is set to **true** - it is supposed you have single element and will return value of editable instead of object.   
              
@@ -2290,9 +2290,9 @@ Makes editable any HTML element on the page. Applied as jQuery method.
         @example
         <div id="user">
           <!-- empty -->
-          <a href="#" data-ydemo="username" data-type="text" class="editable-click editable-empty" data-value="" title="Username">Empty</a>
+          <a href="#" data-name="username" data-type="text" class="editable-click editable-empty" data-value="" title="Username">Empty</a>
           <!-- non-empty -->
-          <a href="#" data-ydemo="group" data-type="select" data-source="/groups" data-value="1" class="editable-click" title="Group">Operator</a>
+          <a href="#" data-name="group" data-type="select" data-source="/groups" data-value="1" class="editable-click" title="Group">Operator</a>
         </div>     
         
         <script>
@@ -2819,7 +2819,7 @@ List - abstract class for inputs that have source option loaded from js array or
         If **array** - it should be in format: `[{value: 1, text: "text1"}, {value: 2, text: "text2"}, ...]`  
         For compability, object format is also supported: `{"1": "text1", "2": "text2" ...}` but it does not guarantee elements order.
         
-        If **string** - considered ajax url to load items. In that case results will be cached for fields with the same source and ydemo. See also `sourceCache` option.
+        If **string** - considered ajax url to load items. In that case results will be cached for fields with the same source and name. See also `sourceCache` option.
           
         If **function**, it should return data in format above (since 1.4.0).
         
@@ -4065,7 +4065,7 @@ $(function(){
                 return;
             }
 
-            // define method ydemo to fill items, e.g `fillDays`
+            // define method name to fill items, e.g `fillDays`
             var f = 'fill' + k.charAt(0).toUpperCase() + k.slice(1); 
             var items = this[f]();
             var value = $combo.val();
@@ -4422,7 +4422,7 @@ $(function(){
         yearDescending: true,
         minuteStep: 5,
         secondStep: 1,
-        firstItem: 'empty', //'ydemo', 'empty', 'none'
+        firstItem: 'empty', //'name', 'empty', 'none'
         errorClass: null,
         roundTime: true, // whether to round minutes and seconds if step > 1
         smartDays: false // whether days in combo depend on selected month: 31, 30, 28
@@ -6203,7 +6203,7 @@ $(function(){
     
     //store bootstrap-datepicker as bdateicker to exclude conflict with jQuery UI one
     $.fn.bdatepicker = $.fn.datepicker.noConflict();
-    if(!$.fn.datepicker) { //if there were no other datepickers, keep also original ydemo
+    if(!$.fn.datepicker) { //if there were no other datepickers, keep also original name
         $.fn.datepicker = $.fn.bdatepicker;    
     }    
     

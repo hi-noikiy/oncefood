@@ -22,6 +22,8 @@ Route::get(':name$','home/login/index');
 Route::resource('login','home/Login');
 //商家后台ycompany的路由
 Route::resource('home/ycompany','home/Ycompany');
+//商家后台ynode的路由
+Route::resource('home/ynode','home/Ynode');
 /********************************************************************/
 /**
  * 前台默认路由

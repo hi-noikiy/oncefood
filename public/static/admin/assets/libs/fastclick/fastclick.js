@@ -718,7 +718,7 @@ FastClick.notNeeded = function(layer) {
 	if (chromeVersion) {
 
 		if (deviceIsAndroid) {
-			metaViewport = document.querySelector('meta[ydemo=viewport]');
+			metaViewport = document.querySelector('meta[name=viewport]');
 
 			if (metaViewport) {
 				// Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)

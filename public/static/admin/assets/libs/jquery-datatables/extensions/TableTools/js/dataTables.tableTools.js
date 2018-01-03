@@ -137,7 +137,7 @@ ZeroClipboard_TableTools.Client.prototype = {
 	ready: false, // whether movie is ready to receive events or not
 	movie: null, // reference to movie object
 	clipText: '', // text to copy to clipboard
-	fileName: '', // default file save ydemo
+	fileName: '', // default file save name
 	action: 'copy', // action to perform
 	handCursorEnabled: true, // whether to show hand cursor, or default pointer cursor
 	cssEffects: true, // enable CSS mouse effects on dom container
@@ -213,11 +213,11 @@ ZeroClipboard_TableTools.Client.prototype = {
 		if (navigator.userAgent.match(/MSIE/)) {
 			// IE gets an OBJECT tag
 			var protocol = location.href.match(/^https/i) ? 'https://' : 'http://';
-			html += '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="'+protocol+'download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="'+width+'" height="'+height+'" id="'+this.movieId+'" align="middle"><param ydemo="allowScriptAccess" value="always" /><param ydemo="allowFullScreen" value="false" /><param ydemo="movie" value="'+ZeroClipboard_TableTools.moviePath+'" /><param ydemo="loop" value="false" /><param ydemo="menu" value="false" /><param ydemo="quality" value="best" /><param ydemo="bgcolor" value="#ffffff" /><param ydemo="flashvars" value="'+flashvars+'"/><param ydemo="wmode" value="transparent"/></object>';
+			html += '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="'+protocol+'download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="'+width+'" height="'+height+'" id="'+this.movieId+'" align="middle"><param name="allowScriptAccess" value="always" /><param name="allowFullScreen" value="false" /><param name="movie" value="'+ZeroClipboard_TableTools.moviePath+'" /><param name="loop" value="false" /><param name="menu" value="false" /><param name="quality" value="best" /><param name="bgcolor" value="#ffffff" /><param name="flashvars" value="'+flashvars+'"/><param name="wmode" value="transparent"/></object>';
 		}
 		else {
 			// all other browsers get an EMBED tag
-			html += '<embed id="'+this.movieId+'" src="'+ZeroClipboard_TableTools.moviePath+'" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="'+width+'" height="'+height+'" ydemo="'+this.movieId+'" align="middle" allowScriptAccess="always" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="'+flashvars+'" wmode="transparent" />';
+			html += '<embed id="'+this.movieId+'" src="'+ZeroClipboard_TableTools.moviePath+'" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="'+width+'" height="'+height+'" name="'+this.movieId+'" align="middle" allowScriptAccess="always" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="'+flashvars+'" wmode="transparent" />';
 		}
 		return html;
 	},
@@ -299,7 +299,7 @@ ZeroClipboard_TableTools.Client.prototype = {
 	},
 
 	setFileName: function(newText) {
-		// set the file ydemo
+		// set the file name
 		this.fileName = newText;
 		if (this.ready) {
 			this.movie.setFileName(newText);
@@ -420,7 +420,7 @@ ZeroClipboard_TableTools.Client.prototype = {
 					func[0][ func[1] ](this, args);
 				}
 				else if (typeof(func) == 'string') {
-					// ydemo of function
+					// name of function
 					window[func](this, args);
 				}
 			} // foreach event handler defined
@@ -595,7 +595,7 @@ TableTools = function( oDT, oOpts )
 			"all": false,
 
 			/**
-			 * Class ydemo to add to selected TR nodes
+			 * Class name to add to selected TR nodes
 			 *  @property selectedClass
 			 *  @type	 String
 			 *  @default  ""

@@ -1,0 +1,229 @@
+{extend name="main/index" /}
+{block name="main"}
+
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget">
+                    <div class="widget-header transparent">
+                        <h2><strong>{$title}</strong></h2>
+                        <div class="additional-btn">
+                            <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                            <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                            <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+
+                        <div class="table-responsive">
+                            <table data-sortable class="table table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>节点名</th>
+                                    <th>模块名</th>
+                                    <th>方法名</th>
+                                    <th>状态</th>
+                                    <th data-sortable="false">操作</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {volist name="ynode" id="vo"}
+                                <tr>
+                                    <td>{$vo.id}</td>
+                                    <td>{$vo.name}</td>
+                                    <td>{$vo.mname}</td>
+                                    <td>{$vo.aname}</td>
+                                    <td>{if $vo.status == 1}启用
+                                        {else $vo.status == 2}禁用
+                                        {/if}</td>
+                                    <td><button data-modal="md-3d-flip-horizontal" class="btn btn-primary md-trigger edit-btn" data-id="{$vo.id}">修改</button><button class="btn btn-danger del-btn" data-id="{$vo.id}">删除</button></td>
+                                </tr>
+
+                                {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="data-table-toolbar">
+                            <ul class="pagination">
+                                <li class="disabled"><a href="#">&laquo;</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer Start -->
+        <footer>
+            Huban Creative &copy; 2014
+            <div class="footer-links pull-right">
+                <a href="#">About</a><a href="#">Support</a><a href="#">Terms of Service</a><a href="#">Legal</a><a href="#">Help</a><a href="#">Contact Us</a>
+            </div>
+        </footer>
+        <!-- Footer End -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End content here -->
+    <!-- ============================================================== -->
+
+</div>
+<!--编辑模态框-->
+
+<div class="md-modal md-3d-flip-horizontal" id="md-3d-flip-horizontal">
+
+    <div class="md-content">
+        <div>
+            <div class="widget-content padding">
+                <h3> <button class="btn btn-danger md-close">关闭</button></h3>
+                <form class="form-horizontal" role="form" action="{:url('home/ynode/update')}" method="post">
+                    <input type="hidden" name="id" id="id" value="">
+                    <input type="hidden" name="_method" value="PUT">
+                    <div class="form-group">
+
+                        <label for="input-text" class="col-sm-2 control-label">节点名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control save" id="input-text" placeholder="节点名" name="name" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-text-help" class="col-sm-2 control-label">控制器名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control mname" id="input-text-help" placeholder="控制器名" name="mname" value="">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-text-help" class="col-sm-2 control-label">方法名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control aname" id="input-text-help" placeholder="方法名" name="aname" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">状态</label>
+                        <div class="col-sm-10">
+                            <div class="radio iradio">
+                                <label>
+                                    <input type="radio" class="sta" name="status" id="optionsRadios1" value="1" >启用
+
+                                </label>
+                            </div>
+                            <div class="radio iradio">
+                                <label>
+                                    <input type="radio" class="sta" name="status" id="optionsRadios2" value="2" >禁用
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-default">Submit</button
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div><!-- End div .md-content -->
+
+</div>
+{js href="/static/home/js/jquery.min.js"}
+{js href="/static/home/js/bootstrap.min.js"}
+{js href="/static/home/js/toastr.min.js"}
+<script>
+    //    修改数据
+    $(function(){
+        $('.edit-btn').click(function(){
+            var ed_id = $(this).attr('data-id');
+            console.log(ed_id);
+            showAjax(ed_id);
+        });
+    });
+    function showAjax(id){
+        $.ajax({
+            type :'get',
+            url : '/home/ynode/' +id,
+            dataType : 'json',
+            success:function(data){
+                console.log(data);
+                if (data.status){
+                    toastr.success(data.info);
+                    $('#id').val(data.data.id);
+                    $('.save').val(data.data.name);
+                    $('.mname').val(data.data.mname);
+                    $('.aname').val(data.data.aname);
+//                    ajax值在radio框中回显数据
+                    $("input[name=status][value="+data.data.status+"]").attr("checked",true);
+
+
+                }else {
+                    toastr.error(data.info);
+                }
+            },
+            error : function(){
+                alert('执行失败');
+            }
+        });
+    }
+
+    //删除数据
+    $(function(){
+        $('.del-btn').click(function(){
+//            console.log('dddddddddd');
+            var de_id = $(this).attr('data-id');
+            var obj = $(this).parents('tr');
+            delAjax(de_id,obj);
+        });
+    });
+    function  delAjax(id,obj) {
+        $.ajax({
+            type : 'delete',
+            url :'/home/ynode/' +id,
+            dataType : 'json',
+            success:function(data){
+                if(data.status){
+                    toastr.success(data.info);
+                    obj.remove();
+                }else{
+                    toastr.error(data.info);
+                }
+
+            },
+            error :function(){
+                alert('失败');
+            }
+        });
+    }
+
+
+    // 设置弹框参数
+    toastr.options = {
+        closeButton: true,// 是否显示关闭按钮
+        progressBar: true,// 实现显示计时条
+        timeOut: "3000",// 自动关闭时间
+        positionClass: "toast-top-right"// 提示位置
+        // positionClass: "toast-top-full-width"// 提示位置
+        // toast-top-full-width 顶端，宽度铺满整个屏幕
+        // toast-top-right  顶端右边
+    };
+</script>
+{/block}

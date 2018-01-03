@@ -2,7 +2,7 @@
 ;(function(){
 
 /**
- * Require the module at `ydemo`.
+ * Require the module at `name`.
  *
  * @param {String} name
  * @return {Object} exports
@@ -29,7 +29,7 @@ function require(name) {
 require.modules = {};
 
 /**
- * Register module at `ydemo` with callback `definition`.
+ * Register module at `name` with callback `definition`.
  *
  * @param {String} name
  * @param {Function} definition
@@ -423,7 +423,7 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
           file.previewElement = Dropzone.createElement(this.options.previewTemplate.trim());
           file.previewTemplate = file.previewElement;
           this.previewsContainer.appendChild(file.previewElement);
-          _ref = file.previewElement.querySelectorAll("[data-dz-ydemo]");
+          _ref = file.previewElement.querySelectorAll("[data-dz-name]");
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             node = _ref[_i];
             node.textContent = file.name;
@@ -548,7 +548,7 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
       completemultiple: noop,
       maxfilesexceeded: noop,
       maxfilesreached: noop,
-      previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-ydemo></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"dz-progress\"><span class=\"dz-upload\" data-dz-uploadprogress></span></div>\n  <div class=\"dz-success-mark\"><span>✔</span></div>\n  <div class=\"dz-error-mark\"><span>✘</span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>"
+      previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"dz-progress\"><span class=\"dz-upload\" data-dz-uploadprogress></span></div>\n  <div class=\"dz-success-mark\"><span>✔</span></div>\n  <div class=\"dz-error-mark\"><span>✘</span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>"
     };
 
     extend = function() {
@@ -876,7 +876,7 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
       if (this.options.dictFallbackText) {
         fieldsString += "<p>" + this.options.dictFallbackText + "</p>";
       }
-      fieldsString += "<input type=\"file\" ydemo=\"" + (this._getParamName(0)) + "\" " + (this.options.uploadMultiple ? 'multiple="multiple"' : void 0) + " /><input type=\"submit\" value=\"Upload!\"></div>";
+      fieldsString += "<input type=\"file\" name=\"" + (this._getParamName(0)) + "\" " + (this.options.uploadMultiple ? 'multiple="multiple"' : void 0) + " /><input type=\"submit\" value=\"Upload!\"></div>";
       fields = Dropzone.createElement(fieldsString);
       if (this.element.tagName !== "FORM") {
         form = Dropzone.createElement("<form action=\"" + this.options.url + "\" enctype=\"multipart/form-data\" method=\"" + this.options.method + "\"></form>");

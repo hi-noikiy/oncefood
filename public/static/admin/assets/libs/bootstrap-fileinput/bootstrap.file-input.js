@@ -92,10 +92,10 @@ $.fn.bootstrapFileInput = function() {
       fileName = $(this).val();
 
       // Remove any previous file names
-      $(this).parent().next('.file-input-ydemo').remove();
+      $(this).parent().next('.file-input-name').remove();
       if (!!$(this).prop('files') && $(this).prop('files').length > 1) {
         fileName = $(this)[0].files.length+' files';
-        //$(this).parent().after('<span class="file-input-ydemo">'+$(this)[0].files.length+' files</span>');
+        //$(this).parent().after('<span class="file-input-name">'+$(this)[0].files.length+' files</span>');
       }
       else {
         // var fakepath = 'C:\\fakepath\\';
@@ -103,7 +103,7 @@ $.fn.bootstrapFileInput = function() {
         fileName = fileName.substring(fileName.lastIndexOf('\\')+1,fileName.length);
       }
 
-      $(this).parent().after('<span class="file-input-ydemo">'+fileName+'</span>');
+      $(this).parent().after('<span class="file-input-name">'+fileName+'</span>');
     });
 
   });
@@ -115,7 +115,7 @@ $.fn.bootstrapFileInput = function() {
 var cssHtml = '<style>'+
   '.file-input-wrapper { overflow: hidden; position: relative; cursor: pointer; z-index: 1; }'+
   '.file-input-wrapper input[type=file], .file-input-wrapper input[type=file]:focus, .file-input-wrapper input[type=file]:hover { position: absolute; top: 0; left: 0; cursor: pointer; opacity: 0; filter: alpha(opacity=0); z-index: 99; outline: 0; }'+
-  '.file-input-ydemo { margin-left: 8px; }'+
+  '.file-input-name { margin-left: 8px; }'+
   '</style>';
 $('link[rel=stylesheet]').eq(0).before(cssHtml);
 

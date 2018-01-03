@@ -5,6 +5,8 @@ use think\Controller;
 use think\Request;
 use think\Db;
 use kuange\qqconnect\QC;
+use think\Session;
+
 class Login extends Controller
 {
     /**
@@ -106,6 +108,7 @@ class Login extends Controller
         $pwd = md5($p['pwd']);
         $company = Db::name('company')->where(['name'=>$name,'pwd'=>$pwd])->find();
 //        var_dump($company['id']);die;
+        Session::set('cid',$company['id']);
         if($company > 0){
             $this->success('登录成功','home/login/top');
         }else{

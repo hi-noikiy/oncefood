@@ -36,7 +36,7 @@
  *         phone: 480
  *     }
  *
- * These breakpoint ydemo may be used as possible values for the data-hide
+ * These breakpoint name may be used as possible values for the data-hide
  * attribute.  The data-hide attribute is optional and may be defined for each
  * th element in the table header.
  *
@@ -137,7 +137,7 @@ ResponsiveDatatablesHelper.prototype.init = function (breakpoints) {
     });
 
     // Copy the sorted breakpoint array into the breakpoints object using the
-    // ydemo as the key.
+    // name as the key.
     for (var i = 0; i < breakpointsSorted.length; i++) {
         this.breakpoints[breakpointsSorted[i].name] = breakpointsSorted[i];
     }

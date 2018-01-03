@@ -392,7 +392,7 @@
 			_fnMap( lang, lang, 'sZeroRecords', 'sLoadingRecords' );
 		}
 	
-		// Old parameter ydemo of the thousands separator mapped onto the new
+		// Old parameter name of the thousands separator mapped onto the new
 		if ( lang.sInfoThousands ) {
 			lang.sThousands = lang.sInfoThousands;
 		}
@@ -407,8 +407,8 @@
 	/**
 	 * Map one parameter onto another
 	 *  @param {object} o Object to map
-	 *  @param {*} knew The new parameter ydemo
-	 *  @param {*} old The old parameter ydemo
+	 *  @param {*} knew The new parameter name
+	 *  @param {*} old The old parameter name
 	 */
 	var _fnCompatMap = function ( o, knew, old ) {
 		if ( o[ knew ] !== undefined ) {
@@ -618,7 +618,7 @@
 			}
 	
 			// `class` is a reserved word in Javascript, so we need to provide
-			// the ability to use a valid ydemo for the camel case input
+			// the ability to use a valid name for the camel case input
 			if ( oOptions.className && ! oOptions.sClass )
 			{
 				oOptions.sClass = oOptions.className;
@@ -904,7 +904,7 @@
 					}
 					else if ( typeof aTargets[j] === 'string' )
 					{
-						/* Class ydemo matching on TH element */
+						/* Class name matching on TH element */
 						for ( k=0, kLen=columns.length ; k<kLen ; k++ )
 						{
 							if ( aTargets[j] == "_all" ||
@@ -1325,7 +1325,7 @@
 				}
 				else
 				{
-					// If array notation is used, we just want to strip it and use the property ydemo
+					// If array notation is used, we just want to strip it and use the property name
 					// and assign the value. If it isn't used, then we get the result we want anyway
 					data[ aLast.replace(__reArray, '') ] = val;
 				}
@@ -2041,7 +2041,7 @@
 				/* New container div */
 				nNewNode = $('<div/>')[0];
 	
-				/* Check to see if we should append an id and/or a class ydemo to the container */
+				/* Check to see if we should append an id and/or a class name to the container */
 				cNext = aDom[i+1];
 				if ( cNext == "'" || cNext == '"' )
 				{
@@ -2431,7 +2431,7 @@
 	 * Build up the parameters in an object needed for a server-side processing
 	 * request. Note that this is basically done twice, is different ways - a modern
 	 * method which is used by default in DataTables 1.10 which uses objects and
-	 * arrays, or the 1.9- method with is ydemo / value pairs. 1.9 method is used if
+	 * arrays, or the 1.9- method with is name / value pairs. 1.9 method is used if
 	 * the sAjaxSource option is used in the initialisation, or the legacyAjax
 	 * option is set.
 	 *  @param {object} oSettings dataTables settings object
@@ -4843,7 +4843,7 @@
 	 *  @param {object} ret target object
 	 *  @param {object} src source object
 	 *  @param {string} name property
-	 *  @param {string} [mappedName] ydemo to map too - optional, ydemo used if not given
+	 *  @param {string} [mappedName] name to map too - optional, name used if not given
 	 *  @memberof DataTable#oApi
 	 */
 	function _fnMap( ret, src, name, mappedName )
@@ -4950,7 +4950,7 @@
 	 *  @param {object} oSettings dataTables settings object
 	 *  @param {string} sStore Name of the array storage for the callbacks in oSettings
 	 *  @param {function} fn Function to be called back
-	 *  @param {string} sName Identifying ydemo for the callback (i.e. a label)
+	 *  @param {string} sName Identifying name for the callback (i.e. a label)
 	 *  @memberof DataTable#oApi
 	 */
 	function _fnCallbackReg( oSettings, sStore, fn, sName )
@@ -6319,18 +6319,18 @@
 	 *
 	 *     [
 	 *       {
-	 *         ydemo:      'data'                -- string   - Property ydemo
+	 *         name:      'data'                -- string   - Property name
 	 *         val:       function () {},       -- function - Api method (or undefined if just an object
 	 *         methodExt: [ ... ],              -- array    - Array of Api object definitions to extend the method result
 	 *         propExt:   [ ... ]               -- array    - Array of Api object definitions to extend the property
 	 *       },
 	 *       {
-	 *         ydemo:     'row'
+	 *         name:     'row'
 	 *         val:       {},
 	 *         methodExt: [ ... ],
 	 *         propExt:   [
 	 *           {
-	 *             ydemo:      'data'
+	 *             name:      'data'
 	 *             val:       function () {},
 	 *             methodExt: [ ... ],
 	 *             propExt:   [ ... ]
@@ -6735,7 +6735,7 @@
 		shift:   __arrayProto.shift,
 	
 	
-		sort:    __arrayProto.sort, // ? ydemo - order?
+		sort:    __arrayProto.sort, // ? name - order?
 	
 	
 		splice:  __arrayProto.splice,
@@ -6809,10 +6809,10 @@
 	
 	
 	// @todo - Is there need for an augment function?
-	// _Api.augment = function ( inst, ydemo )
+	// _Api.augment = function ( inst, name )
 	// {
-	// 	// Find src object in the structure from the ydemo
-	// 	var parts = ydemo.split('.');
+	// 	// Find src object in the structure from the name
+	// 	var parts = name.split('.');
 	
 	// 	_Api.extend( inst, obj );
 	// };
@@ -6820,18 +6820,18 @@
 	
 	//     [
 	//       {
-	//         ydemo:      'data'                -- string   - Property ydemo
+	//         name:      'data'                -- string   - Property name
 	//         val:       function () {},       -- function - Api method (or undefined if just an object
 	//         methodExt: [ ... ],              -- array    - Array of Api object definitions to extend the method result
 	//         propExt:   [ ... ]               -- array    - Array of Api object definitions to extend the property
 	//       },
 	//       {
-	//         ydemo:     'row'
+	//         name:     'row'
 	//         val:       {},
 	//         methodExt: [ ... ],
 	//         propExt:   [
 	//           {
-	//             ydemo:      'data'
+	//             name:      'data'
 	//             val:       function () {},
 	//             methodExt: [ ... ],
 	//             propExt:   [ ... ]
@@ -6962,7 +6962,7 @@
 	 * Context selector for the API's context (i.e. the tables the API instance
 	 * refers to.
 	 *
-	 * @ydemo    DataTable.Api#tables
+	 * @name    DataTable.Api#tables
 	 * @param {string|integer} [selector] Selector to pick which tables the iterator
 	 *   should operate on. If not given, all tables in the current context are
 	 *   used. This can be given as a jQuery selector (for example `':gt(0)'`) to
@@ -7808,7 +7808,7 @@
 	 * {integer}           - column index (>=0 count from left, <0 count from right)
 	 * "{integer}:visIdx"  - visible column index (i.e. translate to column index)  (>=0 count from left, <0 count from right)
 	 * "{integer}:visible" - alias for {integer}:visIdx  (>=0 count from left, <0 count from right)
-	 * "{string}:ydemo"     - column ydemo
+	 * "{string}:name"     - column name
 	 * "{string}"          - jQuery selector on column header nodes
 	 *
 	 */
@@ -7861,7 +7861,7 @@
 							return [ _fnVisibleToColumnIndex( settings, idx ) ];
 	
 						case 'name':
-							// match by ydemo. `names` is column index complete and in order
+							// match by name. `names` is column index complete and in order
 							return $.map( names, function (name, i) {
 								return name === match[1] ? i : null;
 							} );
@@ -8823,7 +8823,7 @@
 		"_sFilterRow": null,
 	
 		/**
-		 * Cache of the class ydemo that DataTables has applied to the row, so we
+		 * Cache of the class name that DataTables has applied to the row, so we
 		 * can quickly look at this variable rather than needing to do a DOM check
 		 * on className for the nTr property.
 		 *  @type string
@@ -8868,7 +8868,7 @@
 		/**
 		 * A list of the columns that sorting should occur on when this column
 		 * is sorted. That this property is an array allows multi-column sorting
-		 * to be defined for a column (for example first ydemo / last ydemo columns
+		 * to be defined for a column (for example first name / last name columns
 		 * would benefit from this). The values are integers pointing to the
 		 * columns to be sorted on (typically it will be a single integer pointing
 		 * at itself, but that doesn't need to be the case).
@@ -9032,8 +9032,8 @@
 		"sDefaultContent": null,
 	
 		/**
-		 * Name for the column, allowing reference to the column by ydemo as well as
-		 * by index (needs a lookup to work by ydemo).
+		 * Name for the column, allowing reference to the column by name as well as
+		 * by index (needs a lookup to work by name).
 		 *  @type string
 		 */
 		"sName": null,
@@ -9096,7 +9096,7 @@
 	 * from v1.10 onwards the primary interface is camel case. In order to avoid
 	 * breaking backwards compatibility utterly with this change, the Hungarian
 	 * version is still, internally the primary interface, but is is not documented
-	 * - hence the @ydemo tags in each doc comment. This allows a Javascript function
+	 * - hence the @name tags in each doc comment. This allows a Javascript function
 	 * to create a map from Hungarian notation to camel case (going the other direction
 	 * would require each property to be listed, which would at around 3K to the size
 	 * of DataTables, while this method is about a 0.5K hit.
@@ -9121,7 +9121,7 @@
 		 *  @default null
 		 *
 		 *  @dtopt Option
-		 *  @ydemo DataTable.defaults.data
+		 *  @name DataTable.defaults.data
 		 *
 		 *  @example
 		 *    // Using a 2D array data source
@@ -9184,7 +9184,7 @@
 		 *  @default [[0,'asc']]
 		 *
 		 *  @dtopt Option
-		 *  @ydemo DataTable.defaults.order
+		 *  @name DataTable.defaults.order
 		 *
 		 *  @example
 		 *    // Sort by 3rd column first, and then 4th column
@@ -9215,7 +9215,7 @@
 		 *  @default null
 		 *
 		 *  @dtopt Option
-		 *  @ydemo DataTable.defaults.orderFixed
+		 *  @name DataTable.defaults.orderFixed
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -9302,7 +9302,7 @@
 		 *  @default null
 		 *
 		 *  @dtopt Option
-		 *  @ydemo DataTable.defaults.ajax
+		 *  @name DataTable.defaults.ajax
 		 *  @since 1.10.0
 		 *
 		 * @example
@@ -9398,7 +9398,7 @@
 		 *  @default [ 10, 25, 50, 100 ]
 		 *
 		 *  @dtopt Option
-		 *  @ydemo DataTable.defaults.lengthMenu
+		 *  @name DataTable.defaults.lengthMenu
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -9420,7 +9420,7 @@
 		 * to specify any options).
 		 *  @member
 		 *
-		 *  @ydemo DataTable.defaults.column
+		 *  @name DataTable.defaults.column
 		 */
 		"aoColumns": null,
 	
@@ -9434,14 +9434,14 @@
 		 * have `targets` defined in each object in the array. Values in the `targets`
 		 * array may be:
 		 *   <ul>
-		 *     <li>a string - class ydemo will be matched on the TH for the column</li>
+		 *     <li>a string - class name will be matched on the TH for the column</li>
 		 *     <li>0 or a positive integer - column index counting from the left</li>
 		 *     <li>a negative integer - column index counting from the right</li>
 		 *     <li>the string "_all" - all columns (i.e. assign a default)</li>
 		 *   </ul>
 		 *  @member
 		 *
-		 *  @ydemo DataTable.defaults.columnDefs
+		 *  @name DataTable.defaults.columnDefs
 		 */
 		"aoColumnDefs": null,
 	
@@ -9456,7 +9456,7 @@
 		 *  @default []
 		 *
 		 *  @dtopt Option
-		 *  @ydemo DataTable.defaults.searchCols
+		 *  @name DataTable.defaults.searchCols
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -9482,7 +9482,7 @@
 		 *    options</i>
 		 *
 		 *  @dtopt Option
-		 *  @ydemo DataTable.defaults.stripeClasses
+		 *  @name DataTable.defaults.stripeClasses
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -9502,7 +9502,7 @@
 		 *  @default true
 		 *
 		 *  @dtopt Features
-		 *  @ydemo DataTable.defaults.autoWidth
+		 *  @name DataTable.defaults.autoWidth
 		 *
 		 *  @example
 		 *    $(document).ready( function () {
@@ -9524,7 +9524,7 @@
 		 *  @default false
 		 *
 		 *  @dtopt Features
-		 *  @ydemo DataTable.defaults.deferRender
+		 *  @name DataTable.defaults.deferRender
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -9546,7 +9546,7 @@
 		 *  @default false
 		 *
 		 *  @dtopt Options
-		 *  @ydemo DataTable.defaults.destroy
+		 *  @name DataTable.defaults.destroy
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -9577,7 +9577,7 @@
 		 *  @default true
 		 *
 		 *  @dtopt Features
-		 *  @ydemo DataTable.defaults.searching
+		 *  @name DataTable.defaults.searching
 		 *
 		 *  @example
 		 *    $(document).ready( function () {
@@ -9597,7 +9597,7 @@
 		 *  @default true
 		 *
 		 *  @dtopt Features
-		 *  @ydemo DataTable.defaults.info
+		 *  @name DataTable.defaults.info
 		 *
 		 *  @example
 		 *    $(document).ready( function () {
@@ -9617,7 +9617,7 @@
 		 *  @default false
 		 *
 		 *  @dtopt Features
-		 *  @ydemo DataTable.defaults.jQueryUI
+		 *  @name DataTable.defaults.jQueryUI
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -9636,7 +9636,7 @@
 		 *  @default true
 		 *
 		 *  @dtopt Features
-		 *  @ydemo DataTable.defaults.lengthChange
+		 *  @name DataTable.defaults.lengthChange
 		 *
 		 *  @example
 		 *    $(document).ready( function () {
@@ -9654,7 +9654,7 @@
 		 *  @default true
 		 *
 		 *  @dtopt Features
-		 *  @ydemo DataTable.defaults.paging
+		 *  @name DataTable.defaults.paging
 		 *
 		 *  @example
 		 *    $(document).ready( function () {
@@ -9675,7 +9675,7 @@
 		 *  @default false
 		 *
 		 *  @dtopt Features
-		 *  @ydemo DataTable.defaults.processing
+		 *  @name DataTable.defaults.processing
 		 *
 		 *  @example
 		 *    $(document).ready( function () {
@@ -9699,7 +9699,7 @@
 		 *  @default false
 		 *
 		 *  @dtopt Options
-		 *  @ydemo DataTable.defaults.retrieve
+		 *  @name DataTable.defaults.retrieve
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -9736,7 +9736,7 @@
 		 *  @default false
 		 *
 		 *  @dtopt Options
-		 *  @ydemo DataTable.defaults.scrollCollapse
+		 *  @name DataTable.defaults.scrollCollapse
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -9758,7 +9758,7 @@
 		 *
 		 *  @dtopt Features
 		 *  @dtopt Server-side
-		 *  @ydemo DataTable.defaults.serverSide
+		 *  @name DataTable.defaults.serverSide
 		 *
 		 *  @example
 		 *    $(document).ready( function () {
@@ -9778,7 +9778,7 @@
 		 *  @default true
 		 *
 		 *  @dtopt Features
-		 *  @ydemo DataTable.defaults.ordering
+		 *  @name DataTable.defaults.ordering
 		 *
 		 *  @example
 		 *    $(document).ready( function () {
@@ -9797,7 +9797,7 @@
 		 *  @default true
 		 *
 		 *  @dtopt Options
-		 *  @ydemo DataTable.defaults.orderMulti
+		 *  @name DataTable.defaults.orderMulti
 		 *
 		 *  @example
 		 *    // Disable multiple column sorting ability
@@ -9818,7 +9818,7 @@
 		 *  @default false
 		 *
 		 *  @dtopt Options
-		 *  @ydemo DataTable.defaults.orderCellsTop
+		 *  @name DataTable.defaults.orderCellsTop
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -9840,7 +9840,7 @@
 		 *  @default true
 		 *
 		 *  @dtopt Features
-		 *  @ydemo DataTable.defaults.orderClasses
+		 *  @name DataTable.defaults.orderClasses
 		 *
 		 *  @example
 		 *    $(document).ready( function () {
@@ -9865,7 +9865,7 @@
 		 *  @default false
 		 *
 		 *  @dtopt Features
-		 *  @ydemo DataTable.defaults.stateSave
+		 *  @name DataTable.defaults.stateSave
 		 *
 		 *  @example
 		 *    $(document).ready( function () {
@@ -9887,7 +9887,7 @@
 		 *  @param {int} dataIndex The index of this row in the internal aoData array
 		 *
 		 *  @dtopt Callbacks
-		 *  @ydemo DataTable.defaults.createdRow
+		 *  @name DataTable.defaults.createdRow
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -9912,7 +9912,7 @@
 		 *  @param {object} settings DataTables settings object
 		 *
 		 *  @dtopt Callbacks
-		 *  @ydemo DataTable.defaults.drawCallback
+		 *  @name DataTable.defaults.drawCallback
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -9940,7 +9940,7 @@
 		 *    to the full data array
 		 *
 		 *  @dtopt Callbacks
-		 *  @ydemo DataTable.defaults.footerCallback
+		 *  @name DataTable.defaults.footerCallback
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -9966,7 +9966,7 @@
 		 *  @returns {string} formatted string for DataTables to show the number
 		 *
 		 *  @dtopt Callbacks
-		 *  @ydemo DataTable.defaults.formatNumber
+		 *  @name DataTable.defaults.formatNumber
 		 *
 		 *  @example
 		 *    // Format a number using a single quote for the separator (note that
@@ -10004,7 +10004,7 @@
 		 *    to the full data array
 		 *
 		 *  @dtopt Callbacks
-		 *  @ydemo DataTable.defaults.headerCallback
+		 *  @name DataTable.defaults.headerCallback
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -10036,7 +10036,7 @@
 		 *  @returns {string} The string to be displayed in the information element.
 		 *
 		 *  @dtopt Callbacks
-		 *  @ydemo DataTable.defaults.infoCallback
+		 *  @name DataTable.defaults.infoCallback
 		 *
 		 *  @example
 		 *    $('#example').dataTable( {
@@ -10059,7 +10059,7 @@
 		 *    present if client-side Ajax sourced data is used
 		 *
 		 *  @dtopt Callbacks
-		 *  @ydemo DataTable.defaults.initComplete
+		 *  @name DataTable.defaults.initComplete
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -10083,7 +10083,7 @@
 		 *    return) will allow it to complete.
 		 *
 		 *  @dtopt Callbacks
-		 *  @ydemo DataTable.defaults.preDrawCallback
+		 *  @name DataTable.defaults.preDrawCallback
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -10102,7 +10102,7 @@
 		/**
 		 * This function allows you to 'post process' each row after it have been
 		 * generated for each table draw, but before it is rendered on screen. This
-		 * function might be used for setting the row class ydemo etc.
+		 * function might be used for setting the row class name etc.
 		 *  @type function
 		 *  @param {node} row "TR" element for the current row
 		 *  @param {array} data Raw data array for this row
@@ -10111,7 +10111,7 @@
 		 *    rows (after filtering)
 		 *
 		 *  @dtopt Callbacks
-		 *  @ydemo DataTable.defaults.rowCallback
+		 *  @name DataTable.defaults.rowCallback
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -10147,7 +10147,7 @@
 		 *
 		 *  @dtopt Callbacks
 		 *  @dtopt Server-side
-		 *  @ydemo DataTable.defaults.serverData
+		 *  @name DataTable.defaults.serverData
 		 *
 		 *  @deprecated 1.10. Please use `ajax` for this functionality now.
 		 */
@@ -10164,7 +10164,7 @@
 		 * passed in parameter is the data set that has been constructed by
 		 * DataTables, and you can add to this or modify it as you require.
 		 *  @type function
-		 *  @param {array} data Data array (array of objects which are ydemo/value
+		 *  @param {array} data Data array (array of objects which are name/value
 		 *    pairs) that has been constructed by DataTables and will be sent to the
 		 *    server. In the case of Ajax sourced data with server-side processing
 		 *    this will be an empty array, for server-side processing there will be a
@@ -10174,7 +10174,7 @@
 		 *
 		 *  @dtopt Callbacks
 		 *  @dtopt Server-side
-		 *  @ydemo DataTable.defaults.serverParams
+		 *  @name DataTable.defaults.serverParams
 		 *
 		 *  @deprecated 1.10. Please use `ajax` for this functionality now.
 		 */
@@ -10191,7 +10191,7 @@
 		 *  @return {object} The DataTables state object to be loaded
 		 *
 		 *  @dtopt Callbacks
-		 *  @ydemo DataTable.defaults.stateLoadCallback
+		 *  @name DataTable.defaults.stateLoadCallback
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -10238,7 +10238,7 @@
 		 *  @param {object} data The state object that is to be loaded
 		 *
 		 *  @dtopt Callbacks
-		 *  @ydemo DataTable.defaults.stateLoadParams
+		 *  @name DataTable.defaults.stateLoadParams
 		 *
 		 *  @example
 		 *    // Remove a saved filter, so filtering is never loaded
@@ -10273,7 +10273,7 @@
 		 *  @param {object} data The state object that was loaded
 		 *
 		 *  @dtopt Callbacks
-		 *  @ydemo DataTable.defaults.stateLoaded
+		 *  @name DataTable.defaults.stateLoaded
 		 *
 		 *  @example
 		 *    // Show an alert with the filtering value that was saved
@@ -10299,7 +10299,7 @@
 		 *  @param {object} data The state object to be saved
 		 *
 		 *  @dtopt Callbacks
-		 *  @ydemo DataTable.defaults.stateSaveCallback
+		 *  @name DataTable.defaults.stateSaveCallback
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -10339,7 +10339,7 @@
 		 *  @param {object} data The state object to be saved
 		 *
 		 *  @dtopt Callbacks
-		 *  @ydemo DataTable.defaults.stateSaveParams
+		 *  @name DataTable.defaults.stateSaveParams
 		 *
 		 *  @example
 		 *    // Remove a saved filter, so filtering is never saved
@@ -10363,7 +10363,7 @@
 		 *  @default 7200 <i>(2 hours)</i>
 		 *
 		 *  @dtopt Options
-		 *  @ydemo DataTable.defaults.stateDuration
+		 *  @name DataTable.defaults.stateDuration
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -10391,7 +10391,7 @@
 		 *  @default null
 		 *
 		 *  @dtopt Options
-		 *  @ydemo DataTable.defaults.deferLoading
+		 *  @name DataTable.defaults.deferLoading
 		 *
 		 *  @example
 		 *    // 57 records available in the table, no filtering applied
@@ -10427,7 +10427,7 @@
 		 *  @default 10
 		 *
 		 *  @dtopt Options
-		 *  @ydemo DataTable.defaults.pageLength
+		 *  @name DataTable.defaults.pageLength
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -10448,7 +10448,7 @@
 		 *  @default 0
 		 *
 		 *  @dtopt Options
-		 *  @ydemo DataTable.defaults.displayStart
+		 *  @name DataTable.defaults.displayStart
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -10471,7 +10471,7 @@
 		 *  @default 0
 		 *
 		 *  @dtopt Options
-		 *  @ydemo DataTable.defaults.tabIndex
+		 *  @name DataTable.defaults.tabIndex
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -10489,7 +10489,7 @@
 		 * during initialisation in addition to through the static
 		 * {@link DataTable.ext.oStdClasses} object).
 		 *  @namespace
-		 *  @ydemo DataTable.defaults.classes
+		 *  @name DataTable.defaults.classes
 		 */
 		"oClasses": {},
 	
@@ -10499,7 +10499,7 @@
 		 * are defined in this object, allowing you to modified them individually or
 		 * completely replace them all as required.
 		 *  @namespace
-		 *  @ydemo DataTable.defaults.language
+		 *  @name DataTable.defaults.language
 		 */
 		"oLanguage": {
 			/**
@@ -10507,7 +10507,7 @@
 			 * actually visible on the page, but will be read by screenreaders, and thus
 			 * must be internationalised as well).
 			 *  @namespace
-			 *  @ydemo DataTable.defaults.language.aria
+			 *  @name DataTable.defaults.language.aria
 			 */
 			"oAria": {
 				/**
@@ -10518,7 +10518,7 @@
 				 *  @default : activate to sort column ascending
 				 *
 				 *  @dtopt Language
-				 *  @ydemo DataTable.defaults.language.aria.sortAscending
+				 *  @name DataTable.defaults.language.aria.sortAscending
 				 *
 				 *  @example
 				 *    $(document).ready( function() {
@@ -10541,7 +10541,7 @@
 				 *  @default : activate to sort column ascending
 				 *
 				 *  @dtopt Language
-				 *  @ydemo DataTable.defaults.language.aria.sortDescending
+				 *  @name DataTable.defaults.language.aria.sortDescending
 				 *
 				 *  @example
 				 *    $(document).ready( function() {
@@ -10561,7 +10561,7 @@
 			 * Pagination string used by DataTables for the built-in pagination
 			 * control types.
 			 *  @namespace
-			 *  @ydemo DataTable.defaults.language.paginate
+			 *  @name DataTable.defaults.language.paginate
 			 */
 			"oPaginate": {
 				/**
@@ -10571,7 +10571,7 @@
 				 *  @default First
 				 *
 				 *  @dtopt Language
-				 *  @ydemo DataTable.defaults.language.paginate.first
+				 *  @name DataTable.defaults.language.paginate.first
 				 *
 				 *  @example
 				 *    $(document).ready( function() {
@@ -10594,7 +10594,7 @@
 				 *  @default Last
 				 *
 				 *  @dtopt Language
-				 *  @ydemo DataTable.defaults.language.paginate.last
+				 *  @name DataTable.defaults.language.paginate.last
 				 *
 				 *  @example
 				 *    $(document).ready( function() {
@@ -10617,7 +10617,7 @@
 				 *  @default Next
 				 *
 				 *  @dtopt Language
-				 *  @ydemo DataTable.defaults.language.paginate.next
+				 *  @name DataTable.defaults.language.paginate.next
 				 *
 				 *  @example
 				 *    $(document).ready( function() {
@@ -10640,7 +10640,7 @@
 				 *  @default Previous
 				 *
 				 *  @dtopt Language
-				 *  @ydemo DataTable.defaults.language.paginate.previous
+				 *  @name DataTable.defaults.language.paginate.previous
 				 *
 				 *  @example
 				 *    $(document).ready( function() {
@@ -10665,7 +10665,7 @@
 			 *  @default No data available in table
 			 *
 			 *  @dtopt Language
-			 *  @ydemo DataTable.defaults.language.emptyTable
+			 *  @name DataTable.defaults.language.emptyTable
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
@@ -10697,7 +10697,7 @@
 			 *  @default Showing _START_ to _END_ of _TOTAL_ entries
 			 *
 			 *  @dtopt Language
-			 *  @ydemo DataTable.defaults.language.info
+			 *  @name DataTable.defaults.language.info
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
@@ -10718,7 +10718,7 @@
 			 *  @default Showing 0 to 0 of 0 entries
 			 *
 			 *  @dtopt Language
-			 *  @ydemo DataTable.defaults.language.infoEmpty
+			 *  @name DataTable.defaults.language.infoEmpty
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
@@ -10740,7 +10740,7 @@
 			 *  @default (filtered from _MAX_ total entries)
 			 *
 			 *  @dtopt Language
-			 *  @ydemo DataTable.defaults.language.infoFiltered
+			 *  @name DataTable.defaults.language.infoFiltered
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
@@ -10763,7 +10763,7 @@
 			 *  @default <i>Empty string</i>
 			 *
 			 *  @dtopt Language
-			 *  @ydemo DataTable.defaults.language.infoPostFix
+			 *  @name DataTable.defaults.language.infoPostFix
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
@@ -10793,7 +10793,7 @@
 			 *  @default 
 			 *
 			 *  @dtopt Language
-			 *  @ydemo DataTable.defaults.language.decimal
+			 *  @name DataTable.defaults.language.decimal
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
@@ -10817,7 +10817,7 @@
 			 *  @default ,
 			 *
 			 *  @dtopt Language
-			 *  @ydemo DataTable.defaults.language.thousands
+			 *  @name DataTable.defaults.language.thousands
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
@@ -10840,7 +10840,7 @@
 			 *  @default Show _MENU_ entries
 			 *
 			 *  @dtopt Language
-			 *  @ydemo DataTable.defaults.language.lengthMenu
+			 *  @name DataTable.defaults.language.lengthMenu
 			 *
 			 *  @example
 			 *    // Language change only
@@ -10882,7 +10882,7 @@
 			 *  @default Loading...
 			 *
 			 *  @dtopt Language
-			 *  @ydemo DataTable.defaults.language.loadingRecords
+			 *  @name DataTable.defaults.language.loadingRecords
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
@@ -10903,7 +10903,7 @@
 			 *  @default Processing...
 			 *
 			 *  @dtopt Language
-			 *  @ydemo DataTable.defaults.language.processing
+			 *  @name DataTable.defaults.language.processing
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
@@ -10927,7 +10927,7 @@
 			 *  @default Search:
 			 *
 			 *  @dtopt Language
-			 *  @ydemo DataTable.defaults.language.search
+			 *  @name DataTable.defaults.language.search
 			 *
 			 *  @example
 			 *    // Input text box will be appended at the end automatically
@@ -10963,7 +10963,7 @@
 			 *  @default <i>Empty string - i.e. disabled</i>
 			 *
 			 *  @dtopt Language
-			 *  @ydemo DataTable.defaults.language.url
+			 *  @name DataTable.defaults.language.url
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
@@ -10985,7 +10985,7 @@
 			 *  @default No matching records found
 			 *
 			 *  @dtopt Language
-			 *  @ydemo DataTable.defaults.language.zeroRecords
+			 *  @name DataTable.defaults.language.zeroRecords
 			 *
 			 *  @example
 			 *    $(document).ready( function() {
@@ -11012,7 +11012,7 @@
 		 *  @extends DataTable.models.oSearch
 		 *
 		 *  @dtopt Options
-		 *  @ydemo DataTable.defaults.search
+		 *  @name DataTable.defaults.search
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -11038,7 +11038,7 @@
 		 *
 		 *  @dtopt Options
 		 *  @dtopt Server-side
-		 *  @ydemo DataTable.defaults.ajaxDataProp
+		 *  @name DataTable.defaults.ajaxDataProp
 		 *
 		 *  @deprecated 1.10. Please use `ajax` for this functionality now.
 		 */
@@ -11057,7 +11057,7 @@
 		 *
 		 *  @dtopt Options
 		 *  @dtopt Server-side
-		 *  @ydemo DataTable.defaults.ajaxSource
+		 *  @name DataTable.defaults.ajaxSource
 		 *
 		 *  @deprecated 1.10. Please use `ajax` for this functionality now.
 		 */
@@ -11106,7 +11106,7 @@
 		 *    <"H"lfr>t<"F"ip> <i>(when `jQueryUI` is true)</i>
 		 *
 		 *  @dtopt Options
-		 *  @ydemo DataTable.defaults.dom
+		 *  @name DataTable.defaults.dom
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -11133,7 +11133,7 @@
 		 *  @default simple_numbers
 		 *
 		 *  @dtopt Options
-		 *  @ydemo DataTable.defaults.pagingType
+		 *  @name DataTable.defaults.pagingType
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -11157,7 +11157,7 @@
 		 *  @default <i>blank string - i.e. disabled</i>
 		 *
 		 *  @dtopt Features
-		 *  @ydemo DataTable.defaults.scrollX
+		 *  @name DataTable.defaults.scrollX
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -11181,7 +11181,7 @@
 		 *  @default <i>blank string - i.e. disabled</i>
 		 *
 		 *  @dtopt Options
-		 *  @ydemo DataTable.defaults.scrollXInner
+		 *  @name DataTable.defaults.scrollXInner
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -11205,7 +11205,7 @@
 		 *  @default <i>blank string - i.e. disabled</i>
 		 *
 		 *  @dtopt Features
-		 *  @ydemo DataTable.defaults.scrollY
+		 *  @name DataTable.defaults.scrollY
 		 *
 		 *  @example
 		 *    $(document).ready( function() {
@@ -11229,7 +11229,7 @@
 		 *
 		 *  @dtopt Options
 		 *  @dtopt Server-side
-		 *  @ydemo DataTable.defaults.serverMethod
+		 *  @name DataTable.defaults.serverMethod
 		 *
 		 *  @deprecated 1.10. Please use `ajax` for this functionality now.
 		 */
@@ -11248,7 +11248,7 @@
 		 *  @type string|object
 		 *  @default null
 		 *
-		 *  @ydemo DataTable.defaults.renderer
+		 *  @name DataTable.defaults.renderer
 		 *
 		 */
 		"renderer": null
@@ -11272,12 +11272,12 @@
 		 * Define which column(s) an order will occur on for this column. This
 		 * allows a column's ordering to take multiple columns into account when
 		 * doing a sort or use the data from a different column. For example first
-		 * ydemo / last ydemo columns make sense to do a multi-column sort over the
+		 * name / last name columns make sense to do a multi-column sort over the
 		 * two columns.
 		 *  @type array|int
 		 *  @default null <i>Takes the value of the column index automatically</i>
 		 *
-		 *  @ydemo DataTable.defaults.column.orderData
+		 *  @name DataTable.defaults.column.orderData
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -11317,7 +11317,7 @@
 		 *  @type array
 		 *  @default [ 'asc', 'desc' ]
 		 *
-		 *  @ydemo DataTable.defaults.column.orderSequence
+		 *  @name DataTable.defaults.column.orderSequence
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -11354,7 +11354,7 @@
 		 *  @type boolean
 		 *  @default true
 		 *
-		 *  @ydemo DataTable.defaults.column.searchable
+		 *  @name DataTable.defaults.column.searchable
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -11387,7 +11387,7 @@
 		 *  @type boolean
 		 *  @default true
 		 *
-		 *  @ydemo DataTable.defaults.column.orderable
+		 *  @name DataTable.defaults.column.orderable
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -11420,7 +11420,7 @@
 		 *  @type boolean
 		 *  @default true
 		 *
-		 *  @ydemo DataTable.defaults.column.visible
+		 *  @name DataTable.defaults.column.visible
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -11460,7 +11460,7 @@
 		 *  @param {int} row The row index for the aoData data store
 		 *  @param {int} col The column index for aoColumns
 		 *
-		 *  @ydemo DataTable.defaults.column.createdCell
+		 *  @name DataTable.defaults.column.createdCell
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -11485,7 +11485,7 @@
 		 * consistency. `dataProp` can still be used, as there is backwards
 		 * compatibility in DataTables for this option, but it is strongly
 		 * recommended that you use `data` in preference to `dataProp`.
-		 *  @ydemo DataTable.defaults.column.dataProp
+		 *  @name DataTable.defaults.column.dataProp
 		 */
 	
 	
@@ -11502,16 +11502,16 @@
 		 *    * `.` - Dotted Javascript notation. Just as you use a `.` in
 		 *      Javascript to read from nested objects, so to can the options
 		 *      specified in `data`. For example: `browser.version` or
-		 *      `browser.ydemo`. If your object parameter ydemo contains a period, use
-		 *      `\\` to escape it - i.e. `first\\.ydemo`.
+		 *      `browser.name`. If your object parameter name contains a period, use
+		 *      `\\` to escape it - i.e. `first\\.name`.
 		 *    * `[]` - Array notation. DataTables can automatically combine data
 		 *      from and array source, joining the data with the characters provided
-		 *      between the two brackets. For example: `ydemo[, ]` would provide a
+		 *      between the two brackets. For example: `name[, ]` would provide a
 		 *      comma-space separated list from the source array. If no characters
 		 *      are provided between the brackets, the original array source is
 		 *      returned.
 		 *    * `()` - Function notation. Adding `()` to the end of a parameter will
-		 *      execute a function of the ydemo given. For example: `browser()` for a
+		 *      execute a function of the name given. For example: `browser()` for a
 		 *      simple function on the data source, `browser.version()` for a
 		 *      function in a nested property or even `browser().version` to get an
 		 *      object property if the function called returns an object. Note that
@@ -11546,15 +11546,15 @@
 		 * is simply a getter and thus simpler to use.
 		 *
 		 * Note that prior to DataTables 1.9.2 `data` was called `mDataProp`. The
-		 * ydemo change reflects the flexibility of this property and is consistent
+		 * name change reflects the flexibility of this property and is consistent
 		 * with the naming of mRender. If 'mDataProp' is given, then it will still
-		 * be used by DataTables, as it automatically maps the old ydemo to the new
+		 * be used by DataTables, as it automatically maps the old name to the new
 		 * if required.
 		 *
 		 *  @type string|int|function|null
 		 *  @default null <i>Use automatically calculated column index</i>
 		 *
-		 *  @ydemo DataTable.defaults.column.data
+		 *  @name DataTable.defaults.column.data
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -11652,7 +11652,7 @@
 		 *      $('#example').dataTable( {
 		 *        "columnDefs": [ {
 		 *          "targets": [ 0 ],
-		 *          "data": "ydemo[, ]"
+		 *          "data": "name[, ]"
 		 *        } ]
 		 *      } );
 		 *    } );
@@ -11678,16 +11678,16 @@
 		 *    * `.` - Dotted Javascript notation. Just as you use a `.` in
 		 *      Javascript to read from nested objects, so to can the options
 		 *      specified in `data`. For example: `browser.version` or
-		 *      `browser.ydemo`. If your object parameter ydemo contains a period, use
-		 *      `\\` to escape it - i.e. `first\\.ydemo`.
+		 *      `browser.name`. If your object parameter name contains a period, use
+		 *      `\\` to escape it - i.e. `first\\.name`.
 		 *    * `[]` - Array notation. DataTables can automatically combine data
 		 *      from and array source, joining the data with the characters provided
-		 *      between the two brackets. For example: `ydemo[, ]` would provide a
+		 *      between the two brackets. For example: `name[, ]` would provide a
 		 *      comma-space separated list from the source array. If no characters
 		 *      are provided between the brackets, the original array source is
 		 *      returned.
 		 *    * `()` - Function notation. Adding `()` to the end of a parameter will
-		 *      execute a function of the ydemo given. For example: `browser()` for a
+		 *      execute a function of the name given. For example: `browser()` for a
 		 *      simple function on the data source, `browser.version()` for a
 		 *      function in a nested property or even `browser().version` to get an
 		 *      object property if the function called returns an object.
@@ -11714,7 +11714,7 @@
 		 *  @type string|int|function|object|null
 		 *  @default null Use the data source value.
 		 *
-		 *  @ydemo DataTable.defaults.column.render
+		 *  @name DataTable.defaults.column.render
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -11727,7 +11727,7 @@
 		 *          { "data": "browser" },
 		 *          {
 		 *            "data": "platform",
-		 *            "render": "[, ].ydemo"
+		 *            "render": "[, ].name"
 		 *          }
 		 *        ]
 		 *      } );
@@ -11790,7 +11790,7 @@
 		 *  @type string
 		 *  @default td
 		 *
-		 *  @ydemo DataTable.defaults.column.cellType
+		 *  @name DataTable.defaults.column.cellType
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -11812,7 +11812,7 @@
 		 *  @type string
 		 *  @default <i>Empty string</i>
 		 *
-		 *  @ydemo DataTable.defaults.column.class
+		 *  @name DataTable.defaults.column.class
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -11854,7 +11854,7 @@
 		 *  @type string
 		 *  @default <i>Empty string<i>
 		 *
-		 *  @ydemo DataTable.defaults.column.contentPadding
+		 *  @name DataTable.defaults.column.contentPadding
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -11882,7 +11882,7 @@
 		 *  @type string
 		 *  @default null
 		 *
-		 *  @ydemo DataTable.defaults.column.defaultContent
+		 *  @name DataTable.defaults.column.defaultContent
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -11928,7 +11928,7 @@
 		 *  @type string
 		 *  @default <i>Empty string</i>
 		 *
-		 *  @ydemo DataTable.defaults.column.name
+		 *  @name DataTable.defaults.column.name
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -11936,11 +11936,11 @@
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "columnDefs": [
-		 *          { "ydemo": "engine", "targets": [ 0 ] },
-		 *          { "ydemo": "browser", "targets": [ 1 ] },
-		 *          { "ydemo": "platform", "targets": [ 2 ] },
-		 *          { "ydemo": "version", "targets": [ 3 ] },
-		 *          { "ydemo": "grade", "targets": [ 4 ] }
+		 *          { "name": "engine", "targets": [ 0 ] },
+		 *          { "name": "browser", "targets": [ 1 ] },
+		 *          { "name": "platform", "targets": [ 2 ] },
+		 *          { "name": "version", "targets": [ 3 ] },
+		 *          { "name": "grade", "targets": [ 4 ] }
 		 *        ]
 		 *      } );
 		 *    } );
@@ -11950,11 +11950,11 @@
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "columns": [
-		 *          { "ydemo": "engine" },
-		 *          { "ydemo": "browser" },
-		 *          { "ydemo": "platform" },
-		 *          { "ydemo": "version" },
-		 *          { "ydemo": "grade" }
+		 *          { "name": "engine" },
+		 *          { "name": "browser" },
+		 *          { "name": "platform" },
+		 *          { "name": "version" },
+		 *          { "name": "grade" }
 		 *        ]
 		 *      } );
 		 *    } );
@@ -11970,7 +11970,7 @@
 		 *  @type string
 		 *  @default std
 		 *
-		 *  @ydemo DataTable.defaults.column.orderDataType
+		 *  @name DataTable.defaults.column.orderDataType
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -12010,7 +12010,7 @@
 		 *  @default null <i>Derived from the 'TH' value for this column in the
 		 *    original HTML table.</i>
 		 *
-		 *  @ydemo DataTable.defaults.column.title
+		 *  @name DataTable.defaults.column.title
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -12051,7 +12051,7 @@
 		 *  @type string
 		 *  @default null <i>Auto-detected from raw data</i>
 		 *
-		 *  @ydemo DataTable.defaults.column.type
+		 *  @name DataTable.defaults.column.type
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -12089,7 +12089,7 @@
 		 *  @type string
 		 *  @default null <i>Automatic</i>
 		 *
-		 *  @ydemo DataTable.defaults.column.width
+		 *  @name DataTable.defaults.column.width
 		 *  @dtopt Columns
 		 *
 		 *  @example
@@ -12660,7 +12660,7 @@
 		 *       and the JSON string to save that has been thus far created. Returns
 		 *       a JSON string to be inserted into a json object
 		 *       (i.e. '"param": [ 0, 1, 2]')</li>
-		 *     <li>string:sName - ydemo of callback</li>
+		 *     <li>string:sName - name of callback</li>
 		 *   </ul>
 		 *  @type array
 		 *  @default []
@@ -12673,7 +12673,7 @@
 		 *   <ul>
 		 *     <li>function:fn - function to call. Takes two parameters, oSettings
 		 *       and the object stored. May return false to cancel state loading</li>
-		 *     <li>string:sName - ydemo of callback</li>
+		 *     <li>string:sName - name of callback</li>
 		 *   </ul>
 		 *  @type array
 		 *  @default []
@@ -13338,7 +13338,7 @@
 			 * custom sorting, but it can also be used to provide custom searching
 			 * by allowing you to pre-processing the data and returning the data in
 			 * the format that should be searched upon. This is done by adding
-			 * functions this object with a parameter ydemo which matches the sType
+			 * functions this object with a parameter name which matches the sType
 			 * for that target column. This is the corollary of <i>afnSortData</i>
 			 * for searching data.
 			 *
@@ -14074,7 +14074,7 @@
 	
 	/**
 	 * Create a wrapper function for exporting an internal functions to an external API.
-	 *  @param {string} fn API function ydemo
+	 *  @param {string} fn API function name
 	 *  @returns {function} wrapped function
 	 *  @memberof DataTable#internal
 	 */
@@ -14218,7 +14218,7 @@
 	 * Draw event, fired whenever the table is redrawn on the page, at the same
 	 * point as fnDrawCallback. This may be useful for binding events or
 	 * performing calculations when the table is altered at all.
-	 *  @ydemo DataTable#draw.dt
+	 *  @name DataTable#draw.dt
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} o DataTables settings object {@link DataTable.models.oSettings}
@@ -14227,7 +14227,7 @@
 	/**
 	 * Search event, fired when the searching applied to the table (using the
 	 * built-in global search, or column filters) is altered.
-	 *  @ydemo DataTable#search.dt
+	 *  @name DataTable#search.dt
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} o DataTables settings object {@link DataTable.models.oSettings}
@@ -14235,7 +14235,7 @@
 
 	/**
 	 * Page change event, fired when the paging of the table is altered.
-	 *  @ydemo DataTable#page.dt
+	 *  @name DataTable#page.dt
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} o DataTables settings object {@link DataTable.models.oSettings}
@@ -14243,7 +14243,7 @@
 
 	/**
 	 * Order event, fired when the ordering applied to the table is altered.
-	 *  @ydemo DataTable#order.dt
+	 *  @name DataTable#order.dt
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} o DataTables settings object {@link DataTable.models.oSettings}
@@ -14252,7 +14252,7 @@
 	/**
 	 * DataTables initialisation complete event, fired when the table is fully
 	 * drawn, including Ajax data loaded, if Ajax data is required.
-	 *  @ydemo DataTable#init.dt
+	 *  @name DataTable#init.dt
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} oSettings DataTables settings object
@@ -14265,7 +14265,7 @@
 	 * is required. This event allows modification of the state saving object
 	 * prior to actually doing the save, including addition or other state
 	 * properties (for plug-ins) or modification of a DataTables core property.
-	 *  @ydemo DataTable#stateSaveParams.dt
+	 *  @name DataTable#stateSaveParams.dt
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} oSettings DataTables settings object
@@ -14277,7 +14277,7 @@
 	 * data, but prior to the settings object being modified by the saved state
 	 * - allowing modification of the saved state is required or loading of
 	 * state for a plug-in.
-	 *  @ydemo DataTable#stateLoadParams.dt
+	 *  @name DataTable#stateLoadParams.dt
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} oSettings DataTables settings object
@@ -14287,7 +14287,7 @@
 	/**
 	 * State loaded event, fired when state has been loaded from stored data and
 	 * the settings object has been modified by the loaded data.
-	 *  @ydemo DataTable#stateLoaded.dt
+	 *  @name DataTable#stateLoaded.dt
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} oSettings DataTables settings object
@@ -14299,7 +14299,7 @@
 	 * (be it, order, searcg or anything else). It can be used to indicate to
 	 * the end user that there is something happening, or that something has
 	 * finished.
-	 *  @ydemo DataTable#processing.dt
+	 *  @name DataTable#processing.dt
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} oSettings DataTables settings object
@@ -14315,7 +14315,7 @@
 	 * Note that this trigger is called in `fnServerData`, if you override
 	 * `fnServerData` and which to use this event, you need to trigger it in you
 	 * success function.
-	 *  @ydemo DataTable#xhr.dt
+	 *  @name DataTable#xhr.dt
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} o DataTables settings object {@link DataTable.models.oSettings}
@@ -14341,7 +14341,7 @@
 	 * Destroy event, fired when the DataTable is destroyed by calling fnDestroy
 	 * or passing the bDestroy:true parameter in the initialisation object. This
 	 * can be used to remove bound events, added DOM nodes, etc.
-	 *  @ydemo DataTable#destroy.dt
+	 *  @name DataTable#destroy.dt
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} o DataTables settings object {@link DataTable.models.oSettings}
@@ -14350,7 +14350,7 @@
 	/**
 	 * Page length change event, fired when number of records to show on each
 	 * page (the length) is changed.
-	 *  @ydemo DataTable#length.dt
+	 *  @name DataTable#length.dt
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} o DataTables settings object {@link DataTable.models.oSettings}
@@ -14359,7 +14359,7 @@
 
 	/**
 	 * Column sizing has changed.
-	 *  @ydemo DataTable#column-sizing.dt
+	 *  @name DataTable#column-sizing.dt
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} o DataTables settings object {@link DataTable.models.oSettings}
@@ -14367,7 +14367,7 @@
 
 	/**
 	 * Column visibility has changed.
-	 *  @ydemo DataTable#column-visibility.dt
+	 *  @name DataTable#column-visibility.dt
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} o DataTables settings object {@link DataTable.models.oSettings}

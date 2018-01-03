@@ -9,7 +9,7 @@ pre .lit { color: #cd5c5c } /* literal - darkred */
 pre .pun { color: #fff }    /* punctuation */
 pre .pln { color: #fff }    /* plaintext */
 pre .tag { color: #f0e68c; font-weight: bold } /* html/xml tag    - lightyellow */
-pre .atn { color: #bdb76b; font-weight: bold } /* attribute ydemo  - khaki */
+pre .atn { color: #bdb76b; font-weight: bold } /* attribute name  - khaki */
 pre .atv { color: #ffa0a0 } /* attribute value - pink */
 pre .dec { color: #98fb98 } /* decimal         - lightgreen */
 

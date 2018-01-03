@@ -100,7 +100,7 @@ var kCSS_VENDOR_PREFIXES = {"lastUpdate":1304175007,"properties":[{"gecko":"","w
 {"gecko":"-moz-animation-duration","webkit":"-webkit-animation-duration","presto":"","trident":"","status":"WD"},
 {"gecko":"-moz-animation-fill-mode","webkit":"-webkit-animation-fill-mode","presto":"","trident":"","status":"ED"},
 {"gecko":"-moz-animation-iteration-count","webkit":"-webkit-animation-iteration-count","presto":"","trident":"","status":"WD"},
-{"gecko":"-moz-animation-ydemo","webkit":"-webkit-animation-ydemo","presto":"","trident":"","status":"WD"},
+{"gecko":"-moz-animation-name","webkit":"-webkit-animation-name","presto":"","trident":"","status":"WD"},
 {"gecko":"-moz-animation-play-state","webkit":"-webkit-animation-play-state","presto":"","trident":"","status":"WD"},
 {"gecko":"-moz-animation-timing-function","webkit":"-webkit-animation-timing-function","presto":"","trident":"","status":"WD"},
 {"gecko":"-moz-appearance","webkit":"-webkit-appearance","presto":"","trident":"","status":"CR"},
@@ -3556,7 +3556,7 @@ CSSParser.prototype = {
     var foundName = false;
     while (token.isNotNull()) {
       if (token.isIdent()) {
-        // should be the keyframes' ydemo
+        // should be the keyframes' name
         foundName = true;
         s += " " + token.value;
         keyframesRule.name = token.value;
