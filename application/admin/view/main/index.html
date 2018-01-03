@@ -64,7 +64,34 @@
         </div>
     </div>
 </div>
+<!-- Modal fade in scale up -->
+<div class="md-modal md-fade-in-scale-up" id="md-fade-in-scale-up">
+        <p>
+            <button class="btn btn-danger md-close">关闭</button>
+        </p>
+    <div class="md-content">
+        <h3>新增属性</h3>
+        <div class="widget-content padding">
+            <div id="basic-form">
+                <form role="form" action="{:url('admin/ShopAttr/save')}" method="post">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">属性名:</label>
+                        <input type="text" class="form-control" name="attr">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <input type="radio" name="status" value="1" checked>启用
+                            <input type="radio" name="status" value="2" >禁用
+                        </div>
+                    </div>
+                    <p></p>
+                    <p><button type="submit" class="btn btn-info">添加</button></p>
+                </form>
+            </div>
+        </div>
 
+    </div><!-- End div .md-content -->
+</div><!-- End div .md-modal .md-fade-in-scale-up -->
 
 <!-- Modal Logout -->
 <div class="md-modal md-just-me" id="logout-modal">
@@ -297,7 +324,8 @@
                             class="fa fa-angle-down"></i></span></a>
                         <ul>
                             <li><a href="{:url('admin/Merchant/index')}"><span>商户列表</span></a></li>
-                            <li><a href="{:url('admin/Shops/index')}"><span>商铺列表</span></a></li>
+                            <li><a href="{:url('admin/Shops/index')}"><span>店铺列表</span></a></li>
+                            <li><a href="{:url('admin/ShopAttr/index')}"><span>店铺属性</span></a></li>
                         </ul>
                     </li>
                 </ul>

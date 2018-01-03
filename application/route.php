@@ -22,7 +22,7 @@ Route::rule('/','index/index/index');
  */
 Route::get('admin','admin/index/index');
 Route::get('getMsg','admin/main/getMsg');
-
+Route::get('getEmail','admin/main/getEmail');
 
 /**
  * 后台主页路由
@@ -44,7 +44,7 @@ Route::resource('Rabc','admin/Rabc');
 /**
  * 角色管理路由
  */
-// Route::get('node/[:id]','admin/Role/nodeList');
+
 Route::post('UpNode','admin/Role/UpdataNode');
 Route::resource('Role','admin/Role');
 
@@ -59,6 +59,11 @@ Route::resource('Jur','admin/Jur');
 Route::resource('Mer','admin/Merchant');
 
 /**
- * 商铺管理路由
+ * 店铺管理路由
  */
 Route::resource('Shops','admin/Shops');
+
+/**
+ * 店铺属性路由
+ */
+Route::resource('Attr','admin/ShopAttr');
