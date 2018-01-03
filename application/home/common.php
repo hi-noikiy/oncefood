@@ -10,6 +10,8 @@
 // +----------------------------------------------------------------------
 /***************************yzw手机短信****************************/
 use app\ydemo\Rest;
+use app\ydemo\PHPMailer;
+use app\ydemo\Exception;
 // 应用公共文件
 function sendTemplateSMS($to, $datas, $tempId)
 {
@@ -63,3 +65,36 @@ function sendTemplateSMS($to, $datas, $tempId)
     'scope' => 'get_user_info,add_share,list_album,add_album,upload_pic,add_topic,add_one_blog,add_weibo,check_page_fans,add_t,add_pic_t,del_t,get_repost_list,get_info,get_other_info,get_fanslist,get_idolist,add_idol,del_idol,get_tenpay_addr',
     'errorReport' => true
 ];
+/************************************邮箱登录**********************************************/
+function sendMail($email){
+    $mail = new PHPMailer(); //建立邮件发送类
+    $mail->CharSet = "UTF-8";
+    $address ="yinzhanwei1008@163.com";
+    $mail->IsSMTP(); // 使用SMTP方式发送
+    $mail->Host = "smtp.163.com"; // 您的企业邮局域名
+    $mail->SMTPAuth = true; // 启用SMTP验证功能
+    $mail->Username = "yinzhanwei1008@163.com"; // 邮局用户名(请填写完整的email地址)
+    $mail->Password = "yinzhanwei123"; // 邮局密码
+    $mail->Port=25;
+    $mail->From = "yinzhanwei1008@163.com"; //邮件发送者email地址
+    $mail->FromName = "波课";
+    $mail->AddAddress($email, "title");//收件人地址，可以替换成任何想要接收邮件的email信箱,格式是AddAddress("收件人email","收件人姓名")
+    //$mail->AddReplyTo("", "");
+
+    //$mail->AddAttachment("/var/tmp/file.tar.gz"); // 添加附件
+    $mail->IsHTML(true); // set email format to HTML //是否使用HTML格式
+
+    $mail->Subject = "您的验证码是:"; //邮件标题
+    $mail->Body = "895652"; //邮件内容，上面设置HTML，则可以是HTML
+
+    if(!$mail->Send())
+    {
+        echo "邮件发送失败. <p>";
+        echo "错误原因: " . $mail->ErrorInfo;
+        exit;
+    }else{
+
+        return '邮箱发送成功';
+
+    }
+}

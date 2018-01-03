@@ -35,14 +35,17 @@
 
                                 <tbody>
                                 {volist name="ynode" id="vo"}
-                                <tr>
+
                                     <td>{$vo.id}</td>
                                     <td>{$vo.name}</td>
                                     <td>{$vo.mname}</td>
                                     <td>{$vo.aname}</td>
-                                    <td>{if $vo.status == 1}启用
-                                        {else $vo.status == 2}禁用
-                                        {/if}</td>
+                                {if $vo.status == 1}
+                                <td><button class="btn btn-success update" data-id="{$vo.id}">启用</button></td>
+                                {else /}
+                                <td><button class="btn btn-danger update" data-id="{$vo.id}">禁用</button></td>
+                                {/if}
+
                                     <td><button data-modal="md-3d-flip-horizontal" class="btn btn-primary md-trigger edit-btn" data-id="{$vo.id}">修改</button><button class="btn btn-danger del-btn" data-id="{$vo.id}">删除</button></td>
                                 </tr>
 
@@ -113,23 +116,7 @@
                             <input type="text" class="form-control aname" id="input-text-help" placeholder="方法名" name="aname" value="">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">状态</label>
-                        <div class="col-sm-10">
-                            <div class="radio iradio">
-                                <label>
-                                    <input type="radio" class="sta" name="status" id="optionsRadios1" value="1" >启用
 
-                                </label>
-                            </div>
-                            <div class="radio iradio">
-                                <label>
-                                    <input type="radio" class="sta" name="status" id="optionsRadios2" value="2" >禁用
-
-                                </label>
-                            </div>
-                        </div>
-                    </div>
 
 
                     <div class="form-group">
@@ -146,18 +133,56 @@
     </div><!-- End div .md-content -->
 
 </div>
+
 {js href="/static/home/js/jquery.min.js"}
 {js href="/static/home/js/bootstrap.min.js"}
 {js href="/static/home/js/toastr.min.js"}
+
 <script>
+
+$(function(){
+    //更新状态
+    $('.update').click(function(){
+        var uid = $(this).attr('data-id');
+        var obj = $(this);
+//        console.log(uid);
+//        console.log(obj);
+//        var u = 'uid='+uid;
+        updateAjax(uid,obj);
+
+    });
+});
+//    更新状态
+function updateAjax(uid,obj){
+    $.ajax({
+        type : 'post',
+        url : '/update/',
+        data : {uid : uid},
+        dataType : 'json',
+        success : function(data){
+            console.log(data);
+            if(data.status == 1){
+                toastr.success(data.info);
+                obj.removeClass('.btn-success').addClass('.btn-danger').html('禁用');
+            }else{
+                toastr.success(data.info);
+                obj.removeClass('.btn-danger').addClass('.btn-success').html('启用');
+            }
+        },
+        error:function(){
+            alert('更新失败');
+        }
+    });
+}
     //    修改数据
     $(function(){
         $('.edit-btn').click(function(){
             var ed_id = $(this).attr('data-id');
-            console.log(ed_id);
+//            console.log(ed_id);
             showAjax(ed_id);
         });
     });
+
     function showAjax(id){
         $.ajax({
             type :'get',
@@ -172,7 +197,10 @@
                     $('.mname').val(data.data.mname);
                     $('.aname').val(data.data.aname);
 //                    ajax值在radio框中回显数据
-                    $("input[name=status][value="+data.data.status+"]").attr("checked",true);
+
+                    $("input[type=radio][value="+data.data.status+"]").attr("checked","checked");
+//                    $("input[name=status][value="+data.data.status+"]").prop("checked",false);
+//                  console.log(de);
 
 
                 }else {

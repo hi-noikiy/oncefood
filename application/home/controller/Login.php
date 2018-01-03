@@ -21,7 +21,15 @@ class Login extends Controller
             'title'=>'登录注册页'
         ]);
     }
-
+//    邮箱
+    public function mail(){
+        $email = '2713497141@qq.com';
+       $result =  sendMail($email);
+       var_dump($result);
+       if ($result){
+           return '12';
+       }
+    }
     /**
      * 保存新建的资源
      *
@@ -37,6 +45,7 @@ class Login extends Controller
         $p = $request->post();
         $data = [
             'name' => $p['name'],
+            'username' => $p['username'],
             'tel' => $p['tel'],
             'qq' => $p['qq'],
             'email' => $p['email'],
@@ -104,18 +113,26 @@ class Login extends Controller
         }
         $p = $request->post();
 //        var_dump($p);die;
-        $name = $p['name'];
+        $name = $p['username'];
+//        var_dump($name);die;
         $pwd = md5($p['pwd']);
-        $company = Db::name('company')->where(['name'=>$name,'pwd'=>$pwd])->find();
+        $company = Db::name('company')->where(['username'=>$name,'pwd'=>$pwd])->find();
+//        var_dump($company);die;
 //        var_dump($company['id']);die;
         Session::set('cid',$company['id']);
+        Session::set('home_username',$company['username']);
         if($company > 0){
             $this->success('登录成功','home/login/top');
         }else{
             $this->error('运行失败');
         }
     }
-
+//    退出系统
+    public function logout(){
+        Session::delete('home_username');
+        return view('home@index/index');
+    }
+//跳转到首页
     public function top(){
         return view('home@main/index',[
             'title'=>'商家后台管理系统'

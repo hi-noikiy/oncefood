@@ -84,7 +84,23 @@ class Ycompany extends Controller
      */
     public function read($id)
     {
-        //
+        if(!Request::instance()->isAjax()){
+                $this->error('你迷路老人');
+            }
+        $yshop = Db::name('yshop')->field('id,name,username,tel,address')->find($id);
+        //        var_dump($ynode);die;
+        if($yshop){
+        $info['status'] = true;
+        $info['info'] = '修改ID为'.$id.'的数据';
+        $info['data'] = $yshop;
+
+
+        }else{
+            $info['status'] = false;
+            $info['info'] = '查无此节点';
+            $info['data'] = '没有数据';
+        }
+        return json($info);
     }
 
     /**
@@ -108,6 +124,23 @@ class Ycompany extends Controller
     public function update(Request $request, $id)
     {
         //
+        if(!Request::instance()->isPut()){
+            $this->error('迷路了');
+        }
+        $p = $request->put();
+//        var_dump($p);die;
+        $data = [
+            'username' => $p['username'],
+            'name' => $p['name'],
+            'tel' => $p['tel'],
+            'address' => $p['address'],
+        ];
+        $yshop = Db::name('yshop')->where(['id'=>$p['id']])->update($data);
+        if($yshop > 0){
+            $this->success('修改成功','home/ycompany/index');
+        }else{
+            $this->error('修改失败');
+        }
     }
 
     /**
@@ -118,6 +151,20 @@ class Ycompany extends Controller
      */
     public function delete($id)
     {
-        //
+        ////查看是不是ajax传送
+        if(!Request::instance()->isAjax()){
+            $this->error('你迷路了');
+        }
+        $yshop = Db::name('yshop')->delete($id);
+        if($yshop > 0){
+            $info['status'] = true;
+            $info['id'] = $id;
+            $info['info'] = 'ID'.$id.'删除成功';
+        }else{
+            $info['status'] = false;
+            $info['id'] = $id;
+            $info['info'] = 'ID'.$id.'删除失败';
+        }
+        return json($info);
     }
 }

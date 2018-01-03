@@ -11,7 +11,7 @@
             <div class="col-md-12">
                 <div class="widget">
                     <div class="widget-header transparent">
-                        <h2><strong>商户</strong> Table</h2>
+                        <h2><strong>{$title}</strong></h2>
                         <div class="additional-btn">
                             <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
                             <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
@@ -25,24 +25,29 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>登录名</th>
-                                    <th>分店名</th>
-                                    <th>电话</th>
-                                    <th>地址</th>
-                                    <th>所属角色</th>
+                                    <th>角色名</th>
+                                    <th>说明</th>
+                                    <th>拥有权限</th>
+                                    <th>状态</th>
+
                                     <th data-sortable="false">操作</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                {volist name="yshop" id="vo"}
+                                {volist name="nid" id="vo"}
                                 <tr>
                                     <td>{$vo.id}</td>
-                                    <td>{$vo.username}</td>
                                     <td>{$vo.name}</td>
-                                    <td>{$vo.tel}</td>
-                                    <td>{$vo.address}</td>
-                                    <td><a href="mailto:#">name@domain.com</a></td>
+                                    <td>{$vo.remark}</td>
+                                    <td>{foreach $vo.node as $k}
+                                        {$k}{/foreach}</td>
+                                    {if $vo.status == 1}
+                                    <td><button class="btn btn-success update" data-id="{$vo.id}">启用</button></td>
+                                    {else /}
+                                    <td><button class="btn btn-danger update" data-id="{$vo.id}">禁用</button></td>
+                                    {/if}
+
                                     <td><button class="btn btn-success">分配权限</button><button data-modal="md-3d-flip-horizontal" class="btn btn-primary md-trigger edit-btn" data-id="{$vo.id}">修改</button><button class="btn btn-danger del-btn" data-id="{$vo.id}">删除</button></td>
                                 </tr>
                                 {/volist}
@@ -82,43 +87,30 @@
 
 </div>
 <!--编辑模态框-->
-<div class="md-modal md-3d-flip-horizontal" id="md-3d-flip-horizontal">
 
+<div class="md-modal md-3d-flip-horizontal" id="md-3d-flip-horizontal">
+    <p><button class="btn btn-danger md-close">关闭</button></p>
     <div class="md-content">
         <div>
             <div class="widget-content padding">
-                <h3> <button class="btn btn-danger md-close">关闭</button></h3>
-                <form class="form-horizontal" role="form" action="{:url('home/ycompany/update')}" method="post">
+
+                <form class="form-horizontal" role="form" action="{:url('home/yrole/update')}" method="post">
                     <input type="hidden" name="id" id="id" value="">
                     <input type="hidden" name="_method" value="PUT">
                     <div class="form-group">
 
-                        <label for="input-text" class="col-sm-2 control-label">登录名</label>
+                        <label for="input-text" class="col-sm-2 control-label">角色名</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control username" id="input-text" placeholder="登录名" name="username" value="">
+                            <input type="text" class="form-control save" id="input-text" placeholder="角色名" name="name" value="">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-text-help" class="col-sm-2 control-label">分店名</label>
+                        <label for="input-text-help" class="col-sm-2 control-label">说明</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control name" id="input-text-help" placeholder="分店名" name="name" value="">
+                            <input type="text" class="form-control remark" id="input-text-help" placeholder="说明" name="remark" value="">
 
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="input-text-help" class="col-sm-2 control-label">电话</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control tel" id="input-text-help" placeholder="电话" name="tel" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="input-text-help" class="col-sm-2 control-label">地址</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control address" id="input-text-help" placeholder="地址" name="address" value="">
-                        </div>
-                    </div>
-
-
                     <div class="form-group">
                         <label class="col-sm-2 control-label"></label>
                         <div class="col-sm-10">
@@ -133,68 +125,103 @@
     </div><!-- End div .md-content -->
 
 </div>
-
 {js href="/static/home/js/jquery.min.js"}
 {js href="/static/home/js/bootstrap.min.js"}
 {js href="/static/home/js/toastr.min.js"}
 <script>
-    //删除数据
+
+//    删除角色
     $(function(){
         $('.del-btn').click(function(){
-//            console.log('dddddddddd');
             var de_id = $(this).attr('data-id');
             var obj = $(this).parents('tr');
             delAjax(de_id,obj);
         });
-//        修改
+        //    修改
         $('.edit-btn').click(function(){
             var ed_id = $(this).attr('data-id');
-//            console.log(ed_id);
             showAjax(ed_id);
         });
-    });
-    function showAjax(id){
-        $.ajax({
-            type :'get',
-            url : '/home/ycompany/' +id,
-            dataType : 'json',
-            success:function(data){
-                console.log(data);
-                if (data.status){
-                    toastr.success(data.info);
-                    $('#id').val(data.data.id);
-                    $('.username').val(data.data.username);
-                    $('.name').val(data.data.name);
-                    $('.tel').val(data.data.tel);
-                    $('.address').val(data.data.address);
-//
-                }else {
-                    toastr.error(data.info);
-                }
-            },
-            error : function(){
-                alert('执行失败');
-            }
+//        更新
+        $('.update').click(function(){
+            var uid = $(this).attr('data-id');
+            var obj = $(this);
+//        console.log(uid);
+//        console.log(obj);
+//        var u = 'uid='+uid;
+            updateAjax(uid,obj);
+
         });
+
+    });
+//    更新
+function updateAjax(uid,obj){
+    $.ajax({
+        type : 'post',
+        url : '/upda/',
+        data : {uid : uid},
+        dataType : 'json',
+        success : function(data){
+            console.log(data);
+            if(data.status == 1){
+                toastr.success(data.info);
+                obj.removeClass('.btn-success').addClass('.btn-danger').html('禁用');
+            }else{
+                toastr.success(data.info);
+                obj.removeClass('.btn-danger').addClass('.btn-success').html('启用');
+            }
+        },
+        error:function(){
+            alert('更新失败');
+        }
+    });
+}
+//    修改
+    function showAjax(id){
+           $.ajax({
+               type:'get',
+               url: '/home/yrole/' + id,
+               dataType: 'json',
+               success:function(data){
+                   console.log(data);
+                    if(data.status){
+                        toastr.success(data.info);
+                        $('#id').val(data.data.id);
+                        $('.save').val(data.data.name);
+                        $('.remark').val(data.data.remark);
+//                        回显单选框的值
+
+//                        $("input[name=status][value="+data.data.status+"]").attr("checked",true);
+//
+                    }else{
+                        toastr.error(data.info);
+                    }
+               },
+               error:function(){
+                   alert('执行失败');
+               }
+           });
     }
-    function  delAjax(id,obj) {
+//    删除
+    function delAjax(id,obj){
         $.ajax({
-            type : 'delete',
-            url :'/home/ycompany/' +id,
-            dataType : 'json',
+            type:'delete',
+            url:'/home/yrole/' + id,
+            dataType:'json',
             success:function(data){
-                if(data.status){
+                if (data.status){
                     toastr.success(data.info);
                     obj.remove();
                 }else{
                     toastr.error(data.info);
                 }
-
             },
-            error :function(){
-                alert('失败');
-            }
+            error:function(){
+                alert('执行失败');
+
+        }
         });
     }
 </script>
+
 {/block}
