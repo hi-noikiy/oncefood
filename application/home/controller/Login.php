@@ -117,10 +117,13 @@ class Login extends Controller
 //        var_dump($name);die;
         $pwd = md5($p['pwd']);
         $company = Db::name('company')->where(['username'=>$name,'pwd'=>$pwd])->find();
+        $yshop = Db::name('yshop')->where(['username'=>$name,'pwd'=>$pwd])->find();
+
 //        var_dump($company);die;
 //        var_dump($company['id']);die;
         Session::set('cid',$company['id']);
         Session::set('home_username',$company['username']);
+        Session::set('yshop_username',$yshop['username']);
         if($company > 0){
             $this->success('登录成功','home/login/top');
         }else{
@@ -134,9 +137,14 @@ class Login extends Controller
     }
 //跳转到首页
     public function top(){
-        return view('home@main/index',[
-            'title'=>'商家后台管理系统'
-        ]);
+        if (empty(Session::get('home_username'))){
+            $this->redirect('home/login/index');
+        }else{
+            return view('home@main/index',[
+                'title'=>'商家后台管理系统'
+            ]);
+        }
+
     }
 
 }

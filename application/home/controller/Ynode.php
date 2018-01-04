@@ -6,7 +6,7 @@ use think\Controller;
 use think\Request;
 use think\Db;
 
-class Ynode extends Controller
+class Ynode extends Admain
 {
     /**
      * 显示所有节点列表列表
@@ -65,38 +65,25 @@ class Ynode extends Controller
     }
 
     /**
+     * 更改状态
      * @param $id
      */
     public function updateStatus(Request $request)
     {
-//        if(!Request::instance()->isPost()){
-//            $this->error('跳转失败');
-//        }
        $uid = $request->post('uid');
-//       var_dump($uid);die;
-
         $data = Db::name('ynode')->field('status')->find($uid);
-//        var_dump($data);die;
         $status['status'] = $data['status'] == 1?2:1;
-
-//        var_dump($status );
         $result = Db::name('ynode')->where(['id'=>$uid])->setField($status);
-//        var_dump($result);die;
-//        var_dump($result);
         if($result && $status['status'] == 1){
             $info= $status;
             $info['id'] = $uid;
             $info['info'] = '启用';
-
         }else{
             $info = $status;
             $info['id'] = $uid;
             $info['info'] = '禁用';
-//            return json($info);
-
         }
         return json($info);
-
     }
     /**
      * 显示指定节点的资源
@@ -116,8 +103,6 @@ class Ynode extends Controller
             $info['status'] = true;
             $info['info'] = '修改ID为'.$id.'的数据';
             $info['data'] = $ynode;
-
-
         }else{
             $info['status'] = false;
             $info['info'] = '查无此节点';

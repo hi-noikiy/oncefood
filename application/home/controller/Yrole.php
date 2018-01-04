@@ -5,7 +5,7 @@ namespace app\home\controller;
 use think\Controller;
 use think\Request;
 use think\Db;
-class Yrole extends Controller
+class Yrole extends Admain
 {
     /**
      * 显示资源角色节点列表

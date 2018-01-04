@@ -7,7 +7,7 @@ use think\Request;
 use think\Db;
 use think\Session;
 
-class Ycompany extends Controller
+class Ycompany extends Admain
 {
     /**
      * 显示商户列表
@@ -20,7 +20,7 @@ class Ycompany extends Controller
 //        这个获取用户
         $cid = Session::get('cid');
 //        var_dump($cid);die;
-        $yshop = Db::name('yshop')->field('id,username,name,tel,address')->where(['cid' => $cid])->select();
+        $yshop = Db::name('yshop')->field('id,name,tel,address,status')->where(['cid' => $cid])->select();
 //        var_dump($yshop);die;
         //显示店铺信息
         return view('home@ycompany/index',[
@@ -57,13 +57,15 @@ class Ycompany extends Controller
         $p = $request->post();
         $cid = Session::get('cid');
         $data =[
-            'username' => $p['username'],
+
             'name' => $p['name'],
             'pwd' => md5($p['pwd']),
             'tel' => $p['tel'],
             'address' => $p['address'],
             'status'=>$p['status'],
-            'cid' => $cid
+            'cid' => $cid,
+            'datetime' => $p['datetime'],
+            'area' => $p['area']
         ];
         if ($p['rpwd'] != $p['pwd']){
             $this->error('密码不一致');
@@ -77,30 +79,67 @@ class Ycompany extends Controller
     }
 
     /**
-     * 显示指定的资源
-     *
-     * @param  int  $id
-     * @return \think\Response
+     * 更改状态
+     * @param Request $request
+     * @return \think\response\Json
      */
-    public function read($id)
+    public function updateSave(Request $request)
     {
-        if(!Request::instance()->isAjax()){
-                $this->error('你迷路老人');
-            }
-        $yshop = Db::name('yshop')->field('id,name,username,tel,address')->find($id);
-        //        var_dump($ynode);die;
-        if($yshop){
-        $info['status'] = true;
-        $info['info'] = '修改ID为'.$id.'的数据';
-        $info['data'] = $yshop;
-
-
+        $uid = $request->post('uid');
+        $data = Db::name('yshop')->field('status')->find($uid);
+        $status['status'] = $data['status'] == 1?2:1;
+        $result = Db::name('yshop')->where(['id'=>$uid])->setField($status);
+        if($result && $status['status'] == 1){
+            $info= $status;
+            $info['id'] = $uid;
+            $info['info'] = '启用';
+        }else{
+            $info = $status;
+            $info['id'] = $uid;
+            $info['info'] = '禁用';
+        }
+        return json($info);
+    }
+    /**
+     * 修改  路由
+     * @param Request $request
+     * @return \think\response\Json
+     */
+    public function saveUpdate(Request $request)
+    {
+        $id = $request->post('id');
+        $yshop = Db::name('yshop')->field('id,name,tel,address')->find($id);
+        if($yshop > 0){
+            $info['status'] = true;
+            $info['info'] = '修改ID为'.$id.'的数据';
+            $info['data'] = $yshop;
         }else{
             $info['status'] = false;
             $info['info'] = '查无此节点';
-            $info['data'] = '没有数据';
+            $info['data'] = $yshop;
         }
         return json($info);
+    }
+
+    /**
+     * 展示详细信息
+     * @param Request $request
+     */
+    public function showUpdate(Request $request)
+    {
+        $id = $request->post('id');
+        $yshop = Db::name('yshop')->field('pwd',true)->find($id);
+        if($yshop > 0){
+            $info['status'] = true;
+            $info['info']= '查看'.$id.'的数据';
+            $info['datas'] = $yshop;
+        }else{
+            $info['status'] = false;
+            $info['info']= '查无此商铺';
+            $info['datas'] = '查无此商铺数据';
+        }
+        return json($info);
+
     }
 
     /**
@@ -130,7 +169,7 @@ class Ycompany extends Controller
         $p = $request->put();
 //        var_dump($p);die;
         $data = [
-            'username' => $p['username'],
+
             'name' => $p['name'],
             'tel' => $p['tel'],
             'address' => $p['address'],

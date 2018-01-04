@@ -14,7 +14,7 @@ class Column extends Controller
      */
     public function index()
     {
-        return view('admin@banner/index');
+        return view('admin@photo/index');
     }
 
     /**
@@ -24,7 +24,7 @@ class Column extends Controller
      */
     public function create()
     {
-        return view('admin@banner/uploads');
+        return view('admin@photo/uploads');
     }
 
     /**
