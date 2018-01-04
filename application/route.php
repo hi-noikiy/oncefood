@@ -33,12 +33,37 @@ Route::post('upda','home/yrole/updateStatus');
 /**
  * 前台默认路由
  */
-
 Route::rule('/','index/index/index');
+
+/**
+ * 注册页面路由 ZMJ
+ */
+
+Route::resource('reg','index/Register');
+
+Route::get('getMessage','index/Register/getMsg');
+
+Route::post('check','index/Register/check');
+Route::get('email','index/Register/email');
+
+/**
+ * 登录页面路由
+ */
+Route::resource('login','index/login');
+Route::get('log','index/login/login');
+/**
+ * 忘记密码路由
+ */ 
+Route::rule('login/spwd','index/login/selectPwd');
+
+/**
+ * 个人中心路由
+ */
+Route::resource('personal','index/personal');
 
 
 /**
- * 后台默认静态路由
+ * 后台默认静态路由 wwb
  */
 Route::get('admin','admin/index/index');
 Route::get('getMsg','admin/main/getMsg');
@@ -74,6 +99,7 @@ Route::resource('Role','admin/Role');
 Route::resource('Jur','admin/Jur');
 
 /**
+<<<<<<< HEAD
  * 商户管理路由
  */
 Route::resource('Mer','admin/Merchant');

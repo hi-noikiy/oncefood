@@ -25,6 +25,9 @@ namespace app\demo;
  * @author Chris Ryan
  * @author Marcus Bointon <phpmailer@synchromedia.co.uk>
  */
+
+use app\demo\PHPMailer;
+
 class SMTP
 {
     /**
