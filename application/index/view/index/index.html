@@ -53,7 +53,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="header_bottom">
 		  <div class="header_nav">
       		<div class="logo">
-				<a href="index.html"><img src="/static/index/images/logo.png" alt=""/><br></a>
+				<a href="index.html"><img src="/static/index/images/logo1.png" alt=""/><br></a>
 			 </div>
 			 <nav class="navbar navbar-default menu" role="navigation"><h3 class="nav_right"><a href="index.html"><img src="/static/index/images/logo.png" class="img-responsive" alt=""/></a></h3>
 			  <div class="container-fluid">
@@ -69,12 +69,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<!-- Collect the nav links, forms, and other content for toggling -->
 			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			      <ul class="nav navbar-nav menu1">
-			      	<li class="active"><a href="index.html">Specials</a></li>
-			        <li><a href="fruits.html">Fruits & Veg</a></li>
-			        <li><a href="products.html">Food Products</a></li>
-			        <li><a href="store.html">Locate Store</a></li>
-			        <li><a href="club.html">Fan Club</a></li>
-			        <li><a href="contact.html">Contact</a></li>
+			      	<li><a href="{:url('index/index/index')}" style="font-size: 20px; font-family: 华文琥珀;">首页</a></li>
+			      	{volist name="category" id="vo"}
+			        <li><a href="fruits.html" style="font-size: 20px; font-family: 华文琥珀;">{$vo.name}</a></li>
+			        {/volist}
 		          </ul>
 				
 
@@ -110,15 +108,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="main">
 		<div class="container">
 		   	<div id="banner" class="banner">
-				<img src="/static/index/images/banner/0.jpg" class="img-responsive" alt=""/>
-				<img src="/static/index/images/banner/1.jpg" class="img-responsive" alt=""/>
-				<img src="/static/index/images/banner/2.jpg" class="img-responsive" alt=""/>
-
-				<div id="banner_left"></div>
-				<div id="banner_right"></div>
-
+		   		{volist name="banner" id="v"}
+				<img src="/static/index/images/banner/{$v.pic}" class="img-responsive" alt=""/>
+				{/volist}
 				<div id="list">
-					<div class="item"></div>
 					<div class="item"></div>
 					<div class="item"></div>
 				</div>

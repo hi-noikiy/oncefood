@@ -9,25 +9,6 @@ $(document).ready(function(){
         }
     }
 
-    $('#banner_left').click(function(){
-        clearInterval(timer);
-       $('#banner img:eq('+ (i) +')').css('display','block').siblings('img').css('display','none');
-       --i;
-       if (i < 0) {
-            i = $('#banner img').length - 1;
-        }
-        timer = setInterval(gun,3000);
-    });
-
-    $('#banner_right').click(function(){
-        clearInterval(timer);
-       $('#banner img:eq('+ (i) +')').css('display','block').siblings('img').css('display','none');
-       ++i;
-       if (i > $('#banner img').length - 1) {
-            i = 0;
-        }
-        timer = setInterval(gun,3000);
-    });
 
     for(var l = $('.item').length - 1; l >=0; l--){
         (function(l){

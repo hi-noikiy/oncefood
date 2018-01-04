@@ -17,7 +17,6 @@ Route::post('home/log','home/login/log');
 Route::get('home/login','home/login/index');
 Route::get('home/mail','home/login/mail');
 Route::get('home/top','home/login/top');
-Route::get(':name$','home/login/index');
 //登录界面的资源路由
 Route::resource('login','home/Login');
 //商家后台ycompany的路由
@@ -61,7 +60,7 @@ Route::rule('login/spwd','index/login/selectPwd');
  */
 Route::resource('personal','index/personal');
 
-
+/************************************************/
 /**
  * 后台默认静态路由 wwb
  */
@@ -118,6 +117,7 @@ Route::resource('Attr','admin/ShopAttr');
  * 栏目管理路由
  */
 Route::resource('Column','admin/Column');
+
 /**
  * 空路由
  */
