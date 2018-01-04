@@ -1,0 +1,31 @@
+{extend name="main/index" /}
+{block name="main"}
+<!-- Start right content -->
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <!-- Page Heading Start -->
+        <div class="page-heading">
+            <h1><i class='fa fa-magic'></i> 图片上传</h1>
+            <!-- <h3>HTML5 Drag & Drop Support</h3> -->
+        </div>
+        <!-- Page Heading End-->
+        <div class="row">
+            <div class="col-md-12 portlets">
+                <!-- Your awesome content goes here -->
+                <div class="widget">
+                    <form action="{:url('admin/Column/save')}" enctype="multipart/form-data" method="post">
+                        <div class="fallback">
+                            <input name="image[]" type="file" multiple><br>
+                        </div>
+                        <button class="btn btn-info">提交</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Start -->
+    </div>
+</div>
+{/block}

@@ -67,3 +67,12 @@ Route::resource('Shops','admin/Shops');
  * 店铺属性路由
  */
 Route::resource('Attr','admin/ShopAttr');
+
+/**
+ * 栏目管理路由
+ */
+Route::resource('Column','admin/Column');
+/**
+ * 空路由
+ */
+Route::get(':name','admin/error/_empty', ['name' => '\w+']);
