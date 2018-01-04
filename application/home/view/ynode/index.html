@@ -42,7 +42,7 @@
                                     <td>{$vo.aname}</td>
                                 {if $vo.status == 1}
                                 <td><button class="btn btn-success update" data-id="{$vo.id}">启用</button></td>
-                                {else /}
+                                {else $vo.status == 2}
                                 <td><button class="btn btn-danger update" data-id="{$vo.id}">禁用</button></td>
                                 {/if}
 
@@ -163,10 +163,18 @@ function updateAjax(uid,obj){
             console.log(data);
             if(data.status == 1){
                 toastr.success(data.info);
-                obj.removeClass('.btn-success').addClass('.btn-danger').html('禁用');
+
+//
+                obj.removeClass('btn-danger').addClass('btn-success');
+
+                obj.html('启用');
+
             }else{
                 toastr.success(data.info);
-                obj.removeClass('.btn-danger').addClass('.btn-success').html('启用');
+                obj.removeClass('btn-success').addClass('btn-danger');
+//
+                obj.html('禁用');
+
             }
         },
         error:function(){
