@@ -4,8 +4,9 @@ namespace app\home\controller;
 
 use think\Controller;
 use think\Request;
+use think\Db;
 
-class Header extends Controller
+class Banner extends Controller
 {
     /**
      * 显示资源列表
@@ -15,6 +16,11 @@ class Header extends Controller
     public function index()
     {
         //
+//        $list = Db::name('banner')->paginate(10);
+//        $list = $list->items();
+        return view('home@photo/index',[
+//            'list' => $list
+        ]);
     }
 
     /**

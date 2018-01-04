@@ -17,11 +17,14 @@ class Column extends Controller
      */
     public function index()
     {
+
         $list = db('banner')->select();
         // $list = $list->items();
         return view('admin@banner/index',[
             'list' => $list
         ]);
+
+        return view('admin@photo/index');
     }
 
     /**
@@ -31,7 +34,7 @@ class Column extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -80,28 +83,6 @@ class Column extends Controller
             return $this->error('图片上传失败');
         }
 
-    }
-
-    /**
-     * 显示指定的资源
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function read($id)
-    {
-        //
-    }
-
-    /**
-     * 显示编辑资源表单页.
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -162,8 +143,4 @@ class Column extends Controller
         return json($info);
     }
 
-    public function upload(Request $request)
-    {
-
-    }
 }

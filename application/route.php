@@ -17,10 +17,18 @@ Route::post('home/log','home/login/log');
 Route::get('home/login','home/login/index');
 Route::get('home/mail','home/login/mail');
 Route::get('home/top','home/login/top');
+
+//前台商铺中心的资源路由
+Route::resource('shop/top','home/Banner');
 //登录界面的资源路由
 Route::resource('login','home/Login');
 //商家后台ycompany的路由
 Route::resource('home/ycompany','home/Ycompany');
+/**********修改商铺状态的路由************/
+Route::post('up','home/ycompany/updateSave');
+//     展示详细信息
+Route::post('show','home/ycompany/showUpdate');
+Route::post('edit','home/ycompany/saveUpdate');
 //商家后台ynode的路由
 Route::resource('home/ynode','home/Ynode');
 Route::post('update','home/ynode/updateStatus');
@@ -98,7 +106,6 @@ Route::resource('Role','admin/Role');
 Route::resource('Jur','admin/Jur');
 
 /**
-<<<<<<< HEAD
  * 商户管理路由
  */
 Route::resource('Mer','admin/Merchant');
