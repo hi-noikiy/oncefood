@@ -17,8 +17,8 @@ class Column extends Controller
      */
     public function index()
     {
-        $list = db('banner')->paginate(10);
-        $list = $list->items();
+        $list = db('banner')->select();
+        // $list = $list->items();
         return view('admin@banner/index',[
             'list' => $list
         ]);
