@@ -4,11 +4,12 @@
 	use think\Controller;
 	use think\Request;
 	use think\Session;
-	class Register extends Controller
+
+	class Register extends Base
 	{
 		public function index()
   	  	{
-        	return view('index@register/register');
+          return view('index@register/register');
   	    }
 
 

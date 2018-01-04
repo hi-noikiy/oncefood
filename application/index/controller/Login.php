@@ -17,9 +17,13 @@
 
 			$name = $_GET['name'];
 			$pwd = $_GET['pwd'];
-    		// $pwd = md5($pwd);
+			$status = $_GET['status'];
+			// if(!empty($status)){
+			// }
 			$data = db('zuser')->where('name',$name)->where('pwd',md5($pwd))->find();
-			if ($data > 0 ) {
+			if ( $data > 0 ) {
+  			Session::set('index.name',$name);
+  			Session::set('index.pwd',$pwd);
             $list['status'] = false;
        		} else {
             $list['status'] = true;
@@ -27,4 +31,10 @@
             return json($list);
 
         }
+
+        public function selectPwd()
+        {
+        	return view('index@Login/select');
+        }
+
 	}

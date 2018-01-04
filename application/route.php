@@ -12,7 +12,6 @@ use think\Route;
 /**
  * 前台默认路由
  */
-Route::get('log','index/login/login');
 Route::rule('/','index/index/index');
 
 
@@ -68,3 +67,14 @@ Route::get('email','index/Register/email');
  * 登录页面路由
  */
 Route::resource('login','index/login');
+Route::get('log','index/login/login');
+/**
+ * 忘记密码路由
+ */ 
+Route::rule('login/spwd','index/login/selectPwd');
+
+
+/**
+ * 个人中心路由
+ */
+Route::resource('personal','index/personal');

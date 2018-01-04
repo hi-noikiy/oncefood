@@ -109,28 +109,21 @@
                         </div>
                         <div class="form-group login-input">
                             <i class="fa fa-key overlay"></i>
-                            <input type="password" class="form-control text-input pd" placeholder="密码" name="pwd">
+                            <input type="email" class="form-control text-input pd" placeholder="邮箱" name="pwd">
                         </div>
-                         <div class="checkbox">
-                            <label>
-                              <input type="checkbox" class='checkbb' name='status' value='1'> 请记住我
-                            </label>
-                        </div>
+                         <div class="btn btn-default"><a href="{:url('index/Register/email')}">获取验证码</a></div>
+                          &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="msg1" placeholder="输入验证码" >
+                        <div class="a" style="height:7px"></div>
                         <p style="float:left" class="tab"></p>
-                        <p style="float:right;"><a href="{:url('index/login/selectPwd')}">忘记密码</a></p>
-                        <p style="float:right;color:#ccc;">&nbsp; | &nbsp;</p>
-                        <p style="float:right"><a href="{:url('index/register/index')}">立即注册</a></p>
+                        
                         <div class="row">
                             <div class="col-sm-12">
-                                <buttons type="submit" class="btn btn-success btn-block login">登录
+                                <buttons type="submit" class="btn btn-success btn-block login">确认提交
                                 </buttons>
                             </div>
                         </div>
-                        <div class="qqlog">
-                            <a href="">
-                                <img src="/static/index/images/qq.png" class="img-circle">
-                            </a>
-                        </div>
+                        
                     </form>
             </div>
         </div>
@@ -147,45 +140,8 @@
 {js href="/static/index/js/jquery.min.js"}
 {js href="/static/index/js/bootstrap.min.js"}
 <script>
-
-        $(function(){
-            $('.login').click(function(){
-                var name = $('.name').val();
-                var pd = $('.pd').val();
-                if(name == ''){
-                  $('.tab').css('color','#ccc').html('* 用户名密码不能为空!');
-                }
-                if(pd == ''){
-                  $('.tab').css('color','#ccc').html('* 用户名密码不能为空!');
-                }
-                // if( $(":checkbox").attr("checked") ){
-                //   console.log(1);
-                // }
-
-                var info = $('#my input').serialize();
-                loginCheck(info);
-            });
-        });
-
-        function loginCheck(info){
-            $.ajax({
-                type:'get',
-                url:'/log/',
-                data: info,
-                dataType: 'json',
-                success : function (data){
-                  console.log(data);
-                  if(data.status){
-                      $('.tab').css('color','#ccc').html('* 用户名密码不匹配!');
-                  }else{
-                      window.location.href = "/";
-                  }
-             },
-                error : function () {
-                alert('请登录账号!');
-            }
-            });
-        }
+    
+        
 
 
 
