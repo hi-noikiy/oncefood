@@ -11,6 +11,26 @@
 use think\Route;
 
 /**
+ * yzw 商户
+ */
+Route::post('home/log','home/login/log');
+Route::get('home/login','home/login/index');
+Route::get('home/mail','home/login/mail');
+Route::get('home/top','home/login/top');
+Route::get(':name$','home/login/index');
+//登录界面的资源路由
+Route::resource('login','home/Login');
+//商家后台ycompany的路由
+Route::resource('home/ycompany','home/Ycompany');
+//商家后台ynode的路由
+Route::resource('home/ynode','home/Ynode');
+Route::post('update','home/ynode/updateStatus');
+//商家后台yrole的路由
+Route::resource('home/yrole','home/Yrole');
+Route::post('upda','home/yrole/updateStatus');
+/********************************************************************/
+
+/**
  * 前台默认路由
  */
 
