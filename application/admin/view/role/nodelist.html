@@ -1,0 +1,41 @@
+{extend name="main/index" /}
+{block name="main"}
+<div class="content-page">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-6 portlets">
+                <div class="widget">
+                    <div class="widget-header transparent">
+                        <h2><strong>{$title}</strong></h2>
+                        <div class="additional-btn">
+                            <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                            <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                            <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                        </div>
+                    </div>
+                    <div class="widget-content padding">
+                        <div id="basic-form"><b>角色:</b>{$name.name}
+							<form role="form" action="{:url('admin/role/UpdataNode')}" method="post">
+								<div class="form-group">
+									<div class=" col-sm-10">
+									  <div class="checkbox">
+										{volist name="node" id="vo"}
+										<label>
+										  <input type="hidden" name="id" value="{$name.id}">
+										  <input type="checkbox" name="node[]" value="{$vo.id}" {if condition="in_array($vo.id,$nid)"}checked{/if}>{$vo.name}
+										</label>
+										{/volist}
+									  </div>
+										<button class="btn btn-info">提交</button>
+									</div>
+								</div>
+							</form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
