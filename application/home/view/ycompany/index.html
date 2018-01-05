@@ -1,6 +1,5 @@
 {extend name="main/index" /}
 {block name="main"}
-
 <div class="content-page">
     <!-- ============================================================== -->
     <!-- Start Content here -->
@@ -11,7 +10,7 @@
             <div class="col-md-12">
                 <div class="widget">
                     <div class="widget-header transparent">
-                        <h2><strong>商户</strong> Table</h2>
+                        <h2><strong>商户</strong></h2>
                         <div class="additional-btn">
                             <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
                             <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
@@ -19,14 +18,13 @@
                         </div>
                     </div>
                     <div class="widget-content">
-
                         <div class="table-responsive">
                             <table data-sortable class="table table-hover table-striped">
                                 <thead>
                                 <tr>
+                                    <button data-modal="md-fade-in-scale-up" class="btn btn-info btn-sm md-trigger add-btn">添加店铺</button>
                                     <th>ID</th>
-                                    <!--<th>登录名</th>-->
-                                    <th>分店名</th>
+                                    <th>店名</th>
                                     <th>电话</th>
                                     <th>地址</th>
                                     <th>状态</th>
@@ -38,7 +36,6 @@
                                 {volist name="yshop" id="vo"}
                                 <tr>
                                     <td>{$vo.id}</td>
-                               
                                     <td>{$vo.name}</td>
                                     <td>{$vo.tel}</td>
                                     <td>{$vo.address}</td>
@@ -47,64 +44,140 @@
                                     {else $vo.status == 2}
                                     <td><button class="btn btn-danger update" data-id="{$vo.id}">禁用</button></td>
                                     {/if}
-                                    <td><button data-modal="md-fall" class="btn btn-success show-btn  md-trigger" data-id="{$vo.id}">详细信息</button><button data-modal="md-3d-flip-horizontal" class="btn btn-primary md-trigger edit-btn" data-id="{$vo.id}">修改</button><button class="btn btn-danger del-btn" data-id="{$vo.id}">删除</button></td>
+                                    <td><button data-modal="md-fall" class="btn btn-success show-btn  md-trigger" data-id="{$vo.id}">详细信息</button><button data-modal="md-3d-flip-horizontal" class="btn btn-primary md-trigger edit-btn" data-id="{$vo.id}">修改</button><button class="btn btn-danger del-btn" data-id="{$vo.id}">删除</button>
+                                        <a href="{:url('home/banner/index',['id' => $vo['id']])}" class="btn btn-info" >图片管理</a> <button data-modal = "md-3d-slit"  class="btn btn-info up-btn md-trigger" data-id="{$vo.id}">上传</button></td>
                                 </tr>
                                 {/volist}
                                 </tbody>
                             </table>
                         </div>
 
-                        <div class="data-table-toolbar">
-                            <ul class="pagination">
-                                <li class="disabled"><a href="#">&laquo;</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">&raquo;</a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <!-- Footer Start -->
-        <footer>
-            Huban Creative &copy; 2014
-            <div class="footer-links pull-right">
-                <a href="#">About</a><a href="#">Support</a><a href="#">Terms of Service</a><a href="#">Legal</a><a href="#">Help</a><a href="#">Contact Us</a>
-            </div>
-        </footer>
         <!-- Footer End -->
     </div>
     <!-- ============================================================== -->
     <!-- End content here -->
     <!-- ============================================================== -->
-
 </div>
-<!--详细信息-->
+<!--详细信息模态框-->
 <div class="md-modal md-fall" id="md-fall">
-    <p>
-        <button class="btn btn-danger md-close">Close me!</button>
-    </p>
     <div class="md-content">
-        <h3 id="h" style="color: red"></h3>
-        <!--<div>-->
-            <ul>
-                <li><strong>电话</strong><p id="s1"></p></li>
-                <li><strong>地址</strong><p id="s2"></p></li>
-                <li><strong>时间</strong><p id="s3"></p></li>
-                <li><strong>区域</strong><p id="s4"></p></li>
-            </ul>
-        <!--</div>-->
+        <button class="btn btn-danger md-close">关闭</button>
+            <table data-sortable class="table table-hover table-striped">
+                <thead>
+                    <h3 id="h" style="color: red"></h3>
+                </thead>
+                <tr>
+                    <th class="col-md-1">电话:</th>
+                    <td id="s1"></td>
+                </tr>
+                <tr>
+                    <th class="col-md-1">地址:</th>
+                    <td id="s2"></td>
+                </tr>
+                <tr>
+                    <th class="col-md-1">Time:</th>
+                    <td id="s3"></td>
+                </tr>
+                <tr>
+                    <th class="col-md-1">商圈:</th>
+                    <td id="s4"></td>
+                </tr>
+                
+        </table>
+         
     </div><!-- End div .md-content -->
 </div><!-- End div .md-modal .md-fall -->
+<!--上传模板图片-->
+<div class="md-modal md-3d-slit" id="md-3d-slit">
+    <p> <button class="btn btn-danger md-close">关闭</button></p>
+    <div class="md-content">
+        <h3 id="h" style="color: red"></h3>
+        <div>
+            <ul>
+                <form action="{:url('home/banner/save')}" enctype="multipart/form-data" method="post">
+                    <input type="hidden" name="id" value="">
+                    选择文件 <input type="file" name="image" class="btn-block btn-success"/> <br>
+                    <button class="btn btn-info">提交</button>
+                </form>
+            </ul>
+        </div>
+    </div><!-- End div .md-content -->
+</div><!-- End div .md-modal .md-3d-slit -->
+<!-- 新增店铺模态框 -->
+<div class="md-modal md-fade-in-scale-up" id="md-fade-in-scale-up">
+    <p>
+        <button class="btn btn-danger md-close">关闭</button>
+    </p>
+    <div class="md-content">
+        <h3>添加店铺</h3>
+        <div class="widget-content padding">
+            <form class="form-horizontal" role="form" action="{:url('home/ycompany/save')}" method="post">
+                <div class="form-group">
+                    <label for="input-text-help" class="col-sm-2 control-label">分类选择</label>
+                    <div class="col-sm-10">
+                        <select class="form-control">
+                            <optgroup label="中华料理">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-text-help" class="col-sm-2 control-label">店铺名</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="input-text-help" placeholder="商户名" name="name" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-text-help" class="col-sm-2 control-label">电话</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="input-text-help" placeholder="电话" name="tel" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-text-help" class="col-sm-2 control-label">地址</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="input-text-help" placeholder="地址" name="address" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-text-help" class="col-sm-2 control-label">营业时间</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="input-text-help" placeholder="营业时间" name="datetime" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-text-help" class="col-sm-2 control-label">区域</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="input-text-help" placeholder="区域" name="area" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">状态</label>
+                    <div class="col-sm-10">
+                        <div class="radio iradio">
+                            <label>
+                                <input type="radio" name="status" id="optionsRadios1" value="1">启用
+                                <input type="radio" name="status" id="optionsRadios2" value="2" checked>禁用
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-info">提交</button>
+            </form>
+        </div>
+    </div><!-- End div .md-content -->
+</div><!-- 新增店铺 end -->
+
 <!--编辑模态框-->
 <div class="md-modal md-3d-flip-horizontal" id="md-3d-flip-horizontal">
-
     <div class="md-content">
         <div>
             <div class="widget-content padding">
@@ -112,13 +185,6 @@
                 <form class="form-horizontal" role="form" action="{:url('home/ycompany/update')}" method="post">
                     <input type="hidden" name="id" id="id" value="">
                     <input type="hidden" name="_method" value="PUT">
-                    <div class="form-group">
-
-                        <label for="input-text" class="col-sm-2 control-label">登录名</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control username" id="input-text" placeholder="登录名" name="username" value="">
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label for="input-text-help" class="col-sm-2 control-label">分店名</label>
                         <div class="col-sm-10">
@@ -152,9 +218,8 @@
         </div>
 
     </div><!-- End div .md-content -->
-
 </div>
-
+<!--编辑模态框 end-->
 {js href="/static/home/js/jquery.min.js"}
 {js href="/static/home/js/bootstrap.js"}
 {js href="/static/home/js/toastr.min.js"}
@@ -176,9 +241,28 @@
             var uid = $(this).attr('data-id');
             var obj = $(this);
             updateSave(uid,obj);
-
+        });
+//        上传banner图
+        $('.up-btn').click(function(){
+            var pid = $(this).attr('data-id');
+            upAjax(pid);
         });
     });
+//    上传Banner图
+    function upAjax(pid)
+    {
+        $.ajax({
+            type:'post',
+            url : '/save/',
+            data: {pid:pid},
+            success : function(data){
+
+            },
+            error :function(){
+                alert('执行失败');
+            }
+        });
+    }
     //    详细信息
     function showAjax(id)
     {

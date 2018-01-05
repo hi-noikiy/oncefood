@@ -108,8 +108,12 @@ function forQQ($code)
     $QQ['nickname']   = $info['nickname'];
     return $QQ;
 }
-
-function qqemail(){
+/**
+ * [qqemail description]
+ * @param  [type] $to [email]
+ * @return [type]     [description]
+ */
+function qqemail($to){
     
     // require("class.phpmailer.php"); //这个是一个smtp的php文档，网上可以下载得到
     
@@ -124,7 +128,7 @@ function qqemail(){
     $mail->Port=587;
     $mail->From = "676499058@qq.com"; //邮件发送者email地址
     $mail->FromName = "验证码";
-    $mail->AddAddress("468094404@qq.com", "title");//收件人地址，可以替换成任何想要接收邮件的email信箱,格式是AddAddress("收件人email","收件人姓名")
+    $mail->AddAddress($to, "title");//收件人地址，可以替换成任何想要接收邮件的email信箱,格式是AddAddress("收件人email","收件人姓名")
 
     //$mail->AddReplyTo("", "");
 

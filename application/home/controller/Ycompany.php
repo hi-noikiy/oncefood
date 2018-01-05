@@ -36,10 +36,7 @@ class Ycompany extends Admain
      */
     public function create()
     {
-        //
-        return view('home@ycompany/shop',[
-            'title' => '添加店铺'
-        ]);
+
     }
 
     /**
@@ -59,7 +56,6 @@ class Ycompany extends Admain
         $data =[
 
             'name' => $p['name'],
-            'pwd' => md5($p['pwd']),
             'tel' => $p['tel'],
             'address' => $p['address'],
             'status'=>$p['status'],
