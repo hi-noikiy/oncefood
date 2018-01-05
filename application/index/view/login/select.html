@@ -37,7 +37,6 @@
     <![endif]-->
 
     <link rel="shortcut icon" href="/static/admin/assets/img/favicon.ico">
-    <script src="/static/admin/assets/js/jquery.min.js"></script>
     <script src="/static/admin/assets/js/toastr.min.js"></script>
 </head>
 <body class="fixed-left login-page">
@@ -105,17 +104,22 @@
                     <form id="my" name="regForm" role="form" action="{:url('index/login/login')}" method="post">
                         <div class="form-group login-input">
                             <i class="fa fa-user overlay"></i>
-                            <input type="text" class="form-control text-input name" placeholder="账号" name="name">
+                            <input type="text" class="form-control text-input name" placeholder="账号" name="name" data-id="1">
                         </div>
                         <div class="form-group login-input">
                             <i class="fa fa-key overlay"></i>
-                            <input type="email" class="form-control text-input pd" placeholder="邮箱" name="pwd">
+                            <input type="tel" class="form-control text-input tel" placeholder="手机号码" name="tel" data-id="1">
                         </div>
-                         <div class="btn btn-default"><a href="{:url('index/Register/email')}">获取验证码</a></div>
+                         <div class="btn btn-default send">获取验证码</a>
+                         </div>
                           &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="text" name="msg1" placeholder="输入验证码" >
-                        <div class="a" style="height:7px"></div>
-                        <p style="float:left" class="tab"></p>
+                        <input type="text" name="msg1" class="tttt" placeholder="输入验证码" style="color:black" data-id="111111">
+                        <div class="a" style="height:7px">
+                            
+                        </div>
+                        <p style="float:left" id="tab">
+                            
+                        </p>
                         
                         <div class="row">
                             <div class="col-sm-12">
@@ -137,18 +141,157 @@
 <!-- the overlay modal element -->
 <div class="md-overlay"></div>
 <!-- End of eoverlay modal -->
-{js href="/static/index/js/jquery.min.js"}
+{js href="/static/admin/assets/js/jquery.min.js"}
 {js href="/static/index/js/bootstrap.min.js"}
 <script>
-    
-        
+    // 判断用户名是否存在
+    $(function(){
+        $('.name').blur(function(){
+            var name = $('.name').val();
+            var tab = document.getElementById('tab');
+            if(name == ''){
+                tab.innerHTML = '* 用户名不能为空！';
+                exit;
+            }
+            $.ajax({
+                type : 'get',
+                url : '/findname/',
+                data : {name:name},
+                datatype : 'json',
+                success : function(data){
+                  if(data['status']){
+                    $('.name').attr('data-id','0');
+                    tab.innerHTML = '* 该用户名可以正常使用！';
+                  }else{
+                    tab.innerHTML = '* 该用户名不存在,请先注册!';
+                  }
+                },
+                error : function() {
+                    alert('找回密码失败!');
+                }
+            });
+        });
+    });
+    // 判断电话是否存在
+    $(function(){
+        $('.tel').blur(function(){
+            var tel = $('.tel').val();
+            var tab = document.getElementById('tab');
+            if (tel == '') {
+                    tab.innerHTML = '* 必填项,请输入您的手机号';
+                    exit;
+            }
+            if (tel.match(/^1[34578]\d{9}$/) == null) {
+                    tab.innerHTML = '* 手机号格式不正确!';
+                    exit;
+            }
+            $.ajax({
+                type : 'get',
+                url : '/findtel/',
+                data : {tel:tel},
+                datatype : 'json',
+                success : function(data){
+                  if(data['status']){
+                    $('.tel').attr('data-id','0');
+                    tab.innerHTML = '* 该手机可以正常使用！';
+                  }else{
+                    tab.innerHTML = '* 该手机不存在,请先注册!';
+                  }
+                },
+                error : function() {
+                    alert('找回密码失败!');
+                }
+            });
+        });
+    });
+    // 发送电话验证码
+        $(function(){
+            $('.send').click(function(){
+                var tel = $('.tel').val();
+                gettelAjax(tel);
+            });
+        });
+        function gettelAjax(tel) {
+            $.ajax({
+                type: 'get',
+                url: '/sendtel/',
+                dataType : 'json',
+                data: {tel:tel},
+                success : function (data){
+                    if(data.status){
+                        alert('验证码发送成功');
+                    }else{
+                        alert('验证码发送失败,请稍后再试!');
+                    }
+                },
+                error : function () {
+                    alert('验证码发送失败,请稍后再试!');
+                }
+            });
+        }
+// 验证电话验证码
+        $(function(){
+            $('.tttt').blur(function(){
+                var ttt = $('.tttt').val();
+                if(ttt == ''){
+                    tab.innerHTML = '* 请输入手机验证码';
+                    exit;
+                }  
+                var tab = document.getElementById('tab');
+                $.ajax({
+                    type: 'get',
+                    url: '/composer/',
+                    dataType : 'json',
+                    data: {ttt:ttt},
+                    success : function (data){
+                        if(data['status']){
+                            tab.innerHTML = '* 验证码输入正确!';
+                            $('.tttt').attr('data-id','0');
+                        }else{
+                            tab.innerHTML = '* 验证码输入错误!';
+                        }
+                    },
+                    error : function(){
+                        alert('验证码错误');
+                    }
+                });
+            });
+        });
+// 提交
+        $(function(){
+            $('.login').click(function(){
+                var tel = $('.tel').val();
+                var aa = $('.name').attr('data-id');
+                var bb = $('.tel').attr('data-id');
+                var cc = $('.tttt').attr('data-id');
+                $.ajax({
+                    type : 'get',
+                    url : '/changepwd/',
+                    datatype : 'json',
+                    data : {tel:tel},
+                    success : function(data){
+                        if(data.status){
+                            if( aa == 0 && bb == 0 && cc == 0 ){
+                                alert('验证成功！请更改密码');
+                                window.location.href = "/returnpass/"+tel;
+                             }else{
+                                alert('验证失败了,请认真填写信息!');
+                             }
+                        }
+                        
+                    },
+                    error : function(){
+                        alert('注册失败1,请稍后再试');
+                    }
+                });
+            });
+        });
 
 
 
 </script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
-<script src="/static/admin/assets/libs/jquery/jquery-1.11.1.min.js"></script>
 <script src="/static/admin/assets/libs/bootstrap/js/bootstrap.min.js"></script>
 <script src="/static/admin/assets/libs/jqueryui/jquery-ui-1.10.4.custom.min.js"></script>
 <script src="/static/admin/assets/libs/jquery-ui-touch/jquery.ui.touch-punch.min.js"></script>

@@ -102,7 +102,7 @@
         <div class="login-wrap animated flipInX">
             <div class="login-block">
                 <img src="/static/index/face/batman.jpg" class="img-circle not-logged-avatar">
-                    <form id="my" name="regForm" role="form" action="{:url('index/login/login')}" method="post">
+                    <form id="my" name="regForm" role="form" action= method="post">
                         <div class="form-group login-input">
                             <i class="fa fa-user overlay"></i>
                             <input type="text" class="form-control text-input name" placeholder="账号" name="name">
@@ -144,7 +144,7 @@
 <!-- the overlay modal element -->
 <div class="md-overlay"></div>
 <!-- End of eoverlay modal -->
-{js href="/static/index/js/jquery.min.js"}
+{js href="/static/index/js/jquery.js"}
 {js href="/static/index/js/bootstrap.min.js"}
 <script>
 
@@ -157,11 +157,8 @@
                 }
                 if(pd == ''){
                   $('.tab').css('color','#ccc').html('* 用户名密码不能为空!');
+                  exit;
                 }
-                // if( $(":checkbox").attr("checked") ){
-                //   console.log(1);
-                // }
-
                 var info = $('#my input').serialize();
                 loginCheck(info);
             });
@@ -169,7 +166,7 @@
 
         function loginCheck(info){
             $.ajax({
-                type:'get',
+                type:'post',
                 url:'/log/',
                 data: info,
                 dataType: 'json',

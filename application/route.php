@@ -58,17 +58,31 @@ Route::get('getMessage','index/Register/getMsg');
 
 Route::post('check','index/Register/check');
 Route::get('email','index/Register/email');
-
+Route::get('checkname','index/Register/checkname');
+Route::get('checktel','index/Register/checktel');
+Route::get('checkemail','index/Register/checkemail');
+Route::get('selecttel','index/Register/selectTel');
+Route::get('selectemail','index/Register/selectEmail');
 /**
  * 登录页面路由
  */
-Route::resource('login','index/login');
-Route::get('log','index/login/login');
+Route::resource('index/login','index/login');
+Route::post('log','index/login/login');
+// 退出登录的路由
+Route::get('delIndex','index/index/delIndex');
 /**
  * 忘记密码路由
  */ 
 Route::rule('login/spwd','index/login/selectPwd');
+Route::get('findname','index/login/findName');
+Route::get('sendtel','index/login/email');
+Route::get('findtel','index/login/findEmail');
+Route::get('composer','index/login/tel');
 
+Route::get('returnpass/:tel','index/login/returnpass');
+
+Route::get('changepwd','index/login/changepwd');
+Route::post('indexpwd','index/login/indexpwd');
 /**
  * 个人中心路由
  */
@@ -134,5 +148,5 @@ Route::resource('Column','admin/Column');
 /**
  * 空路由
  */
-Route::get(':name','admin/error/_empty', ['name' => '\w+']);
+// Route::get(':name','admin/error/_empty', ['name' => '\w+']);
 

@@ -1,5 +1,5 @@
 <?php 
-	namespace app\index\controller;
+namespace app\index\controller;
 
 	use think\Controller;
 	use think\Request;
@@ -12,53 +12,113 @@
           return view('index@register/register');
   	    }
 
-
+// 发送电话验证码
     public function getMsg()
   		{   
-  			$msg = randCode();
+        $tel = $_GET['tel'];
+        $list = db('zuser')->where('tel',$tel)->find();
+        if($list>0){
+          $data['status'] = false;
+          return json($data);
+        }
+  			$msg = randsCode();
   			Session::set('msg',$msg);
-			  $result = sendTemplateSMS('18621695842',array($msg,50),"1");
+			  $result = sendTemplateSMS($tel,array($msg,5000),"1");
 	        if ($result) {
 	            $data['status'] = true;
 				      return json($data);
         	}
 		}
-
+//发送邮箱验证码
     public function email(){
-       $email = qqemail();
-       Session::set('email',$email);
-       return json($email);
+       $msg = $_GET['email'];
+       $list = db('zuser')->where('email',$msg)->find();
+        if($list>0){
+          $data['status'] = false;
+          return json($data);
+        }
+       $rand = randCode();
+       $email = qqemail($rand,$msg);
+       Session::set('em',$rand);
+       
+       if(!empty($email)){
+          $data['status'] = true;
+          return json($data);
+       }
     }
 
+
+    // 检查用户名是否重复
+    public function checkName()
+    {
+          $name = $_GET['name'];
+          $data = db('zuser')->where('name',$name)->find();
+          if($data>0){
+            $list['status'] = true;
+          }else{
+            $list['status'] = false;
+          }
+          return json($list);
+    }
+
+    // 检查用户电话是否重复
+    public function checkTel(){
+        $tel = $_GET['tel'];
+        $data = db('zuser')->where('tel',$tel)->find();
+        if($data>0){
+            $list['status'] = true;
+          }else{
+            $list['status'] = false;
+          }
+        return json($list);
+    }
+
+    // 检查用户邮箱是否重复
+    public function checkemail(){
+        $email = $_GET['email'];
+        $data = db('zuser')->where('email',$email)->find();
+        if($data>0){
+            $list['status'] = true;
+          }else{
+            $list['status'] = false;
+          }
+        return json($list);
+    }
+
+    // 检测手机验证码是否成功
+    public function selectTel(){
+        $b = $_GET['ttt'];
+
+        $a = Session::get('msg');
+
+        if($b == $a){
+          $list['status'] = true;
+        }else{
+          $list['status'] = false;
+        }
+        return json($list);
+    }
+    // 检测邮箱验证码是否成功
+    public function selectEmail(){
+        $b = $_GET['ttt'];
+
+        $a = Session::get('em');
+
+        if($b == $a){
+          $list['status'] = true;
+        }else{
+          $list['status'] = false;
+        }
+        // $list['status'] = true;
+        return json($list);
+    }
+    
 		public function check(Request $request)
 		{
-			    $info = $request->post();
-       		$a = Session::get('msg');
-       		if($a!=$info['msg']){
-       			$this->error('验证码错误！');
-            	exit;
-       		}
-          $list = db('zuser')->field('name')->where('name',$info['name'])->find();
-          if($list != null){
-            $this->error('该用户名已注册！');
-            exit;
-          }
-          
-          $list = db('zuser')->field('tel')->where('tel',$info['tel'])->find();
-          if($list != null){
-            $this->error('该电话已注册！');
-            exit;
-          }
-
-          $info['pwd'] = md5($info['pwd']);
-       		unset($info['repass'],$info['msg'],$info['msg1']);
-       		$data = db('zuser')->insert($info);
-
-       		if($data>0){
-            $this->success('恭喜您,注册成功!', 'index/index/index');
-  	 	 	  } else {
-            $this->error('可惜了,注册失败!');
-       	 	}
+        $info = $request->post();
+        unset($info['repass']);
+        $info['pwd'] = md5($info['pwd']);
+        db('zuser')->insert($info);
 		}
 
 
