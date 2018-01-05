@@ -117,13 +117,12 @@ class Login extends Controller
 //        var_dump($name);die;
         $pwd = md5($p['pwd']);
         $company = Db::name('company')->where(['username'=>$name,'pwd'=>$pwd])->find();
-        $yshop = Db::name('yshop')->where(['username'=>$name,'pwd'=>$pwd])->find();
+
 
 //        var_dump($company);die;
 //        var_dump($company['id']);die;
         Session::set('cid',$company['id']);
         Session::set('home_username',$company['username']);
-        Session::set('yshop_username',$yshop['username']);
         if($company > 0){
             $this->success('登录成功','home/login/top');
         }else{
