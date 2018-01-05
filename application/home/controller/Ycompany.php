@@ -30,16 +30,6 @@ class Ycompany extends Admain
     }
 
     /**
-     * 显示创建商户表单页.
-     *
-     * @return \think\Response
-     */
-    public function create()
-    {
-
-    }
-
-    /**
      * 保存新建的商铺
      *
      * @param  \think\Request  $request
@@ -54,7 +44,6 @@ class Ycompany extends Admain
         $p = $request->post();
         $cid = Session::get('cid');
         $data =[
-
             'name' => $p['name'],
             'tel' => $p['tel'],
             'address' => $p['address'],
@@ -139,17 +128,6 @@ class Ycompany extends Admain
     }
 
     /**
-     * 显示编辑资源表单页.
-     *
-     * @param  int  $id
-     * @return \think\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * 保存更新的资源
      *
      * @param  \think\Request  $request
@@ -200,6 +178,40 @@ class Ycompany extends Admain
             $info['id'] = $id;
             $info['info'] = 'ID'.$id.'删除失败';
         }
+        return json($info);
+    }
+
+    /**
+     * [getCate 获取一级分类]
+     * @return [type] [description]
+     */
+    public function getCate(Request $request)
+    {
+        //查看是不是ajax传送
+        if(!Request::instance()->isAjax()){
+            $this->error('非法请求!');
+        }
+        $cate = db('category')->where('pid = 0 and display = 1')->select();
+
+        $info = $cate;
+        return json($info);
+    }
+
+    /**
+     * [getCates 获取子分类]
+     * @param  [type] $pid [子分类ID]
+     * @return [type]      [description]
+     */
+    public function getCates(Request $request,$pid)
+    {
+        //查看是不是ajax传送
+        if(!Request::instance()->isAjax()){
+            $this->error('非法请求!');
+        }
+
+        $cates = Db::name('category')->where('pid = '.$pid)->select();
+
+        $info = $cates;
         return json($info);
     }
 }

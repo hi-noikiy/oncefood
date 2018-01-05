@@ -1,10 +1,10 @@
 $(document).ready(function(){
     var i = 0;
-    var timer = setInterval(gun,3000);
+    var timer = setInterval(gun,2000);
     function gun(){
-        $('#photo img:eq('+ i +')').css('display','block').siblings('img').css('display','none');
+        $('.banner img:eq('+ i +')').css('display','block').siblings('img').css('display','none');
         ++i;
-        if (i > $('#photo img').length - 1) {
+        if (i > $('#banner img').length - 1) {
             i = 0;
         }
     }
@@ -13,10 +13,10 @@ $(document).ready(function(){
         (function(l){
             $('.item:eq('+ l +')').mouseover(function(){
                 clearInterval(timer);
-                $('#photo img:eq('+ (l) +')').css('display','block').siblings('img').css('display','none');
+                $('.banner img:eq('+ (l) +')').css('display','block').siblings('img').css('display','none');
                 });
             $('.item:eq('+ l +')').mouseout(function(){
-               timer = setInterval(gun,3000);
+               timer = setInterval(gun,2000);
                 });
         })(l);
     }

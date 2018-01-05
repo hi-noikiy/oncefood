@@ -50,7 +50,6 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -105,12 +104,8 @@
                 <div class="form-group">
                     <label for="input-text-help" class="col-sm-2 control-label">分类选择</label>
                     <div class="col-sm-10">
-                        <select class="form-control">
-                            <optgroup label="中华料理">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                        </select>
+                        <select class="form-control cate-top"></select>
+                        <select class="form-control cate-son"></select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -215,128 +210,194 @@
 {js href="/static/home/js/bootstrap.js"}
 {js href="/static/home/js/toastr.min.js"}
 <script>
-    //删除数据
-    $(function(){
-        $('.del-btn').click(function(){
-            var de_id = $(this).attr('data-id');
-            var obj = $(this).parents('tr');
-            delAjax(de_id,obj);
+//执行AJAX,取一级分类;
+$(function() {
+  $('.add-btn').click(function(){
+        var obj = $(this);
+        cateAjax(obj);
+  });
+
+    function cateAjax(obj) {
+        $.ajax({
+            type: 'get',
+            url: '/getCate/',
+            dataType : 'json',
+            success : function (data){
+                // console.log(data);
+                for (var i = 0; i < data.length; i++) {
+                    $('<option value="'+data[i].id+'">'+data[i].name+'</option>').appendTo('.cate-top');
+                }
+            },
+            error : function () {
+                alert('AJAX执行失败!');
+            }
         });
+    }
+});
+
+$(function(){
+     // 绑定change事件,获取二级分类
+    $('.cate-top').change(function(){
+        // 清空之后所有的option选项
+        $(this).nextAll('select').show().empty();
+        // 获取当前的value值
+        var pid = $(this).val();
+        // console.log('id:'+pid);
+        var _this = $(this);
+        // console.log(_this);
+
+        // 请求下一级数据
+        $.ajax({
+            type: 'get',
+            url: '/getCates/',
+            data:'pid='+pid,
+            dataType: 'json',
+            success : function (data) {
+                console.log(data);
+
+                if (!data) {
+                    _this.nextAll('select').hide();
+                    return;
+                }
+
+                // 填充下一级数据
+                for (var i = 0; i < data.length; i++) {
+                    $('<option value="'+data[i].id+'">'+data[i].name+'</option>').appendTo('.cate-son');
+                }
+                // 自动触发后续change事件
+                _this.next('select').trigger('change');
+            },
+            error : function () {
+                alert('AJAX执行失败');
+            }
+        });
+    });
+});
+    
+
+
+//删除数据
+$(function(){
+    $('.del-btn').click(function(){
+        var de_id = $(this).attr('data-id');
+        var obj = $(this).parents('tr');
+        delAjax(de_id,obj);
+    });
 //        详细信息
-        $('.show-btn').click(function(){
-            var sh_id = $(this).attr('data-id');
-            showAjax(sh_id);
-        });
+    $('.show-btn').click(function(){
+        var sh_id = $(this).attr('data-id');
+        showAjax(sh_id);
+    });
 //        更新状态
-        $('.update').click(function(){
-            var uid = $(this).attr('data-id');
-            var obj = $(this);
-            updateSave(uid,obj);
+    $('.update').click(function(){
+        var uid = $(this).attr('data-id');
+        var obj = $(this);
+        updateSave(uid,obj);
 
-        });
     });
-    //    详细信息
-    function showAjax(id)
-    {
-        $.ajax({
-            type: 'post',
-            url: '/show/',
-            data: {id:id},
-            success : function(data){
-                if(data.status){
-                    toastr.success(data.info);
-                    $('#h').html(data.datas.name);
-                    $('#s1').html(data.datas.tel);
-                    $('#s2').html(data.datas.address);
-                    $('#s3').html(data.datas.datetime);
-                    $('#s4').html(data.datas.area);
+});
+//    详细信息
+function showAjax(id)
+{
+    $.ajax({
+        type: 'post',
+        url: '/show/',
+        data: {id:id},
+        success : function(data){
+            if(data.status){
+                toastr.success(data.info);
+                $('#h').html(data.datas.name);
+                $('#s1').html(data.datas.tel);
+                $('#s2').html(data.datas.address);
+                $('#s3').html(data.datas.datetime);
+                $('#s4').html(data.datas.area);
 
-                }else{
-                    toastr.error(data.info);
-                }
-            },
-            error :function(){
-                alert('执行失败');
+            }else{
+                toastr.error(data.info);
             }
-        });
-    }
+        },
+        error :function(){
+            alert('执行失败');
+        }
+    });
+}
 //    更改状态
-    function updateSave(uid,obj)
-    {
-        $.ajax({
-            type : 'post',
-            url : '/up/',
-            data : {uid : uid},
-            dataType : 'json',
-            success : function(data){
-                console.log(data);
-                if(data.status == 1){
-                    toastr.success(data.info);
-                    obj.removeClass('btn-danger').addClass('btn-success');
-                    obj.html('启用');
-                }else{
-                    toastr.success(data.info);
-                    obj.removeClass('btn-success').addClass('btn-danger');
-                    obj.html('禁用');
-                }
-            },
-            error:function(){
-                alert('更新失败');
+function updateSave(uid,obj)
+{
+    $.ajax({
+        type : 'post',
+        url : '/up/',
+        data : {uid : uid},
+        dataType : 'json',
+        success : function(data){
+            console.log(data);
+            if(data.status == 1){
+                toastr.success(data.info);
+                obj.removeClass('btn-danger').addClass('btn-success');
+                obj.html('启用');
+            }else{
+                toastr.success(data.info);
+                obj.removeClass('btn-success').addClass('btn-danger');
+                obj.html('禁用');
             }
-        });
-    }
-
-    $(function () {
-        $('.edit-btn').click(function(){
-            var ed_id = $(this).attr('data-id');
-            console.log(id);
-            editAjax(ed_id);
-        });
+        },
+        error:function(){
+            alert('更新失败');
+        }
     });
-    function editAjax(id)
-    {
-        $.ajax({
-            type: 'post',
-            url: '/edit/',
-            data:{id: id},
-            dataType : 'json',
-            success : function(data){
-                console.log(data);
-                if (data.status){
-                    toastr.success(data.info);
-                    $('#id').val(data.data.id);
-                    $('.username').val(data.data.username);
-                    $('.name').val(data.data.name);
-                    $('.tel').val(data.data.tel);
-                    $('.address').val(data.data.address);
-                }else {
-                    toastr.error(data.info);
-                }
-            },
-            error : function(){
-                alert('执行失败');
-            }
-        });
-    }
-//    删除
-    function  delAjax(id,obj) {
-        $.ajax({
-            type : 'delete',
-            url :'/home/ycompany/'+id,
-            dataType : 'json',
-            success:function(data){
-                if(data.status){
-                    toastr.success(data.info);
-                    obj.remove();
-                }else{
-                    toastr.error(data.info);
-                }
+}
 
-            },
-            error :function(){
-                alert('失败');
+$(function () {
+    $('.edit-btn').click(function(){
+        var ed_id = $(this).attr('data-id');
+        console.log(id);
+        editAjax(ed_id);
+    });
+});
+function editAjax(id)
+{
+    $.ajax({
+        type: 'post',
+        url: '/edit/',
+        data:{id: id},
+        dataType : 'json',
+        success : function(data){
+            console.log(data);
+            if (data.status){
+                toastr.success(data.info);
+                $('#id').val(data.data.id);
+                $('.username').val(data.data.username);
+                $('.name').val(data.data.name);
+                $('.tel').val(data.data.tel);
+                $('.address').val(data.data.address);
+            }else {
+                toastr.error(data.info);
             }
-        });
-    }
+        },
+        error : function(){
+            alert('执行失败');
+        }
+    });
+}
+//    删除
+function  delAjax(id,obj) {
+    $.ajax({
+        type : 'delete',
+        url :'/home/ycompany/'+id,
+        dataType : 'json',
+        success:function(data){
+            if(data.status){
+                toastr.success(data.info);
+                obj.remove();
+            }else{
+                toastr.error(data.info);
+            }
+
+        },
+        error :function(){
+            alert('失败');
+        }
+    });
+}
 </script>
 {/block}
