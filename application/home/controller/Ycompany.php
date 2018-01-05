@@ -37,13 +37,14 @@ class Ycompany extends Admain
      */
     public function save(Request $request)
     {
-        //
         if (!Request::instance()->isPost()){
-            $this->error('你好像迷路了');
+            $this->error('非法请求!');
         }
         $p = $request->post();
         $cid = Session::get('cid');
+
         $data =[
+            'gid' => $p['gid'],
             'name' => $p['name'],
             'tel' => $p['tel'],
             'address' => $p['address'],
