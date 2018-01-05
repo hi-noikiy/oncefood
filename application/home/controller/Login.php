@@ -22,14 +22,14 @@ class Login extends Controller
         ]);
     }
 //    邮箱
-    public function mail(){
-       $email = '2713497141@qq.com';
-       $result =  sendMail($email);
-       var_dump($result);
-       if ($result){
-           return '12';
-       }
-    }
+//    public function mail(){
+//       $email = '2713497141@qq.com';
+//       $result =  sendMail($email);
+//       var_dump($result);
+//       if ($result){
+//           return '12';
+//       }
+//    }
     /**
      * 保存新建的资源
      *
@@ -117,7 +117,6 @@ class Login extends Controller
 //        var_dump($name);die;
         $pwd = md5($p['pwd']);
         $company = Db::name('company')->where(['username'=>$name,'pwd'=>$pwd])->find();
-
 //        var_dump($company);die;
 //        var_dump($company['id']);die;
         Session::set('cid',$company['id']);

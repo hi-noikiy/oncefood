@@ -1,7 +1,5 @@
 {extend name="main/index" /}
 {block name="main"}
-<!-- Right Sidebar End -->
-<!-- Start right content -->
 <div class="content-page">
     <!-- ============================================================== -->
     <!-- Start Content here -->
@@ -9,99 +7,38 @@
     <div class="content">
         <!-- Your awesome content goes here -->
         <div class="widget transparent animated fadeInDown">
-            <h2><strong>轮播图管理</strong></h2>
-
+            <h2><strong>{$banner}</strong></h2>
             <div class="gallery-wrap">
-
+                {volist name="banners" id="vo"}
                 <div class="column">
                     <div class="inner">
-
-                        <div class="img-wrap">
-                            <img src="/static/index/images/banner/" alt="Image gallery" title="Image title here" class="mfp-fade">
-                        </div>
-
-                        <button class="btn btn-success col-md-12 update" data-id="" >可隐藏</button>
-
-                        <button class="btn btn-default col-md-12  update" data-id="">可显示</button>
-
-                        <button class="btn btn-danger col-md-12 del-btn" data-id="">删除</button>
+                        <!--<a class="zooming" href="images/big/img001.jpg" title="Image title here">-->
+                            <div class="img-wrap">
+                                <img src="/uploads/banner/{$vo.icon}" alt="Image gallery" title="Image title here" class="mfp-fade">
+                            </div>
+                        <!--</a>-->
                     </div>
+                    <button class="btn btn-primary">显示</button>
+                    <button class="btn btn-primary">删除</button>
+                    <!--<button class="btn btn-primary">修改</button>-->
                 </div>
                 {/volist}
             </div>
         </div>
-        <form action="{:url('admin/Column/save')}" enctype="multipart/form-data" method="post">
-            选择上传文件: <input type="file" name="image[]" class="btn btn-info" multiple/> <br>
-            <input type="submit" value="上传" class="btn btn-warning" />
-        </form>
+
+        <!-- Footer Start -->
+        <footer>
+            Huban Creative &copy; 2014
+            <div class="footer-links pull-right">
+                <a href="#">About</a><a href="#">Support</a><a href="#">Terms of Service</a><a href="#">Legal</a><a href="#">Help</a><a href="#">Contact Us</a>
+            </div>
+        </footer>
+        <!-- Footer End -->
     </div>
+    <!-- ============================================================== -->
+    <!-- End content here -->
+    <!-- ============================================================== -->
+
 </div>
-
-<script src="/static/admin/assets/js/jquery.min.js"></script>
-<script src="/static/admin/assets/js/toastr.min.js"></script>
-<script>
-    $(function() {
-        $('.update').click(function(){
-            var id = $(this).attr('data-id');
-            var obj = $(this);
-            upAjax(id,obj);
-        });
-    });
-
-    // 执行AJAX
-    function upAjax(id,obj) {
-        $.ajax({
-            type: 'put',
-            url: '/Column/' + id,
-            dataType : 'json',
-            success : function (data){
-                // console.log(data);
-                if (data.display == 1) {
-                    toastr.success(data.info);
-                    obj.removeClass('btn-default').addClass('btn-success').html('可隐藏');
-                }else{
-                    toastr.success(data.info);
-                    obj.removeClass('btn-success').addClass('btn-default').html('可显示');
-                }
-            },
-            error : function () {
-                alert('AJAX执行失败!');
-            }
-        });
-    }
-
-
-    $(document).ready(function() {
-        $('.del-btn').click(function(){
-            var id = $(this).attr('data-id');
-            // console.log(id);
-            if (confirm('您确定要 [ 删 除 ] 该用户吗?')) {
-                var obj = $(this).parents('.column');
-
-                delAjax(id, obj);
-            }
-        });
-    });
-
-    // 执行AJAX删除
-    function delAjax(id, obj) {
-        $.ajax({
-            type: 'delete',
-            url: '/Column/' + id,
-            dataType : 'json',
-            success : function (data){
-                console.log(data);
-                if (data.status) {
-                    toastr.success(data.info);
-                    obj.remove();
-                } else {
-                    toastr.error(data.info, '警告 :');
-                }
-            },
-            error : function () {
-                alert('AJAX执行失败!');
-            }
-        });
-    }
-</script>
+<!-- End right content -->
 {/block}

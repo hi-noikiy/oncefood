@@ -23,8 +23,6 @@ class Column extends Controller
         return view('admin@banner/index',[
             'list' => $list
         ]);
-
-        return view('admin@photo/index');
     }
 
     /**

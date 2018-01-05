@@ -17,8 +17,13 @@ Route::post('home/log','home/login/log');
 Route::get('home/login','home/login/index');
 Route::get('home/mail','home/login/mail');
 Route::get('home/top','home/login/top');
+
+//图片的资源路由
+//Route::resource('home/upload','home/banner');
+
 //前台商铺中心的资源路由
-Route::resource('shop/top','home/Banner');
+Route::get('shop/:id','home/Banner/index');
+Route::post('save','home/Banner/save');
 //登录界面的资源路由
 Route::resource('login','home/Login');
 //商家后台ycompany的路由
