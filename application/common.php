@@ -57,6 +57,17 @@ function randCode()
      $chars = 'abcdefghijkmnpqrstuvwxyzABCDEFGHIJKLMNPRSTUVWXYZ23456789';         //需要用到的验证码字符，如需更多请自行添加
         /* 随机生成4位字符的验证码字符 */
         $randCode = '';
+        for ( $i = 0; $i < 10; $i++ ){
+            $randCode.= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+        }
+        return $randCode;
+}
+
+function randsCode()
+{
+     $chars = 'abcdefghijkmnpqrstuvwxyzABCDEFGHIJKLMNPRSTUVWXYZ23456789';         //需要用到的验证码字符，如需更多请自行添加
+        /* 随机生成4位字符的验证码字符 */
+        $randCode = '';
         for ( $i = 0; $i < 4; $i++ ){
             $randCode.= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
         }
@@ -109,7 +120,7 @@ function forQQ($code)
     return $QQ;
 }
 
-function qqemail(){
+function qqemail($rand,$msg){
     
     // require("class.phpmailer.php"); //这个是一个smtp的php文档，网上可以下载得到
     
@@ -124,7 +135,7 @@ function qqemail(){
     $mail->Port=587;
     $mail->From = "676499058@qq.com"; //邮件发送者email地址
     $mail->FromName = "验证码";
-    $mail->AddAddress("468094404@qq.com", "title");//收件人地址，可以替换成任何想要接收邮件的email信箱,格式是AddAddress("收件人email","收件人姓名")
+    $mail->AddAddress($msg, "title");//收件人地址，可以替换成任何想要接收邮件的email信箱,格式是AddAddress("收件人email","收件人姓名")
 
     //$mail->AddReplyTo("", "");
 
@@ -133,7 +144,7 @@ function qqemail(){
 
     $mail->Subject = "您的验证码是:"; //邮件标题
 
-    $mail->Body = "11111"; //邮件内容，上面设置HTML，则可以是HTML
+    $mail->Body = $rand; //邮件内容，上面设置HTML，则可以是HTML
 
     if(!$mail->Send())
     {
@@ -142,7 +153,45 @@ function qqemail(){
        exit;
     }else{
 
-    return '邮箱发送成功';
+    return 'aaa';
+
+    }
+
+}
+function sendqqemail($rand,$msg){
+    
+    // require("class.phpmailer.php"); //这个是一个smtp的php文档，网上可以下载得到
+    
+    $mail = new PHPMailer(); //建立邮件发送类
+    $mail->CharSet = "UTF-8";
+    $address ="676499058@qq.com";
+    $mail->IsSMTP(); // 使用SMTP方式发送
+    $mail->Host = "smtp.qq.com"; // 您的企业邮局域名
+    $mail->SMTPAuth = true; // 启用SMTP验证功能
+    $mail->Username = "676499058@qq.com"; // 邮局用户名(请填写完整的email地址)
+    $mail->Password = "bwhhdaaxahzqbccg"; // 邮局密码
+    $mail->Port=587;
+    $mail->From = "676499058@qq.com"; //邮件发送者email地址
+    $mail->FromName = "验证码";
+    $mail->AddAddress($msg, "title");//收件人地址，可以替换成任何想要接收邮件的email信箱,格式是AddAddress("收件人email","收件人姓名")
+
+    //$mail->AddReplyTo("", "");
+
+    //$mail->AddAttachment("/var/tmp/file.tar.gz"); // 添加附件
+    $mail->IsHTML(true); // set email format to HTML //是否使用HTML格式
+
+    $mail->Subject = "您的验证码是:"; //邮件标题
+
+    $mail->Body = $rand; //邮件内容，上面设置HTML，则可以是HTML
+
+    if(!$mail->Send())
+    {
+        echo "邮件发送失败. <p>";
+       echo "错误原因: " . $mail->ErrorInfo;
+       exit;
+    }else{
+
+    return 'aaa';
 
     }
 

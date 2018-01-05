@@ -9,11 +9,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <head>
 <title>Foodie-Shop Bootstarp Website Template | Home :: w3layouts</title>
 <link href="/static/index/css/bootstrap.css" rel='stylesheet' type='text/css' />
-<script src="/static/index/js/jquery.min.js"></script>
+<script src="/static/index/js/jquery.js"></script>
+<script src="/static/index/js/banner.js"></script>
 <script src="/static/index/js/bootstrap.min.js"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="/static/index/js/jquery.min.js"></script>
-<script src="/static/index/js/banner.js"></script>
+<script src="/static/index/js/jquery.js"></script>
 <!-- Custom Theme files -->
 <link href="/static/index/css/banner.css" rel='stylesheet' type='text/css'/>
 <link href="/static/index/css/style.css" rel='stylesheet' type='text/css' />
@@ -77,18 +77,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			        <li><a href="contact.html">Contact</a></li>
 		          </ul>
 				
-
-
-				
-	
 				<ul class="login">
-
+				{if condition = "empty($list['name'])" }
 					<a href="{:url('index/login/index')}"><li class="login_top"><i class="sign"> </i><span>登录</span></li></a>
 		            <a href="{:url('index/register/index')}"><li class="login_bottom"><i class="register"> </i><span>注册</span></li></a>
-
-		          	<a href="{:url('index/login/index')}"><li class="login_top"><i class="sign"> </i><span>退出登录</span></li></a>
-		            
+				{else /}
+					<li class="login_bottom"><i class="register"></i><span>欢迎您登录</span></li>
+		          	<a href="{:url('index/index/delIndex')}"><li class="login_top"><i class="sign"> </i><span>退出登录</span></li></a>
+		        {/if}
 		         </ul>
+
 
 
 

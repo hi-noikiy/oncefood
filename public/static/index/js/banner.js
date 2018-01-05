@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
     var i = 0;
     var timer = setInterval(gun,3000);
     function gun(){

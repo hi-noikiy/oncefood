@@ -2,32 +2,32 @@
 {block name="main"}
     <div class="main">
     	<h2 style="margin-left:80px">用户注册</h2>
-		<form action="{:url('index/Register/check')}" class="form-horizontal" name="regForm" method="post" onsubmit="return checkForm()">
+		<form action="{:url('index/Register/check')}" class="form-horizontal" name="regForm" method="post" id="my">
 		  <div class="form-group">
 			    <label for="inputEmail3" class="col-sm-2 control-label" style="top">用户名</label>
 			    <div class="col-sm-4">
-			      <input type="text" name="name" value="" class="form-control" id="inputEmail3" placeholder="请输入用户名" onblur="checkUser()" >
+			      <input type="text" name="name" value="" class="form-control name" id="inputEmail3" placeholder="请输入用户名" data-id="1">
                	  <p id="utab">* 必填项,请用户名(6-12位,数字字母下划线)</p>
 			    </div>
 		  </div>
 		  <div class="form-group">
 			    <label for="inputPassword3" class="col-sm-2 control-label">输入密码</label>
 			    <div class="col-sm-4">
-			      <input type="password" name="pwd" value="" class="form-control" id="inputPassword3" placeholder="请输入密码" onblur="checkPass()" >
+			      <input type="password" name="pwd" value="" data-id="1" class="form-control pwd" id="inputPassword3" placeholder="请输入密码" onblur="checkPass()" >
                   <p id="ptab">* 必填项,请6-18位的密码</p>
 				</div>
 		  </div>
 		  <div class="form-group">
 			    <label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
 			    <div class="col-sm-4">
-			      <input type="password" name="repass" value="" class="form-control" id="inputPassword3" placeholder="重复输入密码" onblur="checkRepass()" >
+			      <input type="password" name="repass" value="" class="form-control repwd" id="inputPassword3" data-id="1" placeholder="重复输入密码" data-id="1" onblur="checkRepass()">
                	  <p id="rptab">* 必填项,请再输入密码</p>
 				</div>
 		  </div>
 		  <div class="form-group">
 			    <label for="inputPassword3" class="col-sm-2 control-label">手机号码</label>
 			    <div class="col-sm-4">
-			      <input type="text" name="tel" value="" class="form-control" id="inputPassword3" placeholder="输入手机号码" onblur="checkTel()" >
+			      <input type="text" name="tel" value="" data-id="1" class="form-control tel" id="inputPassword3" placeholder="输入手机号码">
                	  <p id="ttab">* 必填项,请输入您的手机号码</p>
 				</div>
 		  </div>
@@ -35,136 +35,347 @@
 		  <div class="col-md-offset-1">
                 <div class="btn btn-default getMsg">获取短信验证码</div>
                 &nbsp;&nbsp;
-                <input type="text" name="msg" value="" placeholder="输入短信验证码" >
-               	 <p class="col-md-offset-1" id="mtab">&nbsp;&nbsp;&nbsp;* 必填项,请输入验证码</p>
+                <input type="text" class="tttt" data-id="1" placeholder="输入短信验证码" >
+
+               	 <p class="col-md-offset-1" name="" id="mtab">&nbsp;&nbsp;&nbsp;* 必填项,请输入验证码</p>
      	  </div>
 
           <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">邮箱号码</label>
+                <label for="inputPassword3" class="col-sm-2 control-label email">邮箱号码</label>
                 <div class="col-sm-4">
-                  <input type="text" name="email" value="" class="form-control" id="inputPassword3" placeholder="输入邮箱账号" >
-                  <p id="ttab">* 必填项,请输入您的邮箱号码</p>
+                  <input type="text" name="email" value="" class="form-control emailMsg" id="inputPassword3" data-id="1" placeholder="输入邮箱账号" >
+                  <p id="etab">* 必填项,请输入您的邮箱号码</p>
                 </div>
           </div>
 
           <div class="col-md-offset-1 login-input">
-                <div class="btn btn-default"><a href="{:url('index/Register/email')}">获取验证码</a></div>
+                <div class="btn btn-default getEmail">获取邮箱验证码</a></div>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" name="msg1" placeholder="输入验证码" >
-                 <p class="col-md-offset-1" id="emtab">&nbsp;&nbsp;&nbsp;* 必填项,请输入验证码</p>
+                <input type="text" class="eeee" data-id="1" placeholder="输入验证码" >
+                 <p class="col-md-offset-1" name="" id="emtab">&nbsp;&nbsp;&nbsp;* 必填项,请输入验证码</p>
           </div>
 
 		  <div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10">
-			      <button type="submit" id="aaa" class="btn btn-warning">注册</button>
+			      <buttons type="submit" id="aaa" class="btn btn-warning sub">注册</buttons>
 			    </div>
 		  </div>
 		</form>
 	</div>
+    
+    {js href="/static/index/js/bootstrap.min.js"}
+    {js href="/static/index/js/jquery.js"}
     <script>
-
-    	
         // 用户名检测
-        function checkUser() {
-            var user = document.regForm.name.value;
-            var utab = document.getElementById('utab');
-            var name_state = false;
-            if (user.match(/^\w{6,12}$/) == null) {
-                utab.innerHTML = '* 用户名格式不正确!';
-                utab.style.color = '#f00';
-                return false;
-            } else {
-                utab.innerHTML = '* 验证通过!';
-                utab.style.color = '#0a0';
-                name_state = true;
-                return true;
-            }
-        }
+        $(function(){
+            $('.name').blur(function(){
+                var name = $('.name').val();
+                // var utab = $('#utab');
+                var utab = document.getElementById('utab');
+                if (name == '') {
+                    utab.innerHTML = '* 必填项,请用户名(6-12位,数字字母下划线)';
+                    exit;
+                }
+                if (name.match(/^\w{6,12}$/) == null) {
+                    utab.innerHTML = '* 用户名格式不正确!';
+                    utab.style.color = '#f00';
+                    exit;
+                }
+                $.ajax({
+                    type: 'get',
+                    url: '/checkname/',
+                    data:{name:name},
+                    dataType:'json',
+                    success : function (data){
+                        if(data.status){
+                            utab.innerHTML = '* 该用户名已存在!';
+                            utab.style.color = '#f00';
+                            exit;
+                        }else{
+                            utab.innerHTML = '* 验证通过!';
+                            $('.name').attr('data-id','0');
+                            utab.style.color = '#0a0';
+                        }
+                    },
+                    error : function () {
+                    alert('出事了!');
+                }
+                });
+            });
+        });
+        // tel检测
+        $(function(){
+            $('.tel').blur(function(){
+                var tel = $('.tel').val();
+                var ttab = document.getElementById('ttab');
+                if (tel == '') {
+                    ttab.innerHTML = '* 必填项,请输入您的手机号码';
+                    exit;
+                }
+                if (tel.match(/^1[34578]\d{9}$/) == null) {
+                    ttab.innerHTML = '* 手机格式不正确!';
+                    ttab.style.color = '#f00';
+                    exit;
+                }
+                $.ajax({
+                    type: 'get',
+                    url: '/checktel/',
+                    data:{tel:tel},
+                    dataType:'json',
+                    success : function (data){
+                        if(data.status){
+                            ttab.innerHTML = '* 该电话已存在!';
+                            ttab.style.color = '#f00';
+                            exit;
+                        }else{
+                            ttab.innerHTML = '* 验证通过!';
+                            $('.tel').attr('data-id','0');
+                            ttab.style.color = '#0a0';
+                        }
+                    },
+                    error : function () {
+                    alert('出事了!');
+                }
+                });
+            });
+        });
+        // 邮箱检测
+        $(function(){
+            $('.emailMsg').blur(function(){
+                var email = $('.emailMsg').val();
+                var etab = document.getElementById('etab');
+                if (email == '') {
+                    etab.innerHTML = '* 必填项,请输入您的邮箱账号';
+                    exit;
+                }
+                if (email.match(/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/) == null) {
+                    etab.innerHTML = '* 邮箱格式不正确!';
+                    etab.style.color = '#f00';
+                    exit;
+                }
+                $.ajax({
+                    type: 'get',
+                    url: '/checkemail/',
+                    data:{email:email},
+                    dataType:'json',
+                    success : function (data){
+                        if(data.status){
+                            etab.innerHTML = '* 该邮箱已存在!';
+                            etab.style.color = '#f00';
+                            exit;
+                        }else{
+                            etab.innerHTML = '* 验证通过!';
+                            $('.emailMsg').attr('data-id','0');
+                            etab.style.color = '#0a0';
+                        }
+                    },
+                    error : function () {
+                    alert('出事了!');
+                }
+                });
+            });
+        });
 
-        // 密码检测
-        function checkPass() {
-            var pass = document.regForm.pwd.value;
-            var ptab = document.getElementById('ptab');
-            var pass_state = false;
+// 密码检测
 
-            if (pass.length < 6 || pass.length > 18) {
-                ptab.innerHTML = '* 密码长度不合法!';
-                ptab.style.color = '#f00';
-                return false;
-            } else {
-                ptab.innerHTML = '* 验证通过!';
-                ptab.style.color = '#0a0';
-                pass_state = true;
-                return true;
-            }
-        }
+        $(function(){
+            $('.pwd').blur(function(){
+                var pass = $('.pwd').val();
+                var ptab = document.getElementById('ptab');
+                if(pass.length == 0){
+                    ptab.innerHTML = '* 密码不能为空!';
+                    ptab.style.color = '#f00';
+                    exit;
+                }
+                if(pass.length < 6 || pass.length > 18){
+                    ptab.innerHTML = '* 密码长度不合法!';
+                    ptab.style.color = '#f00';
+                }else{
+                    ptab.innerHTML = '* 验证通过!';
+                    ptab.style.color = '#0a0';
+                    $('.pwd').attr('data-id','0');
+
+                }
+            });
+        });
 
         // 密码检测
         function checkRepass() {
             var pass = document.regForm.pwd.value;
             var repass = document.regForm.repass.value;
             var rptab = document.getElementById('rptab');
-            var repass_state = false;
+            var ptab = document.getElementById('ptab');
             if(repass.length == 0 ) {
-            	rptab.innerHTML = '* 密码长度不合法!';
-            	rptab.style.color = '#f00';
-            	return false;
+                rptab.innerHTML = '* 密码不能为空!';
+                rptab.style.color = '#f00';
+                return false;
             }
+
             if (pass !== repass) {
                 rptab.innerHTML = '* 两次密码不一致!';
                 rptab.style.color = '#f00';
                 return false;
             } else {
                 rptab.innerHTML = '* 验证通过!';
+                // $('.name').attr('data-id','0');
                 rptab.style.color = '#0a0';
-                repass_state = true;
                 return true;
             }
         }
-        //号码验证
-        function checkTel(){
-        	var tel = document.regForm.tel.value;
-        	var ttab = document.getElementById('ttab');
-        	if (tel.match(/^1[34578]\d{9}$/) == null) {
-                ttab.innerHTML = '* 手机号码格式不正确!';
-                ttab.style.color = '#f00';
-                return false;
-            } else {
-                ttab.innerHTML = '* 验证通过!';
-                ttab.style.color = '#0a0';
-                return true;
-                tel_state = true;
-            }
-        }
-
-        // 提交验证
-        function checkForm() {
-            return checkUser() && checkPass() && checkRepass();
-        	
-        }
+        
 
 
 
 
-		$(document).ready(function() {
-	        $('.getMsg').click(function(){
-	          getMsgAjax();
-	       		 });
- 	  	});
-        // 执行AJAX
-        function getMsgAjax() {
+
+    // 手机验证码发送
+        $(function(){
+            $('.getMsg').click(function(){
+                var tel = $('.tel').val();
+                getMsgAjax(tel);
+            });
+        });
+        function getMsgAjax(tel) {
             $.ajax({
                 type: 'get',
                 url: '/getMessage/',
                 dataType : 'json',
+                data: {tel:tel},
                 success : function (data){
-                    alert('短信已发送');
+                    if(data['status']){
+                        alert('短信已发送');
+                    }else{
+                        alert('请输入可使用的手机号码');
+                    }
                 },
                 error : function () {
-                    alert('短信发送失败,请稍后再试!');
+                    alert('短信发送失败!');
                 }
             });
         }
+        // 手机验证码接收
+        $(function(){
+            $('.tttt').blur(function(){
+                var ttt = $('.tttt').val();
+                if(ttt == ''){
+                    mtab.innerHTML = '* 请输入手机验证码';
+                    exit;
+                }  
+                var mtab = document.getElementById('mtab');
+                $.ajax({
+                    type: 'get',
+                    url: '/selecttel/',
+                    dataType : 'json',
+                    data: {ttt:ttt},
+                    success : function (data){
+
+                        if(data['status']){
+                            mtab.innerHTML = '* 验证码手机输入正确!';
+                            mtab.style.color = '#0a0';
+                            $('.tttt').attr('data-id','0');
+                        }else{
+                            mtab.innerHTML = '* 验证码手机输入错误!';
+                            mtab.style.color = '#f00';
+                        }
+                    },
+                    error : function(){
+                        alert('验证码错误');
+                    }
+                });
+            });
+        });
+
+
+        // 邮箱查询
+        $(function(){
+            $('.getEmail').click(function(){
+                var email = $('.emailMsg').val();
+                getEmailAjax(email);
+            });
+        });
+        function getEmailAjax(email) {
+            $.ajax({
+                type: 'get',
+                url: '/email/',
+                dataType : 'json',
+                data: {email:email},
+                success : function (data){
+                    if(data['status']){
+                        alert('邮件已发送');
+                    }else{
+                        alert('请输入可使用的邮箱');
+                    }
+                },
+                error : function () {
+                    alert('邮件发送失败,请稍后再试!');
+                }
+            });
+        }   
+        // 邮箱验证码接收
+        $(function(){
+            $('.eeee').blur(function(){
+                var ttt = $('.eeee').val();
+                if(ttt == ''){
+                    emtab.innerHTML = '* 请输入邮箱验证码,注意空格';
+                    exit;
+                }  
+                var emtab = document.getElementById('emtab');
+                $.ajax({
+                    type: 'get',
+                    url: '/selectemail/',
+                    dataType : 'json',
+                    data: {ttt:ttt},
+                    success : function (data){
+                        if(data['status']){
+                            emtab.innerHTML = '* 邮箱验证码输入正确!';
+                            emtab.style.color = '#0a0';
+                             $('.eeee').attr('data-id','0');
+                        }else{
+                            emtab.innerHTML = '* 请输入正确的邮箱验证码!';
+                            emtab.style.color = '#f00'
+
+                        }
+                    },
+                    error : function(){
+                        alert('验证码错误');
+                    }
+                });
+            });
+        });
+
+
+        // 执行注册
+        $(function(){
+            $('.sub').click(function(){
+                var info = $('#my input').serialize();
+                var aa = $('.name').attr('data-id');
+                var bb = $('.pwd').attr('data-id');
+                var dd = $('.tel').attr('data-id');
+                var ee = $('.tttt').attr('data-id');
+                var ff = $('.emailMsg').attr('data-id');
+                var gg = $('.eeee').attr('data-id');
+                $.ajax({
+                    type : 'post',
+                    url : '/check/',
+                    datatype : 'json',
+                    data : info,
+                    success : function(data){
+                        if( bb == 0 && aa == 0 && dd == 0 && ee == 0 && ff == 0 & gg == 0 ){
+                            alert('注册成功');
+                            window.location.href = "index/login";
+                        }else{
+                            alert('注册失败了,请认真填写信息');
+                        }
+                    },
+                    error : function(){
+                        alert('注册失败1,请稍后再试');
+                    }
+                });
+            });
+        });
+
+    	
+        
 
 
        
