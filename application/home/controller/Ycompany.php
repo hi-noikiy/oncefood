@@ -52,9 +52,7 @@ class Ycompany extends Admain
             'datetime' => $p['datetime'],
             'area' => $p['area']
         ];
-        if ($p['rpwd'] != $p['pwd']){
-            $this->error('密码不一致');
-        }
+
         $yshop = Db::name('yshop')->data($data)->insert();
         if ($yshop > 0){
             $this->success('添加商铺成功','home/ycompany/index');

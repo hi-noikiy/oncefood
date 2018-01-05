@@ -1,11 +1,11 @@
 /* 案例 */
-.banner{
-    position: relative;
-    overflow: hidden;
-}
+        #banner{
+            position: relative;
+            overflow:hidden;
+        }
 
-#list{width: 200px; height: 50px; position: absolute; right:50px; bottom:20px;}
+        #list{width: 200px; height: 50px; position: absolute; right:50px; bottom:20px;}
 
-#list .item{width: 8px; height: 8px; background-color: rgba(0,0,0,0.1); border-radius:100%; float:left; margin-right: 10px; border:2px solid rgba(0,0,0,0.3)}
+        #list .item{width: 8px; height: 8px; background-color: rgba(0,0,0,0.1); border-radius:100%; float:left; margin-right: 10px; border:2px solid rgba(0,0,0,0.3)}
 
-#list .item:hover{background-color: rgba(255,255,255, 0.5); border-color:#333;}
+        #list .item:hover{background-color: rgba(255,255,255, 0.5); border-color:#333;}
