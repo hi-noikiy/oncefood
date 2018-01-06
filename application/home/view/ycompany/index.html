@@ -44,8 +44,8 @@
                                     {else $vo.status == 2}
                                     <td><button class="btn btn-danger update" data-id="{$vo.id}">禁用</button></td>
                                     {/if}
-                                    <td><button data-modal="md-fall" class="btn btn-success show-btn  md-trigger" data-id="{$vo.id}">详细信息</button><button data-modal="md-3d-flip-horizontal" class="btn btn-primary md-trigger edit-btn" data-id="{$vo.id}">修改</button><button class="btn btn-danger del-btn" data-id="{$vo.id}">删除</button>
-                                        <a href="{:url('home/banner/index',['id' => $vo['id']])}" class="btn btn-info" >图片管理</a> <button data-modal = "md-3d-slit"  class="btn btn-info up-btn md-trigger" data-id="{$vo.id}">上传</button></td>
+                                    <td><button data-modal="md-fall" class="btn btn-success show-btn  md-trigger" data-id="{$vo.id}">详细信息</button> <button data-modal="md-3d-flip-horizontal" class="btn btn-primary md-trigger edit-btn" data-id="{$vo.id}">修改</button> <button class="btn btn-danger del-btn" data-id="{$vo.id}">删除</button>
+                                        <a href="{:url('home/banner/index',['id' => $vo['id']])}" class="btn btn-info" >图片管理</a> <a href="{:url('home/banner/read',['id' => $vo['id']])}"  class="btn btn-info" >上传</a> <a href="{:url('home/banner/create',['id' => $vo['id']])}"  class="btn btn-info" >上传环境</a></td>
                                 </tr>
                                 {/volist}
                                 </tbody>
@@ -92,22 +92,7 @@
          
     </div><!-- End div .md-content -->
 </div><!-- End div .md-modal .md-fall -->
-<!--上传模板图片-->
-<div class="md-modal md-3d-slit" id="md-3d-slit">
-    <p> <button class="btn btn-danger md-close">关闭</button></p>
-    <div class="md-content">
-        <h3 id="h" style="color: red"></h3>
-        <div>
-            <ul>
-                <form action="{:url('home/banner/save')}" enctype="multipart/form-data" method="post">
-                    <input type="hidden" name="id" value="">
-                    选择文件 <input type="file" name="image" class="btn-block btn-success"/> <br>
-                    <button class="btn btn-info">提交</button>
-                </form>
-            </ul>
-        </div>
-    </div><!-- End div .md-content -->
-</div><!-- End div .md-modal .md-3d-slit -->
+
 <!-- 新增店铺模态框 -->
 <div class="md-modal md-fade-in-scale-up" id="md-fade-in-scale-up">
     <p>
@@ -300,27 +285,7 @@ $(function(){
             var obj = $(this);
             updateSave(uid,obj);
         });
-//        上传banner图
-        $('.up-btn').click(function(){
-            var pid = $(this).attr('data-id');
-            upAjax(pid);
-        });
     });
-//    上传Banner图
-    function upAjax(pid)
-    {
-        $.ajax({
-            type:'post',
-            url : '/save/',
-            data: {pid:pid},
-            success : function(data){
-
-            },
-            error :function(){
-                alert('执行失败');
-            }
-        });
-    }
     //    详细信息
     function showAjax(id){
     $.ajax({

@@ -19,7 +19,28 @@
                         <!--</a>-->
                     </div>
                     <button class="btn btn-primary">显示</button>
-                    <button class="btn btn-primary">删除</button>
+                    <button class="btn btn-primary btn-danger" data-id="{$vo.id}">删除</button>
+                    <!--<button class="btn btn-primary">修改</button>-->
+                </div>
+                {/volist}
+            </div>
+        </div>
+        <div class="widget transparent animated fadeInDown">
+            <h2><strong>{$show}</strong></h2>
+            <div class="gallery-wrap">
+                {volist name="shows" id="vo"}
+                <div class="column">
+                    <div class="inner">
+                        <!--<a class="zooming" href="images/big/img001.jpg" title="Image title here">-->
+                        <div class="img-wrap">
+                            <img src="/uploads/evr/{$vo.icon}" alt="Image gallery" title="Image title here" class="mfp-fade">
+
+                        </div>
+                        <strong style="color: #0b0b0b">简介</strong><p style="color: red">{$vo.comment}</p>
+                        <!--</a>-->
+                    </div>
+                    <button class="btn btn-primary">显示</button>
+                    <button class="btn btn-danger " data-id="{$vo.id}">删除</button>
                     <!--<button class="btn btn-primary">修改</button>-->
                 </div>
                 {/volist}
