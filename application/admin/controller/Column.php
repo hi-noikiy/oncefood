@@ -11,7 +11,7 @@ use think\Db;
 class Column extends Controller
 {
     /**
-     * 显示资源列表
+     * 轮播图列表
      *
      * @return \think\Response
      */
@@ -26,17 +26,7 @@ class Column extends Controller
     }
 
     /**
-     * 上传图片页.
-     *
-     * @return \think\Response
-     */
-    public function create()
-    {
-
-    }
-
-    /**
-     * 保存新建的资源
+     * 上传轮播图
      *
      * @param  \think\Request  $request
      * @return \think\Response
@@ -58,7 +48,6 @@ class Column extends Controller
                return $this->error($msg);
             }
         }
-
 
         Db::startTrans();
         try {
@@ -84,7 +73,7 @@ class Column extends Controller
     }
 
     /**
-     * 保存更新的资源
+     * 编辑轮播图
      *
      * @param  \think\Request  $request
      * @param  int  $id
@@ -110,7 +99,7 @@ class Column extends Controller
     }
 
     /**
-     * 删除指定资源
+     * 删除轮播图
      *
      * @param  int  $id
      * @return \think\Response
@@ -139,6 +128,12 @@ class Column extends Controller
             $info['info'] = 'ID为: ' . $id . '的图片删除失败,请重试!';
         };
         return json($info);
+    }
+
+    public function HotShop()
+    {
+        // $list = Db::name('yshop as a,lamp_yshop_shop as b')->field('')
+        return view('admin@Column/HotShop');
     }
 
 }

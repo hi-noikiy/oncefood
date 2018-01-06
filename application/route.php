@@ -134,7 +134,7 @@ Route::resource('Mer','admin/Merchant');
  * 店铺管理路由
  */
 Route::resource('Shops','admin/Shops');
-
+Route::get('GoHot/[:id]','admin/Shops/hot');
 /**
  * 店铺属性路由
  */
@@ -144,9 +144,9 @@ Route::resource('Attr','admin/ShopAttr');
  * 栏目管理路由
  */
 Route::resource('Column','admin/Column');
-
+Route::get('HotShop','admin/Column/HotShop');
 /**
  * 空路由
  */
-// Route::get(':name','admin/error/_empty', ['name' => '\w+']);
+Route::get(':name','admin/error/_empty', ['name' => '\w+']);
 
