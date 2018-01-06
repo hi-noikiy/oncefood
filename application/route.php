@@ -161,7 +161,12 @@ Route::resource('Attr','admin/ShopAttr');
  * 栏目管理路由
  */
 Route::resource('Column','admin/Column');
-Route::get('HotShop','admin/Column/HotShop');
+
+/**
+ * 热门编辑路由
+ */
+Route::resource('HotShop','admin/HotShop');
+Route::get('UpHot/[:id]','admin/HotShop/UpHot');
 /**
  * 空路由
  */

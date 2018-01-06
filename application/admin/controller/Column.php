@@ -130,10 +130,4 @@ class Column extends Controller
         return json($info);
     }
 
-    public function HotShop()
-    {
-        // $list = Db::name('yshop as a,lamp_yshop_shop as b')->field('')
-        return view('admin@Column/HotShop');
-    }
-
 }

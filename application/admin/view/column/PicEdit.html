@@ -1,0 +1,66 @@
+{extend name="main/index" /}
+{block name="main"}
+<!-- Right Sidebar End -->
+<!-- Start right content -->
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <!-- Your awesome content goes here -->
+        <div class="widget transparent animated fadeInDown">
+            <h2><strong>设置热门封面</strong></h2>
+            <div class="gallery-wrap">
+                {volist name="list" id="vo"}
+                <div class="column">
+                    <div class="inner">
+                        <!-- <a class="zooming" href="images/big/img001.jpg" title="Image title here"> -->
+                        <div class="img-wrap">
+                            <img src="/uploads/evr/{$vo.icon}" alt="Image gallery" title="Image title here" class="mfp-fade">
+                        </div>
+                        {if condition="$vo.face == 1"}
+                        <button class="btn btn-success col-md-12 update" data-id="{$vo.id}">封面</button>
+                        {else/}
+                        <button class="btn btn-default col-md-12  update" data-id="{$vo.id}">非封面</button>
+                        {/if}
+                    </div>
+                </div>
+                {/volist}
+            </div>
+            <a href="{:url('admin/HotShop/index')}" class="btn btn-info">返回列表</a>
+        </div>
+<script src="/static/admin/assets/js/jquery.min.js"></script>
+<script src="/static/admin/assets/js/toastr.min.js"></script>
+<script>
+$(function() {
+  $('.update').click(function(){
+        var id = $(this).attr('data-id');
+        var obj = $(this);
+        PicAjax(id,obj);
+  });
+});
+
+// 执行AJAX
+function PicAjax(id,obj) {
+    $.ajax({
+        type: 'put',
+        url: '/HotShop/' + id,
+        dataType : 'json',
+        success : function (data){
+            console.log(data);
+            if (data.face == 1) {
+                toastr.success(data.info);
+            }else{
+                toastr.success(data.info);
+                obj.removeClass('update').removeClass('btn-default').addClass('btn-success').html('封面');
+                $('.update').removeClass('btn-success').addClass('btn-default').html('非封面');
+                obj.addClass('update');
+            }
+        },
+        error : function () {
+            alert('AJAX执行失败!');
+        }
+    });
+}
+</script>
+{/block}

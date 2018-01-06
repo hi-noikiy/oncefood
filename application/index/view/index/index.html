@@ -182,33 +182,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		   	   	 <h3><i class="arrow"> </i><span>热门店铺</span></h3>
 		   	   </ul>
 		   	   <ul class="feature_grid">
-				 <li class="grid1"><img src="/static/index/images/f1.jpg" class="img-responsive" alt=""/>
-				 	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed</p>
-				 	<div class="price">Price:
-					  <span class="actual">$12.00</span>
-					</div>
-				    <div class="but1">
-			          <a href="#">Buy Now</a>
-			        </div>
+		   	   	{volist name="hot" id="v"}
+				 <li class="grid1"><img src="/uploads/evr/{$v.icon}" class="img-responsive" style="width: 200px; height: 150px;">
+				 	<p>{$v.comment}</p>
+				    <div class="price">
+				    	<span class="actual"><a href="#">预约定位</a></span>
+				    </div>
 				 </li>		   	   	
-				 <li class="grid1"><img src="/static/index/images/f2.jpg" class="img-responsive" alt=""/>
-				 	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed</p>
-				 	<div class="price">Price:
-					  <span class="actual">$12.00</span>
-					</div>
-				    <div class="but1">
-			          <a href="#">Buy Now</a>
-			        </div>
-				 </li>		   	
-				 <li class="grid2"><img src="/static/index/images/f3.jpg" class="img-responsive" alt=""/>
-				 	<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed</p>
-				 	<div class="price">Price:
-					  <span class="actual">$12.00</span>
-					</div>
-				    <div class="but1">
-			          <a href="#">Buy Now</a>
-			        </div>
-				 </li>		   	
+				{/volist}
 				 <div class="clearfix"> </div>
 		   	   </ul>
 		   	    <ul class="feature">

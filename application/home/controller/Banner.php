@@ -43,27 +43,30 @@ class Banner extends Controller
             'banners' => $id
         ]);
     }
+
     public function evrsave(Request $request)
     {
         $id = $request->post('id');
         $comment = $request->post('comment');
-//        var_dump($id);die;
+        $face = $request->post('face');
+        // var_dump($face);die;
         $file = $request->file('image');
         // 移动到框架应用根目录/public/uploads/ 目录下
         if($file){
-            $info = $file->validate(['size'=>156780,'ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads'. DS . 'evr');
+            $info = $file->validate(['ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads'. DS . 'evr');
             if($info){
                 $icon = $info->getSaveName();
                 $data = [
                     'icon' => $icon,
                     'sid' => $id,
                     'comment' => $comment,
-                    'face' => 2
+                    'face' => $face
                 ];
                 $yshop_show = Db::name('yshop_show')->data($data)->insert();
                 if($yshop_show > 0 ){
 
                     $this->error('添加轮播图成功');
+                    
                 }else{
 
                     $this->error('添加轮播图失败');
