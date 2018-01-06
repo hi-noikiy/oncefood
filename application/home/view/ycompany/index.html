@@ -45,7 +45,7 @@
                                     <td><button class="btn btn-danger update" data-id="{$vo.id}">禁用</button></td>
                                     {/if}
                                     <td><button data-modal="md-fall" class="btn btn-success show-btn  md-trigger" data-id="{$vo.id}">详细信息</button> <button data-modal="md-3d-flip-horizontal" class="btn btn-primary md-trigger edit-btn" data-id="{$vo.id}">修改</button> <button class="btn btn-danger del-btn" data-id="{$vo.id}">删除</button>
-                                        <a href="{:url('home/banner/index',['id' => $vo['id']])}" class="btn btn-info" >图片管理</a> <a href="{:url('home/banner/read',['id' => $vo['id']])}"  class="btn btn-info" >上传</a> <a href="{:url('home/banner/create',['id' => $vo['id']])}"  class="btn btn-info" >上传环境</a></td>
+                                        <a href="{:url('home/banner/index',['id' => $vo['id']])}" class="btn btn-info" >图片管理</a> <a href="{:url('home/banner/read',['id' => $vo['id']])}"  class="btn btn-info" >上传</a> <a href="{:url('home/banner/create',['id' => $vo['id']])}"  class="btn btn-info" >上传环境</a> <a href="{:url('home/Comment/index',['id' => $vo['id']])}"  class="btn btn-info" >商铺介绍</a></td>
                                 </tr>
                                 {/volist}
                                 </tbody>
@@ -272,6 +272,7 @@ $(function(){
         $('.del-btn').click(function(){
             var de_id = $(this).attr('data-id');
             var obj = $(this).parents('tr');
+//            console.log(de_id,obj);
             delAjax(de_id,obj);
         });
 //        详细信息

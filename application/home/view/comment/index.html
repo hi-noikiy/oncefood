@@ -1,0 +1,107 @@
+{extend name="main/index" /}
+{block name="main"}
+<!--<script src="/static/home/js/tinymce.min.js"></script>-->
+<script src="http://cdn.bootcss.com/tinymce/4.4.3/tinymce.min.js"></script>
+<script>tinymce.init({ selector:'textarea' });</script>
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <!-- Page Heading Start -->
+        <div class="page-heading">
+            <h1><i class='fa fa-envelope'></i> {$title}</h1>
+        </div>
+        <!-- Page Heading End-->
+        <!-- Your awesome content goes here -->
+        <div class="box-info box-messages animated fadeInDown">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="widget">
+                        <div class="widget-header transparent">
+                            <h2><strong>商户</strong></h2>
+                            <div class="additional-btn">
+                                <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                                <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                                <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                            </div>
+
+                        </div>
+                        <div class="widget-content">
+                            <div class="table-responsive">
+                                <table data-sortable class="table table-hover table-striped" style="table-layout: fixed;">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>简介</th>
+
+                                        <th data-sortable="false">操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    <tr>
+                                        <td></td>
+                                        <td style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title=“完整内容”></td>
+
+
+                                        <td><button class="btn btn-success update" data-id="">启用</button></td>
+
+                                        <td><button class="btn btn-danger update" data-id="">禁用</button></td>
+
+                                        <td><button data-modal="md-fall" class="btn btn-success show-btn  md-trigger" data-id="">详细信息</button> <button data-modal="md-3d-flip-horizontal" class="btn btn-primary md-trigger edit-btn" data-id="">修改</button> <button class="btn btn-danger del-btn" data-id="">删除</button>
+
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget">
+
+                        <div class="widget-content">
+                            <!--<form action="" id="co">-->
+                            <textarea  id="comment">填写你的介绍</textarea>
+                                <button class="btn btn-info .co">发送 </button>
+                            <!--</form>-->
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- End of your awesome content -->
+
+
+
+        <!-- Footer Start -->
+        <footer>
+            Huban Creative &copy; 2014
+            <div class="footer-links pull-right">
+                <a href="#">About</a><a href="#">Support</a><a href="#">Terms of Service</a><a href="#">Legal</a><a href="#">Help</a><a href="#">Contact Us</a>
+            </div>
+        </footer>
+        <!-- Footer End -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End content here -->
+    <!-- ============================================================== -->
+
+</div>
+<script>tinymce.init({ selector:'textarea' });</script>
+{js href="/static/home/js/jquery.min.js"}
+{js href="/static/home/js/bootstrap.js"}
+{js href="/static/home/js/toastr.min.js"}
+<script>
+    $(function(){
+        $('.co').click(function(){
+            var obj = tinymce.get('#comment').getContent();
+            console.log(obj);
+        });
+    });
+</script>
+{/block}

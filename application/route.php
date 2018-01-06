@@ -17,11 +17,20 @@ Route::post('home/log','home/login/log');
 Route::get('home/login','home/login/index');
 Route::get('home/mail','home/login/mail');
 Route::get('home/top','home/login/top');
+//评论
+Route::get('com/:id','home/Comment/index');
+
+
 
 //图片的资源路由
 //Route::resource('home/upload','home/banner');
 
 //前台商铺中心的资源路由
+Route::post('ban','home/Banner/ban');
+
+Route::post('banner','home/Banner/updateSave');
+Route::post('delete','home/Banner/delete');
+Route::post('evrdelete','home/Banner/evrdelete');
 Route::get('shop/:id','home/Banner/index');
 //轮播图上传
 Route::get('up/:id','home/Banner/read');
