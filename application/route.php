@@ -18,10 +18,15 @@ Route::get('home/login','home/login/index');
 Route::get('home/mail','home/login/mail');
 Route::get('home/top','home/login/top');
 //评论
+
 Route::get('com/:id','home/Comment/index');
+Route::post('commit','home/comment/commit');
+Route::post('status','home/comment/triggersave');
+Route::post('message','home/comment/message');
+Route::post('msgde','home/comment/messagedelete');
+Route::post('editmessage','home/comment/editmessage');
 
-
-
+Route::resource('home/comment','home/Comment');
 //图片的资源路由
 //Route::resource('home/upload','home/banner');
 
