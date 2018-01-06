@@ -17,9 +17,39 @@
                                 <img src="/uploads/banner/{$vo.icon}" alt="Image gallery" title="Image title here" class="mfp-fade">
                             </div>
                         <!--</a>-->
+                        {if $vo.display == 1}
+                        <td><button class="btn btn-success update" data-id="{$vo.id}">启用</button></td>
+                        {else $vo.display == 2}
+                        <td><button class="btn btn-danger update" data-id="{$vo.id}">禁用</button></td>
+                        {/if}
+                        <button class="btn btn-primary btn-danger del-btn" data-id="{$vo.id}">删除</button>
                     </div>
-                    <button class="btn btn-primary">显示</button>
-                    <button class="btn btn-primary">删除</button>
+                    <!--<button class="btn btn-primary">修改</button>-->
+                </div>
+                {/volist}
+            </div>
+        </div>
+        <div class="widget transparent animated fadeInDown">
+            <h2><strong>{$show}</strong></h2>
+            <div class="gallery-wrap">
+                {volist name="shows" id="vo"}
+                <div class="column">
+                    <div class="inner">
+                        <!--<a class="zooming" href="images/big/img001.jpg" title="Image title here">-->
+                        <div class="img-wrap">
+                            <img src="/uploads/evr/{$vo.icon}" alt="Image gallery" title="Image title here" class="mfp-fade">
+
+                        </div>
+                        <strong style="color: #0b0b0b">简介</strong><p style="color: red">{$vo.comment}</p>
+                        <!--</a>-->
+                        {if $vo.display == 1}
+                        <td><button class="btn btn-success evr" data-id="{$vo.id}">启用</button></td>
+                        {else $vo.display == 2}
+                        <td><button class="btn btn-danger evr" data-id="{$vo.id}">禁用</button></td>
+                        {/if}
+                        <button class="btn btn-danger dell-btn" data-id="{$vo.id}">删除</button>
+                    </div>
+
                     <!--<button class="btn btn-primary">修改</button>-->
                 </div>
                 {/volist}
@@ -41,4 +71,134 @@
 
 </div>
 <!-- End right content -->
+{js href="/static/home/js/jquery.min.js"}
+{js href="/static/home/js/bootstrap.js"}
+{js href="/static/home/js/toastr.min.js"}
+<script>
+    $(function(){
+        $('.del-btn').click(function(){
+            var de_id = $(this).attr('data-id');
+            var obj = $(this).parents('div');
+//            console.log(de_id,obj);
+            delAjax(de_id,obj);
+        });
+        $('.dell-btn').click(function(){
+            var de_id = $(this).attr('data-id');
+            var obj = $(this).parents('div');
+//            console.log(de_id,obj);
+            dellAjax(de_id,obj);
+        });
+//        更改banner状态
+        $('.update').click(function (){
+            var uid = $(this).attr('data-id');
+            var obj = $(this);
+            banner(uid,obj);
+        });
+        //        更改室内环境状态
+        $('.evr').click(function (){
+            var uid = $(this).attr('data-id');
+            var obj = $(this);
+            evr(uid,obj);
+        });
+
+    });
+    //    更改室内环境状态
+    function evr(uid,obj)
+    {
+        $.ajax({
+            type : 'post',
+            url : '/ban/',
+            data : {uid : uid},
+            dataType : 'json',
+            success : function(data){
+                console.log(data);
+                if(data.display == 1){
+                    toastr.success(data.info);
+                    obj.removeClass('btn-danger').addClass('btn-success');
+                    obj.html('启用');
+                }else{
+                    toastr.success(data.info);
+                    obj.removeClass('btn-success').addClass('btn-danger');
+                    obj.html('禁用');
+                }
+            },
+            error:function(){
+                alert('更新失败');
+            }
+        });
+    }
+//    更改banner状态
+    function banner(uid,obj)
+    {
+        $.ajax({
+            type : 'post',
+            url : '/banner/',
+            data : {uid : uid},
+            dataType : 'json',
+            success : function(data){
+                console.log(data);
+                if(data.display == 1){
+                    toastr.success(data.info);
+                    obj.removeClass('btn-danger').addClass('btn-success');
+                    obj.html('启用');
+                }else{
+                    toastr.success(data.info);
+                    obj.removeClass('btn-success').addClass('btn-danger');
+                    obj.html('禁用');
+                }
+            },
+            error:function(){
+                alert('更新失败');
+            }
+        });
+    }
+//    删除室内环境的
+    function dellAjax(id,obj)
+    {
+        $.ajax({
+            type : 'post',
+            url : '/evrdelete/',
+
+            data : {id : id},
+            dataType : 'json',
+            success : function(data){
+                if (data.status){
+                    toastr.success(data.info);
+                    obj.remove();
+                }else{
+                    toastr.error(data.info);
+                }
+            },
+            error : function(){
+                alert('执行失败')
+            }
+        });
+//        ajax请求时间过长用它刷新
+        window.location.reload(true);
+    }
+//    删除轮播图的
+    function delAjax(id,obj)
+    {
+        $.ajax({
+            type : 'post',
+            url : '/delete/',
+
+            data : {id : id},
+            dataType : 'json',
+            success : function(data){
+                if (data.status){
+                    toastr.success(data.info);
+                    obj.remove();
+                }else{
+                    toastr.error(data.info);
+                }
+            },
+            error : function(){
+                alert('执行失败')
+            }
+        });
+        //        ajax请求时间过长用它刷新
+        window.location.reload(true);
+    }
+</script>
 {/block}
