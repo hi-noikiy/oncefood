@@ -104,7 +104,7 @@ Route::post('indexpwd','index/login/indexpwd');
  * 个人中心路由
  */
 Route::resource('personal','index/personal');
-
+Route::post('personalSave','index/Personal/savee');
 /************************************************/
 /**
  * 后台默认静态路由 wwb
@@ -165,5 +165,5 @@ Route::get('HotShop','admin/Column/HotShop');
 /**
  * 空路由
  */
-Route::get(':name','admin/error/_empty', ['name' => '\w+']);
+// Route::get(':name','admin/error/_empty', ['name' => '\w+']);
 

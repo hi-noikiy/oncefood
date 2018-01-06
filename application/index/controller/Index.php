@@ -10,6 +10,7 @@ class Index extends Controller
 {
     public function index()
     {	
+        // 存session获取html样式标准,以及分类遍历
         $name = Session::get('index.name');
         $nickname = Session::get('index.nickname');
         $id = Session::get('index.id');
@@ -26,6 +27,7 @@ class Index extends Controller
     }
 
     public function delIndex(){
+        // 删除session页面不显示登录样式
     	Session::delete('index');
     	$banner = db('banner')->field('pic')->where('display',1)->select();
         $category = db('category')->where('pid = 0 and display = 1')->paginate(5);
