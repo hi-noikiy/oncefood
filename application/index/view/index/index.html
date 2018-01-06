@@ -69,6 +69,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			    </div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				{if condition = "empty($list['name'])" }
 			      <ul class="nav navbar-nav menu1">
 			      	<li><a href="{:url('index/index/index')}" style="font-size: 20px; font-family: 华文琥珀;">首页</a></li>
 			      	{volist name="category" id="vo"}
@@ -77,10 +78,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		          </ul>
 				
 				<ul class="login">
-				{if condition = "empty($list['name'])" }
 					<a href="{:url('index/login/index')}"><li class="login_top"><i class="sign"> </i><span>登录</span></li></a>
 		            <a href="{:url('index/register/index')}"><li class="login_bottom"><i class="register"> </i><span>注册</span></li></a>
 				{else /}
+				 <ul class="nav navbar-nav menu1">
+			      	<li><a href="{:url('index/index/index')}" style="font-size: 20px; font-family: 华文琥珀;">首页</a></li>
+			      	{volist name="category" id="vo"}
+			        <li><a href="fruits.html" style="font-size: 20px; font-family: 华文琥珀;">{$vo.name}</a></li>
+			        {/volist}
+		          </ul>
+				<ul class="login">
 					<li class="login_bottom"><i class="register"></i><span>欢迎您登录</span></li>
 		          	<a href="{:url('index/index/delIndex')}"><li class="login_top"><i class="sign"> </i><span>退出登录</span></li></a>
 		        {/if}

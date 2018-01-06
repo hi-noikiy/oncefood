@@ -8,8 +8,10 @@ use think\Session;
 class Base extends controller
 {
 	public function _initialize()
-	{
-		
-	}
+    {
+       
+    }
+
+    
 
 }
