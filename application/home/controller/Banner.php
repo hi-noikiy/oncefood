@@ -44,6 +44,10 @@ class Banner extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * 添加室内环境
+     */
     public function evrsave(Request $request)
     {
         $id = $request->post('id');
@@ -53,9 +57,10 @@ class Banner extends Controller
         $file = $request->file('image');
         // 移动到框架应用根目录/public/uploads/ 目录下
         if($file){
-            $info = $file->validate(['ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads'. DS . 'evr');
+            $info = $file->validate(['size'=>156780,'ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads'. DS . 'evr');
             if($info){
-                $icon = $info->getSaveName();
+                $icon = str_replace("\\","/",$info->getSaveName());
+//                $icon = $info->getSaveName();
                 $data = [
                     'icon' => $icon,
                     'sid' => $id,
@@ -65,11 +70,11 @@ class Banner extends Controller
                 $yshop_show = Db::name('yshop_show')->data($data)->insert();
                 if($yshop_show > 0 ){
 
-                    $this->error('添加轮播图成功');
+                    $this->error('添加室内环境成功');
                     
                 }else{
 
-                    $this->error('添加轮播图失败');
+                    $this->error('添加室内环境失败');
                 }
 
             }else{
@@ -96,7 +101,9 @@ class Banner extends Controller
         if($file){
             $info = $file->validate(['size'=>156780,'ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads'. DS . 'banner');
             if($info){
-                $icon = $info->getSaveName();
+                $icon = str_replace("\\","/",$info->getSaveName());
+
+//                $icon = $info->getSaveName();
                 $data = [
                     'icon' => $icon,
                     'sid' => $id,
@@ -106,11 +113,11 @@ class Banner extends Controller
                 if($yshop_banner > 0 ){
 //                    $info['status'] = true;
 //                    $info['info'] = '添加成功';
-                    $this->error('添加室内环境成功');
+                    $this->error('添加轮播图成功');
                 }else{
 //                    $info['status'] = false;
 //                    $info['info'] = '添加失败';
-                    $this->error('添加室内环境失败');
+                    $this->error('添加室轮播失败');
                 }
 
             }else{
@@ -217,6 +224,28 @@ class Banner extends Controller
             $info = $status;
             $info['id'] = $uid;
             $info['info'] = '禁用';
+        }
+        return json($info);
+    }
+    /**
+     * 更改封面状态
+     * @param Request $request
+     * @return \think\response\Json
+     */
+    public function face(Request $request)
+    {
+        $uid = $request->post('uid');
+        $data = Db::name('yshop_show')->field('face')->find($uid);
+        $status['face'] = $data['face'] == 1?2:1;
+        $result = Db::name('yshop_show')->where(['id'=>$uid])->setField($status);
+        if($result && $status['face'] == 1){
+            $info= $status;
+            $info['id'] = $uid;
+            $info['info'] = '封面';
+        }else{
+            $info = $status;
+            $info['id'] = $uid;
+            $info['info'] = '非封面';
         }
         return json($info);
     }

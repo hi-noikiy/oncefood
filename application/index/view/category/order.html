@@ -1,0 +1,30 @@
+{extend name="category/shop"}
+{block name="main"}
+<article id="content">
+    <div class="wrap">
+        <div class="box">
+            <div>
+                <h2 class="letter_spacing">Contact <span>Form</span></h2>
+                <form id="ContactForm">
+                    <div>
+                        <div class="wrapper">
+                            <span>Your Name:</span>
+                            <input type="text" class="input" >
+                        </div>
+                        <div class="wrapper">
+                            <span>Your E-mail:</span>
+                            <input type="text" class="input" >
+                        </div>
+                        <div class="textarea_box">
+                            <span>Your Message:</span>
+                            <textarea name="textarea" cols="1" rows="1"></textarea>
+                        </div>
+                        <a href="#" class="button1" onClick="document.getElementById('ContactForm').submit()">Send</a>
+                        <a href="#" class="button1" onClick="document.getElementById('ContactForm').reset()">Clear</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</article>
+{/block}

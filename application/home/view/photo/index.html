@@ -29,6 +29,7 @@
                 {/volist}
             </div>
         </div>
+        <!--室内环境的-->
         <div class="widget transparent animated fadeInDown">
             <h2><strong>{$show}</strong></h2>
             <div class="gallery-wrap">
@@ -42,12 +43,18 @@
                         </div>
                         <strong style="color: #0b0b0b">简介</strong><p style="color: red">{$vo.comment}</p>
                         <!--</a>-->
+                        {if $vo.face == 1}
+                        <td><button class="btn btn-success evre" data-id="{$vo.id}">封面</button></td>
+                        {else $vo.face == 2}
+                        <td><button class="btn btn-danger evre" data-id="{$vo.id}">非封面</button></td>
+                        {/if}
                         {if $vo.display == 1}
                         <td><button class="btn btn-success evr" data-id="{$vo.id}">启用</button></td>
                         {else $vo.display == 2}
                         <td><button class="btn btn-danger evr" data-id="{$vo.id}">禁用</button></td>
                         {/if}
                         <button class="btn btn-danger dell-btn" data-id="{$vo.id}">删除</button>
+
                     </div>
 
                     <!--<button class="btn btn-primary">修改</button>-->
@@ -100,8 +107,40 @@
             var obj = $(this);
             evr(uid,obj);
         });
+        //        更改封面
+        $('.evre').click(function (){
+            var uid = $(this).attr('data-id');
+            var obj = $(this);
+            evre(uid,obj);
+        });
 
     });
+    //        更改封面
+    function evre(uid,obj)
+    {
+
+        $.ajax({
+            type : 'post',
+            url : '/face/',
+            data : {uid : uid},
+            dataType : 'json',
+            success : function(data){
+                console.log(data);
+                if(data.face == 1){
+                    toastr.success(data.info);
+                    obj.removeClass('btn-danger').addClass('btn-success');
+                    obj.html('封面');
+                }else{
+                    toastr.success(data.info);
+                    obj.removeClass('btn-success').addClass('btn-danger');
+                    obj.html('非封面');
+                }
+            },
+            error:function(){
+                alert('更新失败');
+            }
+        });
+    }
     //    更改室内环境状态
     function evr(uid,obj)
     {

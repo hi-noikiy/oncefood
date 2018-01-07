@@ -1,0 +1,282 @@
+{extend name="index/index" /}
+{block name="main"}
+<div class="main">
+    <div class="container">
+        <div id="banner" class="banner">
+            {volist name="banner" id="v"}
+            <img src="/static/index/images/banner/{$v.pic}" class="img-responsive">
+            {/volist}
+            <div id="list">
+                <div class="item"></div>
+                <div class="item"></div>
+            </div>
+        </div>
+        <div class="row content">
+            <div class="col-md-3 content_top">
+                <div class="category_box">
+                    <h3 class="cate_head">条件筛选搜索</h3>
+                    <ul class="category">
+                        <li><a href="#">Arts</a></li>
+                        <li><a href="#">Beauty</a></li>
+                        <li><a href="#">Books</a></li>
+                        <li><a href="#">Cart Software</a></li>
+                        <li><a href="#">Electronics</a></li>
+                        <li><a href="#">Fashion / Clothing</a></li>
+                        <li><a href="#">Food</a></li>
+                        <li><a href="#">Furniture</a></li>
+                        <li><a href="#">Home Goods</a></li>
+                        <li><a href="#">Jewelry</a></li>
+                        <li><a href="#">Lingerie</a></li>
+                        <li><a href="#">Music</a></li>
+                        <li><a href="#">Office Supplies</a></li>
+                        <li><a href="#">Printing</a></li>
+                        <li><a href="#">Software</a></li>
+                    </ul>
+                </div>
+                <ul class="product_reviews">
+                    <h3><i class="arrow"> </i><span>好评推荐</span></h3>
+                    <li>
+                        <ul class="review1">
+                            <li class="review1_img"><img src="/static/index/images/pic1.jpg" class="img-responsive" alt=""/></li>
+                            <li class="review1_desc"><h3><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</a></h3><p>Wed, June 2014</p></li>
+                            <div class="clearfix"> </div>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="review1">
+                            <li class="review1_img"><img src="/static/index/images/pic2.jpg" class="img-responsive" alt=""/></li>
+                            <li class="review1_desc"><h3><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</a></h3><p>Wed, June 2014</p></li>
+                            <div class="clearfix"> </div>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="review1">
+                            <li class="review1_img"><img src="/static/index/images/pic3.jpg" class="img-responsive" alt=""/></li>
+                            <li class="review1_desc"><h3><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</a></h3><p>Wed, June 2014</p></li>
+                            <div class="clearfix"> </div>
+                        </ul>
+                    </li>
+                    <div class="but">
+                        <a href="#">More Reviews<i class="but_arrow"> </i></a>
+                    </div>
+                </ul>
+
+                <ul class="product_reviews">
+                    <h3><i class="arrow"> </i><span>Payment Methods</span></h3>
+                    <img src="/static/index/images/payment.png" class="img-responsive" alt=""/>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <ul class="feature">
+                    <h3><i class="arrow"> </i><span>店铺</span></h3>
+                </ul>
+                <ul class="feature_grid">
+                    {volist name="show" id="v"}
+                    {foreach $v as $vo}
+                    <a href="{:url('index/category/create',['id'=>$vo['sid']])}"><li class="grid1"><img src="/uploads/evr/{$vo.icon}" class="img-responsive" style="width: 200px; height: 150px;">
+                        <p>{$vo.comment}</p>
+                    </li></a>
+                    {/foreach}
+                    {/volist}
+                    <div class="clearfix"> </div>
+                </ul>
+                <ul class="feature">
+                    <h3><i class="arrow"> </i><span>新品推荐</span></h3>
+                </ul>
+                <div class="row content_bottom">
+                    <div class="col-md-3">
+                        <div class="content_box"><a href="single.html">
+                            <div class="view view-fifth">
+                                <img src="/static/index/images/p1.jpg" class="img-responsive" alt=""/>
+                                <div class="content_box-grid">
+                                    <p class="m_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</p>
+                                    <div class="price">Price:
+                                        <span class="actual">$12.00</span>
+                                    </div>
+                                    <ul class="product_but">
+                                        <li class="but3">Buy</li>
+                                        <li class="like"><span>120</span><i class="like1"> </i></li>
+                                        <div class="clearfix"> </div>
+                                    </ul>
+                                    <div class="mask">
+                                        <div class="info">Quick View</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="content_box"><a href="single.html">
+                            <div class="view view-fifth">
+                                <img src="/static/index/images/p4.jpg" class="img-responsive" alt=""/>
+                                <div class="content_box-grid">
+                                    <p class="m_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</p>
+                                    <div class="price">Price:
+                                        <span class="actual">$12.00</span>
+                                    </div>
+                                    <ul class="product_but">
+                                        <li class="but3">Buy</li>
+                                        <li class="like"><span>120</span><i class="like1"> </i></li>
+                                        <div class="clearfix"> </div>
+                                    </ul>
+                                    <div class="mask">
+                                        <div class="info">Quick View</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="content_box"><a href="single.html">
+                            <div class="view view-fifth">
+                                <img src="/static/index/images/p3.jpg" class="img-responsive" alt=""/>
+                                <div class="content_box-grid">
+                                    <p class="m_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</p>
+                                    <div class="price">Price:
+                                        <span class="actual">$12.00</span>
+                                    </div>
+                                    <ul class="product_but">
+                                        <li class="but3">Buy</li>
+                                        <li class="like"><span>120</span><i class="like1"> </i></li>
+                                        <div class="clearfix"> </div>
+                                    </ul>
+                                    <div class="mask">
+                                        <div class="info">Quick View</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="content_box"><a href="single.html">
+                            <div class="view view-fifth">
+                                <img src="/static/index/images/p2.jpg" class="img-responsive" alt=""/>
+                                <div class="content_box-grid">
+                                    <p class="m_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</p>
+                                    <div class="price">Price:
+                                        <span class="actual">$12.00</span>
+                                    </div>
+                                    <ul class="product_but">
+                                        <li class="but3">Buy</li>
+                                        <li class="like"><span>120</span><i class="like1"> </i></li>
+                                        <div class="clearfix"> </div>
+                                    </ul>
+                                    <div class="mask">
+                                        <div class="info">Quick View</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row content_bottom1">
+                    <div class="col-md-3">
+                        <div class="content_box"><a href="single.html">
+                            <div class="view view-fifth">
+                                <img src="/static/index/images/p8.jpg" class="img-responsive" alt=""/>
+                                <div class="content_box-grid">
+                                    <p class="m_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</p>
+                                    <div class="price">Price:
+                                        <span class="actual">$12.00</span>
+                                    </div>
+                                    <ul class="product_but">
+                                        <li class="but3">Buy</li>
+                                        <li class="like"><span>120</span><i class="like1"> </i></li>
+                                        <div class="clearfix"> </div>
+                                    </ul>
+                                    <div class="mask">
+                                        <div class="info">Quick View</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="content_box"><a href="single.html">
+                            <div class="view view-fifth">
+                                <img src="/static/index/images/p7.jpg" class="img-responsive" alt=""/>
+                                <div class="content_box-grid">
+                                    <p class="m_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</p>
+                                    <div class="price">Price:
+                                        <span class="actual">$12.00</span>
+                                    </div>
+                                    <ul class="product_but">
+                                        <li class="but3">Buy</li>
+                                        <li class="like"><span>120</span><i class="like1"> </i></li>
+                                        <div class="clearfix"> </div>
+                                    </ul>
+                                    <div class="mask">
+                                        <div class="info">Quick View</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="content_box"><a href="single.html">
+                            <div class="view view-fifth">
+                                <img src="/static/index/images/p6.jpg" class="img-responsive" alt=""/>
+                                <div class="content_box-grid">
+                                    <p class="m_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</p>
+                                    <div class="price">Price:
+                                        <span class="actual">$12.00</span>
+                                    </div>
+                                    <ul class="product_but">
+                                        <li class="but3">Buy</li>
+                                        <li class="like"><span>120</span><i class="like1"> </i></li>
+                                        <div class="clearfix"> </div>
+                                    </ul>
+                                    <div class="mask">
+                                        <div class="info">Quick View</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="content_box"><a href="single.html">
+                            <div class="view view-fifth">
+                                <img src="/static/index/images/p5.jpg" class="img-responsive" alt=""/>
+                                <div class="content_box-grid">
+                                    <p class="m_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</p>
+                                    <div class="price">Price:
+                                        <span class="actual">$12.00</span>
+                                    </div>
+                                    <ul class="product_but">
+                                        <li class="but3">Buy</li>
+                                        <li class="like"><span>120</span><i class="like1"> </i></li>
+                                        <div class="clearfix"> </div>
+                                    </ul>
+                                    <div class="mask">
+                                        <div class="info">Quick View</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+                <ul class="dc_pagination dc_paginationA dc_paginationA06">
+                    <li><a href="#">1</a></li>
+                    <li><a href="#" class="current">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">...</a></li>
+                    <li><a href="#">19</a></li>
+                    <li><a href="#">20</a></li>
+                    <li><a href="#" class="previous">Next></a></li>
+                    <li><a href="#" class="next">Last>></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

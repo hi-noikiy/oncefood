@@ -18,8 +18,10 @@ Route::get('home/login','home/login/index');
 Route::get('home/mail','home/login/mail');
 Route::get('home/top','home/login/top');
 //分类
-Route::get('category','home/Category/index');
+Route::get('category/:id','index/Category/index');
+Route::rule('create/[:id]','index/Category/create');
 
+Route::get('order','index/Category/order');
 //评论
 
 Route::get('com/:id','home/Comment/index');
@@ -37,7 +39,7 @@ Route::resource('home/comment','home/Comment');
 
 //前台商铺中心的资源路由
 Route::post('ban','home/Banner/ban');
-
+Route::post('face','home/Banner/face');
 Route::post('banner','home/Banner/updateSave');
 Route::post('delete','home/Banner/delete');
 Route::post('evrdelete','home/Banner/evrdelete');
