@@ -28,6 +28,7 @@
                                     <th>电话</th>
                                     <th>地址</th>
                                     <th>状态</th>
+                                    <th>商铺</th>
                                     <th data-sortable="false">操作</th>
                                 </tr>
                                 </thead>
@@ -44,7 +45,8 @@
                                     {else $vo.status == 2}
                                     <td><button class="btn btn-danger update" data-id="{$vo.id}">禁用</button></td>
                                     {/if}
-                                    <td><button data-modal="md-fall" class="btn btn-success show-btn  md-trigger" data-id="{$vo.id}">详细信息</button> <button data-modal="md-3d-flip-horizontal" class="btn btn-primary md-trigger edit-btn" data-id="{$vo.id}">修改</button> <button class="btn btn-danger del-btn" data-id="{$vo.id}">删除</button>
+                                    <td><a class = "md-trigger btn btn-info at-btn" data-modal = "md-rotate-from-left" href="{:url('home/Comment/at',['id' => $vo['id']])}">商铺属性</a></td>
+                                    <td> <button data-modal="md-fall" class="btn btn-success show-btn  md-trigger" data-id="{$vo.id}">详细信息</button> <button data-modal="md-3d-flip-horizontal" class="btn btn-primary md-trigger edit-btn" data-id="{$vo.id}">修改</button> <button class="btn btn-danger del-btn" data-id="{$vo.id}">删除</button>
                                         <a href="{:url('home/banner/index',['id' => $vo['id']])}" class="btn btn-info" >图片管理</a> <a href="{:url('home/banner/read',['id' => $vo['id']])}"  class="btn btn-info" >上传</a> <a href="{:url('home/banner/create',['id' => $vo['id']])}"  class="btn btn-info" >上传环境</a> <a href="{:url('home/Comment/index',['id' => $vo['id']])}"  class="btn btn-info" >商铺介绍</a></td>
                                 </tr>
                                 {/volist}
@@ -63,6 +65,8 @@
     <!-- End content here -->
     <!-- ============================================================== -->
 </div>
+
+
 <!--详细信息模态框-->
 <div class="md-modal md-fall" id="md-fall">
     <div class="md-content">
@@ -220,6 +224,8 @@
 {js href="/static/home/js/bootstrap.js"}
 {js href="/static/home/js/toastr.min.js"}
 <script>
+
+
 //执行AJAX,取一级分类;
 $(function() {
   $('.add-btn').click(function(){

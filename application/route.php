@@ -17,6 +17,9 @@ Route::post('home/log','home/login/log');
 Route::get('home/login','home/login/index');
 Route::get('home/mail','home/login/mail');
 Route::get('home/top','home/login/top');
+//分类
+Route::get('category','home/Category/index');
+
 //评论
 
 Route::get('com/:id','home/Comment/index');
@@ -25,6 +28,8 @@ Route::post('status','home/comment/triggersave');
 Route::post('message','home/comment/message');
 Route::post('msgde','home/comment/messagedelete');
 Route::post('editmessage','home/comment/editmessage');
+Route::get('at/:id','home/comment/at');
+Route::post('attr','home/comment/attr');
 
 Route::resource('home/comment','home/Comment');
 //图片的资源路由

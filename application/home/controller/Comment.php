@@ -179,4 +179,35 @@ class Comment extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * 商铺属性
+     */
+    public function  at(Request $request,$id)
+    {
+        $attr = Db::name('attr')->select();
+        return view('home@ycompany/attr',[
+            'id' => $id,
+            'attr' =>'商铺属性',
+            'shop' =>$attr
+        ]);
+
+    }
+
+    public function attr(Request $request)
+    {
+        $p = $request->post();
+//        var_dump($p);die;
+        $data = [
+            'sid' => $p['id'],
+            'aid' =>$p ['aid']
+        ];
+        $yshop_attr = Db::name('yshop_attr')->data($data)->insert();
+        if($yshop_attr > 0){
+            $this->success('添加成功','home/ycompany/index');
+        }else{
+            $this->error('添加失败');
+        }
+    }
+
 }
