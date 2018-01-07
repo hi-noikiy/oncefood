@@ -78,20 +78,21 @@
 						<hr/>
 
 						<!--头像 -->
-						<div class="user-infoPic">
-
-							<div class="filePic">
-								<img class="am-circle am-img-thumbnail" src="images/getAvatar.do.jpg" alt="" />
-								<input type="file">
-							</div>
-
-							
-						</div>
+						
 
 						<!--个人信息 -->
 						<div class="info-main">
-	<form class="am-form am-form-horizontal" method="post" action = "{:url('index/Personal/savee')}">
+	<form class="am-form am-form-horizontal" method="post" enctype= 'multipart/form-data' action = "{:url('index/Personal/savee')}">
 
+						<div class="user-infoPic">
+
+						<div class="filePic">
+							<img class="am-circle am-img-thumbnail" style="height:80px" src="/uploads/111.jpg"/>
+							<input type="file" name="icon">
+						</div>
+
+							
+						</div>
 								<div class="am-form-group">
 									<label for="user-name2" class="am-form-label">昵称</label>
 									<div class="am-form-content">
