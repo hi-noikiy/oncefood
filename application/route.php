@@ -104,7 +104,11 @@ Route::post('indexpwd','index/login/indexpwd');
  * 个人中心路由
  */
 Route::resource('personal','index/personal');
+Route::post('personalSave','index/Personal/savee');
+// 修改密码路由
 
+Route::get('pwdhtml','index/Personal/pwdhtml');
+Route::post('savepwd','index/Personal/savepwd');
 /************************************************/
 /**
  * 后台默认静态路由 wwb
@@ -170,5 +174,5 @@ Route::get('UpHot/[:id]','admin/HotShop/UpHot');
 /**
  * 空路由
  */
-Route::get(':name','admin/error/_empty', ['name' => '\w+']);
+// Route::get(':name','admin/error/_empty', ['name' => '\w+']);
 

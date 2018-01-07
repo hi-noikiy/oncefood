@@ -30,6 +30,7 @@
 
     		public function login(Request $request)
     		{
+          // 登录主页,同时将账号信息存进Session
               $info = $request->post();
               $name = $info['name'];
               $pwd = $info['pwd'];
@@ -54,6 +55,7 @@
         }
 
         public function findName(){
+          // 查找用户名在数据库中是否存在
             $name = $_GET['name'];
             $data = db('zuser')->where('name',$name)->find();
             if( $data>0 ){
