@@ -10,4 +10,10 @@ class Zuser extends Model
         $data['name'] = 'bobo888';
         return $this->save($data);
     }
+
+    public function find($id){
+
+        return $this->where('id',$id)->select();
+    }
+
 }

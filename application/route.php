@@ -105,6 +105,10 @@ Route::post('indexpwd','index/login/indexpwd');
  */
 Route::resource('personal','index/personal');
 Route::post('personalSave','index/Personal/savee');
+// 修改密码路由
+
+Route::get('pwdhtml','index/Personal/pwdhtml');
+Route::post('savepwd','index/Personal/savepwd');
 /************************************************/
 /**
  * 后台默认静态路由 wwb
