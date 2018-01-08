@@ -20,6 +20,7 @@ CKEDITOR.stylesSet.add( 'default', [
 	// so they are not needed here by default. You may enable them to avoid
 	// placing the "Format" combo in the toolbar, maintaining the same features.
 	/*
+<<<<<<< HEAD
 	{ ydemo: 'Paragraph',		element: 'p' },
 	{ ydemo: 'Heading 1',		element: 'h1' },
 	{ ydemo: 'Heading 2',		element: 'h2' },
@@ -29,6 +30,17 @@ CKEDITOR.stylesSet.add( 'default', [
 	{ ydemo: 'Heading 6',		element: 'h6' },
 	{ ydemo: 'Preformatted Text',element: 'pre' },
 	{ ydemo: 'Address',			element: 'address' },
+=======
+	{ name: 'Paragraph',		element: 'p' },
+	{ name: 'Heading 1',		element: 'h1' },
+	{ name: 'Heading 2',		element: 'h2' },
+	{ name: 'Heading 3',		element: 'h3' },
+	{ name: 'Heading 4',		element: 'h4' },
+	{ name: 'Heading 5',		element: 'h5' },
+	{ name: 'Heading 6',		element: 'h6' },
+	{ name: 'Preformatted Text',element: 'pre' },
+	{ name: 'Address',			element: 'address' },
+>>>>>>> yzw
 	*/
 
 	{ name: 'Italic Title',		element: 'h2', styles: { 'font-style': 'italic' } },
@@ -49,12 +61,21 @@ CKEDITOR.stylesSet.add( 'default', [
 	// some of them in the Styles combo, removing them from the toolbar.
 	// (This requires the "stylescombo" plugin)
 	/*
+<<<<<<< HEAD
 	{ ydemo: 'Strong',			element: 'strong', overrides: 'b' },
 	{ ydemo: 'Emphasis',			element: 'em'	, overrides: 'i' },
 	{ ydemo: 'Underline',		element: 'u' },
 	{ ydemo: 'Strikethrough',	element: 'strike' },
 	{ ydemo: 'Subscript',		element: 'sub' },
 	{ ydemo: 'Superscript',		element: 'sup' },
+=======
+	{ name: 'Strong',			element: 'strong', overrides: 'b' },
+	{ name: 'Emphasis',			element: 'em'	, overrides: 'i' },
+	{ name: 'Underline',		element: 'u' },
+	{ name: 'Strikethrough',	element: 'strike' },
+	{ name: 'Subscript',		element: 'sub' },
+	{ name: 'Superscript',		element: 'sup' },
+>>>>>>> yzw
 	*/
 
 	{ name: 'Marker',			element: 'span', attributes: { 'class': 'marker' } },

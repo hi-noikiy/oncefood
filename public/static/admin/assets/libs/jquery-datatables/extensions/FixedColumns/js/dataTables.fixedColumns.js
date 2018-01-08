@@ -1251,7 +1251,11 @@ FixedColumns.prototype = /** @lends FixedColumns.prototype */{
 
 /**
  * FixedColumns default settings for initialisation
+<<<<<<< HEAD
  *  @ydemo FixedColumns.defaults
+=======
+ *  @name FixedColumns.defaults
+>>>>>>> yzw
  *  @namespace
  *  @static
  */
@@ -1332,7 +1336,11 @@ FixedColumns.defaults = /** @lends FixedColumns.defaults */{
 
 /**
  * FixedColumns version
+<<<<<<< HEAD
  *  @ydemo      FixedColumns.version
+=======
+ *  @name      FixedColumns.version
+>>>>>>> yzw
  *  @type      String
  *  @default   See code
  *  @static
@@ -1348,7 +1356,11 @@ FixedColumns.version = "3.0.1";
 
 /**
  * Event fired whenever FixedColumns redraws the fixed columns (i.e. clones the table elements from the main DataTable). This will occur whenever the DataTable that the FixedColumns instance is attached does its own draw.
+<<<<<<< HEAD
  * @ydemo FixedColumns#draw.dtfc
+=======
+ * @name FixedColumns#draw.dtfc
+>>>>>>> yzw
  * @event
  * @param {event} e jQuery event object
  * @param {object} o Event parameters from FixedColumns

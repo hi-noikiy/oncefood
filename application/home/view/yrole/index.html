@@ -1,0 +1,235 @@
+{extend name="main/index" /}
+{block name="main"}
+
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="widget">
+                    <div class="widget-header transparent">
+                        <h2><strong>{$title}</strong></h2>
+                        <div class="additional-btn">
+                            <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                            <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                            <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+
+                        <div class="table-responsive">
+                            <table data-sortable class="table table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>角色名</th>
+                                    <th>说明</th>
+                                    <th>拥有权限</th>
+                                    <th>状态</th>
+
+                                    <th data-sortable="false">操作</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {volist name="nid" id="vo"}
+                                <tr>
+                                    <td>{$vo.id}</td>
+                                    <td>{$vo.name}</td>
+                                    <td>{$vo.remark}</td>
+                                    <td>{foreach $vo.node as $k}
+                                        {$k}{/foreach}</td>
+                                    {if $vo.status == 1}
+                                    <td><button class="btn btn-success update" data-id="{$vo.id}">启用</button></td>
+                                    {else /}
+                                    <td><button class="btn btn-danger update" data-id="{$vo.id}">禁用</button></td>
+                                    {/if}
+
+                                    <td><button class="btn btn-success">分配权限</button><button data-modal="md-3d-flip-horizontal" class="btn btn-primary md-trigger edit-btn" data-id="{$vo.id}">修改</button><button class="btn btn-danger del-btn" data-id="{$vo.id}">删除</button></td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="data-table-toolbar">
+                            <ul class="pagination">
+                                <li class="disabled"><a href="#">&laquo;</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer Start -->
+        <footer>
+            Huban Creative &copy; 2014
+            <div class="footer-links pull-right">
+                <a href="#">About</a><a href="#">Support</a><a href="#">Terms of Service</a><a href="#">Legal</a><a href="#">Help</a><a href="#">Contact Us</a>
+            </div>
+        </footer>
+        <!-- Footer End -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End content here -->
+    <!-- ============================================================== -->
+
+</div>
+<!--编辑模态框-->
+
+<div class="md-modal md-3d-flip-horizontal" id="md-3d-flip-horizontal">
+    <p><button class="btn btn-danger md-close">关闭</button></p>
+    <div class="md-content">
+        <div>
+            <div class="widget-content padding">
+
+                <form class="form-horizontal" role="form" action="{:url('home/yrole/update')}" method="post">
+                    <input type="hidden" name="id" id="id" value="">
+                    <input type="hidden" name="_method" value="PUT">
+                    <div class="form-group">
+
+                        <label for="input-text" class="col-sm-2 control-label">角色名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control save" id="input-text" placeholder="角色名" name="name" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-text-help" class="col-sm-2 control-label">说明</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control remark" id="input-text-help" placeholder="说明" name="remark" value="">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div><!-- End div .md-content -->
+
+</div>
+{js href="/static/home/js/jquery.min.js"}
+{js href="/static/home/js/bootstrap.min.js"}
+{js href="/static/home/js/toastr.min.js"}
+<script>
+
+//    删除角色
+    $(function(){
+        $('.del-btn').click(function(){
+            var de_id = $(this).attr('data-id');
+            var obj = $(this).parents('tr');
+            delAjax(de_id,obj);
+        });
+        //    修改
+        $('.edit-btn').click(function(){
+            var ed_id = $(this).attr('data-id');
+            showAjax(ed_id);
+        });
+//        更新
+        $('.update').click(function(){
+            var uid = $(this).attr('data-id');
+            var obj = $(this);
+//        console.log(uid);
+//        console.log(obj);
+//        var u = 'uid='+uid;
+            updateAjax(uid,obj);
+
+        });
+
+    });
+//    更新
+function updateAjax(uid,obj){
+    $.ajax({
+        type : 'post',
+        url : '/upda/',
+        data : {uid : uid},
+        dataType : 'json',
+        success : function(data){
+            console.log(data);
+            if(data.status == 1){
+                toastr.success(data.info);
+
+//
+                obj.removeClass('btn-danger').addClass('btn-success');
+
+                obj.html('启用');
+
+            }else{
+                toastr.success(data.info);
+                obj.removeClass('btn-success').addClass('btn-danger');
+//
+                obj.html('禁用');
+
+            }
+        },
+        error:function(){
+            alert('更新失败');
+        }
+    });
+}
+//    修改
+    function showAjax(id){
+           $.ajax({
+               type:'get',
+               url: '/home/yrole/' + id,
+               dataType: 'json',
+               success:function(data){
+                   console.log(data);
+                    if(data.status){
+                        toastr.success(data.info);
+                        $('#id').val(data.data.id);
+                        $('.save').val(data.data.name);
+                        $('.remark').val(data.data.remark);
+//                        回显单选框的值
+
+//                        $("input[name=status][value="+data.data.status+"]").attr("checked",true);
+//
+                    }else{
+                        toastr.error(data.info);
+                    }
+               },
+               error:function(){
+                   alert('执行失败');
+               }
+           });
+    }
+//    删除
+    function delAjax(id,obj){
+        $.ajax({
+            type:'delete',
+            url:'/home/yrole/' + id,
+            dataType:'json',
+            success:function(data){
+                if (data.status){
+                    toastr.success(data.info);
+                    obj.remove();
+                }else{
+                    toastr.error(data.info);
+                }
+            },
+            error:function(){
+                alert('执行失败');
+
+        }
+        });
+    }
+</script>
+
+{/block}

@@ -74,9 +74,10 @@ class role extends AdminBase
      */
     public function read($id)
     {
-        $name = Db::name('role')->field('id,ydemo')->where('id',$id)->find();
+
+        $name = Db::name('role')->field('id,name')->where('id',$id)->find();
         $nid = Db::name('role_node')->field('nid')->where('rid',$id)->group('nid')->select();
-        $node = Db::name('node')->field('id,ydemo')->where('status','1')->select();
+        $node = Db::name('node')->field('id,name')->where('status','1')->select();
 
 
         foreach ($nid as $v) {
@@ -85,7 +86,7 @@ class role extends AdminBase
 
         return view('admin@role/nodeList',[
             'title' => '分配权限',
-            'ydemo' => $name,
+            'name' => $name, 
             'nid' => $list, 
             'node' => $node
         ]);

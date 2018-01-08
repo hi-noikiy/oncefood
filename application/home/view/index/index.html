@@ -15,6 +15,8 @@
     <link href="/static/home/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/static/home/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/home/css/toastr.min.css">
+    <link rel="stylesheet" href="/static/home/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/home/css/bootstrap-theme.css">
     <!-- Font-Awesome-Icons-CSS -->
 
 </head>
@@ -27,28 +29,24 @@
         <div class="w3layouts-main">
             <h2>现在登录</h2>
             <form action="{:url('home/login/log')}" method="post">
-                <input placeholder="邮箱/手机号/用户名" name="name" id="v" type="text" required="">
+
+                <input placeholder="邮箱/手机号/用户名" name="username" id="v" type="text" required="" >
                 <span class="icons i1"></span>
-                <input placeholder="密码" name="pwd" type="password" required="">
-                <span class="icons i2"></span>text
-                <input type="submit" value="phone" class="btn">
+                <input placeholder="密码" name="pwd" id="c" type="password" required="">
+                <span class="icons i2"></span>
+                <!--<input type="submit" value="点击获取" class="btn">-->
+                <!--<a href="{:url('home/login/mail')}">发送邮件地址</a>-->
                 <input type="submit" value="登录" name="login">
             </form>
-            <h6><a href="#">忘记密码?</a></h6>
-            <h3>(or)</h3>
-            <div class="social_icons agileinfo">
-                <ul class="top-links">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                </ul>
-            </div>
+            <!--<h6><a href="#">忘记密码?</a></h6>-->
+            <!--<h3>(or)</h3>-->
         </div>
         <div class="w3layouts-main2">
             <h3>申请注册</h3>
             <form action="{:url('home/login/save')}" method="post">
-                <input placeholder="用户名" name="name" id="name" type="text" required="">
+                <input placeholder="公司名" name="name" id="name" type="text" required="">
+                <span class="icons i3"></span>
+                <input placeholder="登录名" name="username" id="username" type="text" required="">
                 <span class="icons i3"></span>
                 <input placeholder="电话" name="tel" id="tel" type="text" required="">
                 <span class="icons i4"></span>
@@ -84,31 +82,36 @@
 <script src="/static/home/js/jquery.min.js"></script>
 <script src="/static/home/js/particles.min.js"></script>
 <script src="/static/home/js/toastr.min.js"></script>
+
+<script src="/static/home/js/bootstrap.min.js"></script>
+
 <script>
-//$(function(){
-//    $('.btn').click(function(){
-//
-//        var data = $('#v').val();
-//
-//        phone(data);
-//    });
-//    function phone(data){
-//        $.ajax({
-//            type:post,
-//            url:'home/login/phone',
-//            dataType:'json',
-//            data:data,
-//            success:function(data){
+//    待修改手机短信
+$(function() {
+    $('.btn').click(function () {
+        var phone = $('#v').val();
+        alert(phone);
+        $.ajax({
+            type : 'post',
+            url : '/home/login/phone/',
+            data : {'phone': phone},
+            success : function(data){
+                console.log(data.info);
 //                alert(data);
-//            },
-//            error:function(){
-//                alert('执行失败');
-//            }
-//
-//        });
-//    }
-//
-//});
+                if (data.status){
+                    toastr.success(data.info);
+
+                }else {
+                    toastr.error(data.info,'警告')
+                }
+            },
+            error : function(data){
+//                console.log(data.info);
+//                alert(da);
+            }
+        });
+    });
+});
 // 设置弹框参数
 toastr.options = {
     closeButton: true,// 是否显示关闭按钮

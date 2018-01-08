@@ -68,7 +68,11 @@ $(function () {
             selectable: true,
             eventClick: function (calEvent, jsEvent, view) {
                 var form = $("<form></form>");
+<<<<<<< HEAD
                 form.append("<label>Change event ydemo</label>");
+=======
+                form.append("<label>Change event name</label>");
+>>>>>>> yzw
                 form.append("<div class='input-group'><input class='form-control' type=text value='" + calEvent.title + "' /><span class='input-group-btn'><button type='submit' class='btn btn-success'><i class='fa fa-check'></i> Save Changes</button></span></div>");
                 $modal.modal({
                     backdrop: 'static'
@@ -92,14 +96,23 @@ $(function () {
                 });
                 form = $("<form></form>");
                 form.append("<div class='row'></div>");
+<<<<<<< HEAD
                 form.find(".row").append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Event Name</label><input class='form-control' placeholder='Insert Event Name' type='text' ydemo='title'/></div></div>").append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Category</label><select class='form-control' ydemo='category'></select></div></div>").find("select[ydemo='category']").append("<option value='bg-red'>Work</option>")
+=======
+                form.find(".row").append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Event Name</label><input class='form-control' placeholder='Insert Event Name' type='text' name='title'/></div></div>").append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Category</label><select class='form-control' name='category'></select></div></div>").find("select[name='category']").append("<option value='bg-red'>Work</option>")
+>>>>>>> yzw
                     .append("<option value='bg-green-1'>Entertainment</option>").append("<option value='bg-pink-1'>Meeting</option>").append("<option value='bg-lightblue-1'>Lunch</option>").append("<option value='bg-red-1'>Work</option>").append("<option value='bg-blue-1'>Sport</option>");
                 $modal.find('.delete-event').hide().end().find('.save-event').show().end().find('.modal-body').empty().prepend(form).end().find('.save-event').unbind('click').click(function () {
                     form.submit();
                 });
                 $modal.find('form').on('submit', function () {
+<<<<<<< HEAD
                     title = form.find("input[ydemo='title']").val();
                     $categoryClass = form.find("select[ydemo='category'] option:checked").val();
+=======
+                    title = form.find("input[name='title']").val();
+                    $categoryClass = form.find("select[name='category'] option:checked").val();
+>>>>>>> yzw
                     if (title !== null && title.length != 0) {
                         calendar.fullCalendar('renderEvent', {
                             title: title,

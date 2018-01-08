@@ -1,0 +1,142 @@
+{extend name="main/index" /}
+{block name="main"}
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <!-- Page Heading Start -->
+        <div class="page-heading">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget">
+                        <div class="widget-header transparent">
+                            <h2><strong>{$title}</strong></h2>
+                            <div class="additional-btn">
+                                <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                                <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                                <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                            </div>
+                        </div>
+                        <div class="widget-content">
+                            <div class="table-responsive">
+                                <table data-sortable class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>公司名</th>
+                                        <th>店铺名称</th>
+                                        <th>店铺地址</th>
+                                        <th>联系方式</th>
+                                        <th>创建时间</th>
+                                        <th>商圈位置</th>
+                                        <th>状态</th>
+                                        <th>热门</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {volist name="list" id="v"}
+                                    <tr>
+                                        <td>{$v.id}</td>
+                                        <td><strong>{$v.cname}</strong></td>
+                                        <td>{$v.name}</td>
+                                        <td>{$v.address}</td>
+                                        <td>{$v.tel}</td>
+                                        <td>{$v.datetime}</td>
+                                        <td>{$v.area}</td>
+                                        {if condition="$v.status == 1"}
+                                        <td><button class="label label-info update" data-id="{$v.id}">可下线</button></td>
+                                        {else/}
+                                        <td><button class="label label-default update" data-id="{$v.id}">待上线</button></td>
+                                        {/if}
+                                        {if condition="$v.hot == 1"}
+                                        <td><button class="label label-default hot" data-id="{$v.id}">上热门</button></td>
+                                        {else/}
+                                        <td><button class="label label-info hot" data-id="{$v.id}">下热门</button></td>
+                                        {/if}
+                                    </tr>
+                                    {/volist}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {$list->render()}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/admin/assets/js/jquery.min.js"></script>
+<script src="/static/admin/assets/js/toastr.min.js"></script>
+<script>
+// 审核上线
+$(function() {
+  $('.update').click(function(){
+        var id = $(this).attr('data-id');
+        var obj = $(this);
+        upAjax(id,obj);
+  });
+});
+
+// 执行AJAX
+function upAjax(id,obj) {
+    $.ajax({
+        type: 'put',
+        url: '/Shops/' + id,
+        dataType : 'json',
+        success : function (data){
+            console.log(data);
+            if (data.status == 1) {
+                toastr.success(data.info);
+                obj.removeClass('label-default').addClass('label-info').html('可下线');
+            }else{
+                toastr.success(data.info);
+                obj.removeClass('label-info').addClass('label-default').html('待上线');
+            }
+           
+        },
+        error : function () {
+            alert('AJAX执行失败!');
+        }
+    });
+}
+
+// 上热门
+$(function() {
+  $('.hot').click(function(){
+        var id = $(this).attr('data-id');
+        var obj = $(this);
+        hotAjax(id,obj);
+  });
+});
+
+// 执行AJAX上热门
+function hotAjax(id,obj) {
+    $.ajax({
+        type: 'get',
+        url: '/GoHot/' + id,
+        dataType : 'json',
+        success : function (data){
+            console.log(data);
+            if (data.status == 2) {
+                toastr.success(data.info);
+            }else{
+                if (data.hot == 1) {
+                    toastr.success(data.info);
+                    obj.removeClass('label-info').addClass('label-default').html('上热门');
+                }else{
+                    toastr.success(data.info);
+                    obj.removeClass('label-default').addClass('label-info').html('下热门');
+                }
+            }
+
+        },
+        error : function () {
+            alert('AJAX执行失败!');
+        }
+    });
+}
+</script>
+{/block}

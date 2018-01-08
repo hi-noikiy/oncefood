@@ -64,7 +64,11 @@ $(function(){
         tooltipFormatFieldlistKey: 'field'
     });
 
+<<<<<<< HEAD
     // click event ydemo sparkline
+=======
+    // click event demo sparkline
+>>>>>>> yzw
     $('.clickdemo').sparkline();
     $('.clickdemo').bind('sparklineClick', function(ev) {
         var sparkline = ev.sparklines[0],

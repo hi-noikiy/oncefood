@@ -1,0 +1,102 @@
+{extend name="main/index" /}
+{block name="main"}
+<!-- Start right content -->
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <!-- Page Heading Start -->
+        <div class="page-heading">
+
+            <!-- Page Heading End-->                <!-- Your awesome content goes here -->
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="widget">
+                        <div class="widget-header transparent">
+                            <h2><strong>热门编辑</strong></h2>
+                            <div class="additional-btn">
+                                <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                                <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                                <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                            </div>
+                        </div>
+                        <div class="widget-content">
+                            <div class="table-responsive">
+                                <table data-sortable class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>封面</th>
+                                        <th>公司名称</th>
+                                        <th>描述</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {volist name="list" id="v"}
+                                    <tr>
+                                        <td>{$v.bid}</td>
+                                        <td><img src="/uploads/evr/{$v.icon}" style="width: 80px; height: 80px;"></td>
+                                        <td>{$v.name}</td>
+                                        <td>{$v.comment}</td>
+                                        {if condition="$v.status == 1"}
+                                        <td><button class="label label-info update" data-id="{$v.bid}">可下线</button></td>
+                                        {else/}
+                                        <td><button class="label label-default update" data-id="{$v.bid}">待上线</button></td>
+                                        {/if}
+                                        <td>
+                                             <a href="{:url('admin/HotShop/edit',['id'=> $v['id']])}">设置封面</a>
+                                        </td>
+                                    </tr>
+                                    {/volist}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {$list->render()}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/admin/assets/js/jquery.min.js"></script>
+<script src="/static/admin/assets/js/toastr.min.js"></script>
+<script>
+// 审核上线
+$(function() {
+  $('.update').click(function(){
+        var id = $(this).attr('data-id');
+        var obj = $(this);
+        upAjax(id,obj);
+  });
+});
+
+// 执行AJAX
+function upAjax(id,obj) {
+    $.ajax({
+        type: 'get',
+        url: '/UpHot/' + id,
+        dataType : 'json',
+        success : function (data){
+            console.log(data);
+            if (data.status == 1) {
+                toastr.success(data.info);
+                obj.removeClass('label-default').addClass('label-info').html('可下线');
+            }else{
+                toastr.success(data.info);
+                obj.removeClass('label-info').addClass('label-default').html('待上线');
+            }
+           
+        },
+        error : function () {
+            alert('AJAX执行失败!');
+        }
+    });
+}
+</script>
+{/block}

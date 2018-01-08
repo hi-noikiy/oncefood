@@ -1,0 +1,40 @@
+{extend name="main/index" /}
+{block name="main"}
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <!-- Page Heading Start -->
+        <div class="page-heading">
+            <h1><i class='fa fa-magic'></i> Form Uploads</h1>
+            <h3>{$banner}{$banners}</h3>            	</div>
+        <!-- Page Heading End-->
+        <div class="row">
+            <div class="col-md-12 portlets">
+                <!-- Your awesome content goes here -->
+                <div class="widget">
+                    <form action="{:url('home/banner/save')}" enctype="multipart/form-data" method="post">
+                    <input type="hidden" name="id" value="{$banners}">
+                    选择文件 <input type="file" name="image" class="btn-block btn-success"/> <br>
+                    <button class="btn btn-info">提交</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <!-- Footer Start -->
+        <footer>
+            Huban Creative &copy; 2014
+            <div class="footer-links pull-right">
+                <a href="#">About</a><a href="#">Support</a><a href="#">Terms of Service</a><a href="#">Legal</a><a href="#">Help</a><a href="#">Contact Us</a>
+            </div>
+        </footer>
+        <!-- Footer End -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End content here -->
+    <!-- ============================================================== -->
+
+</div>
+{/block}

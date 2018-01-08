@@ -92,7 +92,11 @@ These options are default:
     checkedCheckboxClass: '',
     checkedRadioClass: '',
 
+<<<<<<< HEAD
   demo
+=======
+  // if not empty, added as class name on unchecked state (input.checked = false)
+>>>>>>> yzw
   uncheckedClass: '',
 
     // if not empty, used instead of 'uncheckedClass' option (input type specific)
@@ -106,7 +110,11 @@ These options are default:
     disabledCheckboxClass: '',
     disabledRadioClass: '',
 
+<<<<<<< HEAD
   demo
+=======
+  // if not empty, added as class name on enabled state (input.disabled = false)
+>>>>>>> yzw
   enabledClass: '',
 
     // if not empty, used instead of 'enabledClass' option (input type specific)
@@ -120,7 +128,11 @@ These options are default:
     indeterminateCheckboxClass: '',
     indeterminateRadioClass: '',
 
+<<<<<<< HEAD
   demo
+=======
+  // if not empty, added as class name on determinate state (input.indeterminate = false)
+>>>>>>> yzw
   determinateClass: '',
 
     // if not empty, used instead of 'determinateClass' option (input type specific)
@@ -148,7 +160,11 @@ These options are default:
   // true to set 'pointer' CSS cursor over enabled inputs and 'default' over disabled
   cursor: false,
 
+<<<<<<< HEAD
   demo
+=======
+  // set true to inherit original input's class name
+>>>>>>> yzw
   inheritClass: false,
 
   // if set to true, input's id is prefixed with 'iCheck-' and attached

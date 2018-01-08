@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>商家首页</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/category/css/reset.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/static/category/css/layout.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/static/category/css/style.css" type="text/css" media="all">
+    <script type="text/javascript" src="/static/category/js/jquery-1.6.js" ></script>
+    <!--写所有东西都变成英文-->
+    <!--<script type="text/javascript" src="/static/category/js/cufon-yui.js"></script>-->
+    <script type="text/javascript" src="/static/category/js/cufon-replace.js"></script>
+    <script type="text/javascript" src="/static/category/js/Forum_400.font.js"></script>
+    <script type="text/javascript" src="/static/category/js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="/static/category/js/tms-0.3.js"></script>
+    <script type="text/javascript" src="/static/category/js/tms_presets.js"></script>
+    <script type="text/javascript" src="/static/category/js/script.js"></script>
+    <script type="text/javascript" src="/static/category/js/atooltip.jquery.js"></script>
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/static/category/js/html5.js"></script>
+    <style type="text/css">
+        .slider_bg {behavior:url(js/PIE.htc)}
+    </style>
+    <![endif]-->
+    <!--[if lt IE 7]>
+    <div style='clear:both;text-align:center;position:relative'>
+        <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" alt="" /></a>
+    </div>
+    <![endif]-->
+</head>
+<body id="page1">
+<div class="body6">
+    <div class="body1">
+        <div class="body5">
+            <div class="main">
+                <!-- header -->
+                <header>
+                    <h1><a href="#"><img src="/static/index/images/logo1.png" alt=""></a></h1>
+                    <nav>
+                        <ul id="top_nav">
+                            <li><a href="#"><img src="/static/category/images/icon_1.gif" alt=""></a></li>
+                            <li><a href="#"><img src="/static/category/images/icon_2.gif" alt=""></a></li>
+                            <li class="end"><a href="#"><img src="/static/category/images/icon_3.gif" alt=""></a></li>
+                        </ul>
+                    </nav>
+                    <nav>
+                        <ul id="menu">
+                            <!--<li><a href="create">首页</a></li>-->
+                            <li><a href="Cuisine.html">菜单</a></li>
+                            <li><a href="{:url('index/category/order')}">预定</a></li>
+                            <!--<li><a href="CookBook.html">CookBook</a></li>-->
+                            <!--<li><a href="Contacts.html">Contacts</a></li>-->
+                        </ul>
+                    </nav>
+
+                </header>
+                {block name="main"}
+                <!-- 中间部分 -->
+                <!-- content -->
+                <article id="content">
+                    <div class="slider_bg">
+                        <div class="slider">
+                            <ul class="items">
+                                <ul class="items">
+                                    {volist name="ban" id="vo"}
+                                    <li>
+                                        <img style="width: 100%;height: 100%;" src="/uploads/banner/{$vo.icon}" alt="">
+                                        <!--<div class="banner">-->
+
+                                        <!--</div>-->
+                                    </li>
+                                    {/volist}
+                                </ul>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="wrap">
+                        {volist name="sh" id="v"}
+                        <section class="cols pad_left1">
+                            <div class="box">
+
+                                <div>
+                                    <figure><img style="width: 200px;height: 200px;" src="/uploads/evr/{$v.icon}" alt="" ></figure></figure>
+                                    <p class="pad_bot1">{$v.comment}</p>
+                                </div>
+
+                            </div>
+                        </section>
+                        {/volist}
+                    </div>
+                </article>
+                {/block}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- 尾部 -->
+<div class="body3">
+    <div class="body4">
+        <div class="main">
+
+
+            <!-- footer -->
+            <footer>
+                <div class="wrapper">
+                    <section class="col1 pad_left1">
+                        <h3>Toll Free: <span>1-800 123 45 67</span></h3>
+
+                    </section>
+                    <section class="col2 pad_left1">
+
+                    </section>
+                </div>
+                <!-- {%FOOTER_LINK} -->
+            </footer>
+            <!-- / footer -->
+        </div>
+    </div>
+</div>
+<script type="text/javascript"> Cufon.now(); </script>
+</body>
+</html>

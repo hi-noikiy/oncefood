@@ -1,5 +1,4 @@
 <?php
-
 namespace app\admin\controller;
 
 use think\Controller;
@@ -54,6 +53,9 @@ class AdminBase extends controller
     public function _empty(Request $request)
     {
         $a = $request->action();
-        return ' 您当前访问的: ' . $a . '页面不存在~';
+        // $a = $request->action();
+        // return ' 您当前访问的: ' . $a . '页面不存在~';
+        return view('admin@Error/404');
+
     }
 }

@@ -18,7 +18,12 @@
     "require": {
         "php": ">=5.4.0",
         "topthink/framework": "~5.0.0",
+<<<<<<< HEAD
         "topthink/think-captcha": "1.*"
+=======
+        "topthink/think-captcha": "1.*",
+        "kuange/qqconnect": "^0.0.1"
+>>>>>>> yzw
     },
     "autoload": {
         "psr-4": {

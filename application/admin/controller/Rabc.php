@@ -15,7 +15,7 @@ class Rabc extends AdminBase
     public function index()
     {
 
-        $sql = " select a.id,a.username,a.ydemo,group_concat(c.ydemo) as role
+        $sql = " select a.id,a.username,a.name,group_concat(c.name) as role
         from lamp_user a,lamp_user_role b,lamp_role c
         where a.id = b.uid and b.rid = c.id
         group by a.id;";
@@ -75,8 +75,9 @@ class Rabc extends AdminBase
      */
     public function read($id)
     {
-        $name = Db::name('user')->field('id,ydemo')->find($id);
-        $role = Db::name('role')->field('id,ydemo')->where('status','1')->select();
+
+        $name = Db::name('user')->field('id,name')->find($id);
+        $role = Db::name('role')->field('id,name')->where('status','1')->select();
         $rid = Db::name('user_role')->field('rid')->where('uid',$id)->select();
         
         foreach ($rid as $v) {
@@ -86,7 +87,8 @@ class Rabc extends AdminBase
 
         return view('admin@Rabc/rolelist',[
             'title' => '角色列表', 
-            'ydemo' => $name,
+
+            'name' => $name,
             'role' => $role,
             'rid' => $list
         ]);
@@ -164,6 +166,7 @@ class Rabc extends AdminBase
      */
     public function delete($id)
     {
+
         // 先判断有没有表关联
         $uid = Db::name('user_role')->where('uid',$id)->select();
 

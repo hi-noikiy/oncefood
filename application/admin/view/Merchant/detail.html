@@ -1,0 +1,55 @@
+{extend name="main/index" /}
+{block name="main"}
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <!-- Page Heading Start -->
+        <div class="page-heading">
+
+            <!-- Page Heading End-->                <!-- Your awesome content goes here -->
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="widget">
+                        <div class="widget-header transparent">
+                            <h2><strong>{$title}</strong></h2>
+                            <div class="additional-btn">
+                                <a href="{:url('admin/Merchant/index')}" class="btn btn-warning">返回列表</a>
+                            </div>
+                        </div>
+                        <div class="widget-content">
+                            <div class="table-responsive">
+                                <table data-sortable class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>店铺名称</th>
+                                        <th>qq号</th>
+                                        <th>邮箱</th>
+                                        <th>店铺</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {volist name="list" id="v"}
+                                    <tr>
+                                        <td>{$v.id}</td>
+                                        <td>{$v.name}</td>
+                                        <td>{$v.qq}</td>
+                                        <td>{$v.email}</td>
+                                        <td>{$v.sname}</td>
+                                    </tr>
+                                    {/volist}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

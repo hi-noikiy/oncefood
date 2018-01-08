@@ -945,7 +945,11 @@ Scroller.prototype = /** @lends Scroller.prototype */{
 /**
  * Scroller default settings for initialisation
  *  @namespace
+<<<<<<< HEAD
  *  @ydemo Scroller.defaults
+=======
+ *  @name Scroller.defaults
+>>>>>>> yzw
  *  @static
  */
 Scroller.defaults = /** @lends Scroller.defaults */{
@@ -1083,7 +1087,11 @@ Scroller.oDefaults = Scroller.defaults;
  * Scroller version
  *  @type      String
  *  @default   See code
+<<<<<<< HEAD
  *  @ydemo      Scroller.version
+=======
+ *  @name      Scroller.version
+>>>>>>> yzw
  *  @static
  */
 Scroller.version = "1.2.1";

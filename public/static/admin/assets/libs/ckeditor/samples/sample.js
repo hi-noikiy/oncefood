@@ -24,7 +24,11 @@
 			if ( missing.length ) {
 				var warn = CKEDITOR.dom.element.createFromHtml(
 					'<div class="warning">' +
+<<<<<<< HEAD
 						'<span>To fully experience this ydemo, the ' + missing.join( ', ' ) + ' plugin' + ( missing.length > 1 ? 's are' : ' is' ) + ' required.</span>' +
+=======
+						'<span>To fully experience this demo, the ' + missing.join( ', ' ) + ' plugin' + ( missing.length > 1 ? 's are' : ' is' ) + ' required.</span>' +
+>>>>>>> yzw
 					'</div>'
 				);
 				warn.insertBefore( editor.container );

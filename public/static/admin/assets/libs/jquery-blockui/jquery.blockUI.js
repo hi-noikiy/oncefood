@@ -235,7 +235,11 @@
 			// don't ask; if you really must know: http://groups.google.com/group/jquery-en/browse_thread/thread/36640a8730503595/2f6a79a77a78e493#2f6a79a77a78e493
 			quirksmodeOffsetHack: 4,
 
+<<<<<<< HEAD
 			// class ydemo of the message block
+=======
+			// class name of the message block
+>>>>>>> yzw
 			blockMsgClass: 'blockMsg',
 
 			// if it is already blocked, then ignore it (don't unblock and reblock)

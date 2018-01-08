@@ -1,0 +1,289 @@
+{extend name="main/index" /}
+{block name="main"}
+<!--<script src="/static/home/js/tinymce.min.js"></script>-->
+<script src="http://cdn.bootcss.com/tinymce/4.4.3/tinymce.min.js"></script>
+<script>tinymce.init({ selector:'textarea' });</script>
+<div class="content-page">
+    <!-- ============================================================== -->
+    <!-- Start Content here -->
+    <!-- ============================================================== -->
+    <div class="content">
+        <!-- Page Heading Start -->
+        <div class="page-heading">
+            <h1><i class='fa fa-envelope'></i> {$title}</h1>
+        </div>
+        <!-- Page Heading End-->
+        <!-- Your awesome content goes here -->
+        <div class="box-info box-messages animated fadeInDown">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="widget">
+                        <div class="widget-header transparent">
+                            <h2><strong>商户{$sid}</strong></h2>
+                            <div class="additional-btn">
+                                <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                                <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                                <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                            </div>
+
+                        </div>
+                        <div class="widget-content">
+                            <div class="table-responsive">
+                                <table data-sortable class="table table-hover table-striped" style="table-layout: fixed;">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>简介</th>
+                                        <th>状态</th>
+                                        <th data-sortable="false">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {volist name="com" id="vo"}
+                                    <tr>
+                                        <td>{$vo.id}</td>
+                                        <td style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{$vo.comment}</td>
+                                        {if $vo.display == 1}<td><button class="btn btn-success sta" data-id="{$vo.id}">启用</button></td>{else $vo.display == 2}<td><button class="btn btn-danger sta" data-id="{$vo.id}">禁用</button></td>{/if}<td><button data-modal="md-fall" class="btn btn-success show-btn  md-trigger" data-id="{$vo.id}">详细信息</button>  <button data-modal="md-3d-flip-horizontal" class="btn btn-primary md-trigger edit-btn" data-id="{$vo.id}">修改</button> <button class="btn btn-danger del-btn" data-id="{$vo.id}">删除</button></td>
+
+                                    </tr>
+                                    {/volist}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget">
+
+                        <div class="widget-content">
+                            <!--<form action="" id="co">-->
+
+                            <textarea  id="comment">填写你的介绍</textarea>
+                            <button class="btn btn-info co" data-id="{$sid}">发送 </button>
+                            <!--</form>-->
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- End of your awesome content -->
+
+
+
+        <!-- Footer Start -->
+        <footer>
+            Huban Creative &copy; 2014
+            <div class="footer-links pull-right">
+                <a href="#">About</a><a href="#">Support</a><a href="#">Terms of Service</a><a href="#">Legal</a><a href="#">Help</a><a href="#">Contact Us</a>
+            </div>
+        </footer>
+        <!-- Footer End -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End content here -->
+    <!-- ============================================================== -->
+
+</div>
+<!--详细信息-->
+<div class="md-modal md-fall" id="md-fall">
+    <div class="md-content">
+        <button class="btn btn-danger md-close">关闭</button>
+        <table data-sortable class="table table-hover table-striped">
+            <thead>
+            <h3 id="h" style="color: red"></h3>
+            </thead>
+            <tr>
+                <th class="col-md-1">简介:</th>
+                <td id="s1" style="overflow: scroll"></td>
+            </tr>
+
+        </table>
+
+    </div><!-- End div .md-content -->
+</div><!-- End div .md-modal .md-fall -->
+<!--编辑模态框-->
+<div class="md-modal md-3d-flip-horizontal" id="md-3d-flip-horizontal">
+    <div class="md-content">
+        <div>
+            <div class="widget-content padding">
+                <h3> <button class="btn btn-danger md-close">关闭</button></h3>
+                <form class="form-horizontal" role="form" action="{:url('home/Comment/update')}" method="post">
+                    <input type="hidden" name="id" id="id" value="">
+                    <input type="hidden" name="_method" value="PUT">
+                    <div class="form-group">
+                        <label for="input-text-help" class="col-sm-2 control-label">简介</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control name" id="input-text-help" placeholder="简介" name="comment" value="">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div><!-- End div .md-content -->
+</div>
+{js href="/static/home/js/jquery.min.js"}
+{js href="/static/home/js/bootstrap.js"}
+{js href="/static/home/js/toastr.min.js"}
+<script>
+    $(function(){
+        $('.co').click(function(){
+            var obj = tinymce.get('comment').getContent();
+//            var id = $('#id').val();
+            var id = $(this).attr('data-id');
+            comment(obj,id);
+        });
+//        更改状态
+        $('.sta').click(function(){
+            var id = $(this).attr('data-id');
+            var obj = $(this);
+            upAjax(id,obj);
+        });
+//        展示详细信息
+        $('.show-btn').click(function(){
+            var id = $(this).attr('data-id');
+            showAjax(id);
+        });
+        //        删除详细信息
+        $('.del-btn').click(function(){
+            var id = $(this).attr('data-id');
+            var obj = $(this).parents('tr');
+            deleteAjax(id,obj);
+        });
+//        修改
+        $('.edit-btn').click(function(){
+            var id = $(this).attr('data-id');
+                console.log(id);
+            editAjax(id);
+        });
+    });
+//    编辑信息
+    function editAjax(id)
+    {
+        $.ajax({
+            type: 'post',
+            url: '/editmessage/',
+            data:{id: id},
+            dataType : 'json',
+            success : function(data){
+                console.log(data);
+                if (data.status){
+                    toastr.success(data.info);
+                    $('#id').val(data.data.id);
+                    $('.name').val(data.data.comment);
+
+                }else {
+                    toastr.error(data.info);
+                }
+            },
+            error : function(){
+                alert('执行失败');
+            }
+        });
+    }
+//    删除详细信息
+    function deleteAjax(id,obj){
+        $.ajax({
+            type : 'post',
+            url : '/msgde/',
+
+            data : {id : id},
+            dataType : 'json',
+            success : function(data){
+                if (data.status){
+                    toastr.success(data.info);
+                    obj.remove();
+                }else{
+                    toastr.error(data.info);
+                }
+            },
+            error : function(){
+                alert('执行失败')
+            }
+        });
+//        ajax请求时间过长用它刷新
+//        window.location.reload(true);
+    }
+//    展示详细信息
+    function showAjax(id) {
+        $.ajax({
+            type : 'post',
+            url : '/message/',
+            data : {id : id},
+            dataType : 'json',
+            success : function(data){
+                console.log(data);
+                if(data.status){
+                    toastr.success(data.info);
+                    $('#s1').html(data.datas);
+                }else{
+                    toastr.success(data.info);
+                }
+            },
+            error:function(){
+                toastr.warning('动作失败');
+            }
+        });
+//        window.location.reload(true);
+    }
+//    更改状态
+    function upAjax(id,obj)
+    {
+        $.ajax({
+            type : 'post',
+            url : '/status/',
+            data : {id : id},
+            dataType : 'json',
+            success : function(data){
+                console.log(data);
+                if(data.display == 1){
+                    toastr.success(data.info);
+                    obj.removeClass('btn-danger').addClass('btn-success');
+                    obj.html('启用');
+                }else{
+                    toastr.success(data.info);
+                    obj.removeClass('btn-success').addClass('btn-danger');
+                    obj.html('禁用');
+                }
+            },
+            error:function(){
+                toastr.warning('动作失败');
+            }
+        });
+    }
+//    提交介绍
+    function comment(obj,id)
+    {
+        $.ajax({
+            type : 'post',
+            url : '/commit/',
+            data : {'obj':obj,'id':id},
+            dataType : 'json',
+            success:function (data) {
+                if(data.status){
+                    toastr.success(data.info);
+                }else{
+                    toastr.error(data.info);
+                }
+
+            },
+            error:function () {
+                toastr.warning('执行失败');
+            }
+
+        });
+        window.location.reload(true);
+    }
+</script>
+{/block}

@@ -234,7 +234,11 @@
 
         $.extend(defaults, options);
 
+<<<<<<< HEAD
         // Sets targets to element based on the ydemo or ID passed if they are not currently objects
+=======
+        // Sets targets to element based on the name or ID passed if they are not currently objects
+>>>>>>> yzw
         if (typeof defaults.target === 'string' || !(defaults.target instanceof jQuery)) {
             defaults.target = $(defaults.target);
         }

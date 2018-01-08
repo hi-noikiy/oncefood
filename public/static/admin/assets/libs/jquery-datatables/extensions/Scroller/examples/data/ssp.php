@@ -25,7 +25,11 @@ $table = 'massive';
 $primaryKey = 'id';
 
 // Array of database columns which should be read and sent back to DataTables.
+<<<<<<< HEAD
 // The `db` parameter represents the column ydemo in the database, while the `dt`
+=======
+// The `db` parameter represents the column name in the database, while the `dt`
+>>>>>>> yzw
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
 $columns = array(

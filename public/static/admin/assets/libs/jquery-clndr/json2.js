@@ -471,7 +471,11 @@ if (typeof JSON !== 'object') {
                 j = eval('(' + text + ')');
 
 // In the optional fourth stage, we recursively walk the new structure, passing
+<<<<<<< HEAD
 // each ydemo/value pair to a reviver function for possible transformation.
+=======
+// each name/value pair to a reviver function for possible transformation.
+>>>>>>> yzw
 
                 return typeof reviver === 'function'
                     ? walk({'': j}, '')

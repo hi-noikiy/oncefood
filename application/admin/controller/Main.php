@@ -60,7 +60,35 @@ class Main extends controller
      */
     public function index()
     {
-        return view('admin@main/index');
+
+        if (Session::get('UserJur')) {
+            return view('admin@main/index');
+        }else{
+            return view('admin@login/login');
+        }
+    }
+
+    public function getMsg()
+    {   
+        $code = randCode();
+
+        $result = sendTemplateSMS('15021343181',array($code,5),"1");
+        
+        if ($result) {
+            $data['status'] = true;
+
+            return json($data);
+        }
+        
+    }
+
+    public function getEmail()
+    {
+        $result = sendMail();
+        if ($result['status'] == 'true') {
+            return $this->success('邮件发送成功',url('admin/index/index'));
+        }
+            return $this->error('发送失败');
     }
 
 }

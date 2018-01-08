@@ -123,7 +123,11 @@
         // - submitted: The live validating is enabled after the form is submitted
         live: 'enabled',
 
+<<<<<<< HEAD
         // Map the field ydemo with validator rules
+=======
+        // Map the field name with validator rules
+>>>>>>> yzw
         fields: null
     };
 
@@ -150,7 +154,11 @@
                     }
                 },
                 validator,
+<<<<<<< HEAD
                 v,          // Validator ydemo
+=======
+                v,          // Validator name
+>>>>>>> yzw
                 enabled,
                 optionName,
                 optionValue,
@@ -171,8 +179,13 @@
 					// The user just click the submit button
 					that._submitIfValid = true;
                 })
+<<<<<<< HEAD
                 // Find all fields which have either "ydemo" or "data-bv-field" attribute
                 .find('[ydemo], [data-bv-field]')
+=======
+                // Find all fields which have either "name" or "data-bv-field" attribute
+                .find('[name], [data-bv-field]')
+>>>>>>> yzw
                     .each(function() {
                         var $field = $(this);
                         if (that._isExcluded($field)) {
@@ -245,7 +258,11 @@
         /**
          * Init field
          *
+<<<<<<< HEAD
          * @param {String} field The field ydemo
+=======
+         * @param {String} field The field name
+>>>>>>> yzw
          */
         _initField: function(field) {
             if (this.options.fields[field] == null || this.options.fields[field].validators == null) {
@@ -438,6 +455,7 @@
         // --- Public methods ---
 
         /**
+<<<<<<< HEAD
          * Retrieve the field elements by given ydemo
          *
          * @param {String} field The field ydemo
@@ -445,6 +463,15 @@
          */
         getFieldElements: function(field) {
             var fields = this.options.fields[field].selector ? $(this.options.fields[field].selector) : this.$form.find('[ydemo="' + field + '"]');
+=======
+         * Retrieve the field elements by given name
+         *
+         * @param {String} field The field name
+         * @returns {null|jQuery[]}
+         */
+        getFieldElements: function(field) {
+            var fields = this.options.fields[field].selector ? $(this.options.fields[field].selector) : this.$form.find('[name="' + field + '"]');
+>>>>>>> yzw
             return (fields.length == 0) ? null : fields;
         },
 
@@ -534,7 +561,11 @@
         /**
          * Validate given field
          *
+<<<<<<< HEAD
          * @param {String} field The field ydemo
+=======
+         * @param {String} field The field name
+>>>>>>> yzw
          * @returns {BootstrapValidator}
          */
         validateField: function(field) {
@@ -553,7 +584,11 @@
          * Validate field element
          *
          * @param {jQuery} $field The field element
+<<<<<<< HEAD
          * @param {Boolean} updateAll If true, update status of all elements which have the same ydemo
+=======
+         * @param {Boolean} updateAll If true, update status of all elements which have the same name
+>>>>>>> yzw
          * @returns {BootstrapValidator}
          */
         validateFieldElement: function($field, updateAll) {
@@ -587,7 +622,11 @@
                     $field.data('bv.dfs.' + validatorName, validateResult);
 
                     validateResult.done(function($f, v, isValid) {
+<<<<<<< HEAD
                         // v is validator ydemo
+=======
+                        // v is validator name
+>>>>>>> yzw
                         $f.removeData('bv.dfs.' + v);
                         updateAll ? that.updateStatus($f.attr('data-bv-field'), isValid ? that.STATUS_VALID : that.STATUS_INVALID, v)
                                   : that.updateElementStatus($f, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
@@ -607,11 +646,19 @@
         },
 
         /**
+<<<<<<< HEAD
          * Update all validating results of elements which have the same field ydemo
          *
          * @param {String} field The field ydemo
          * @param {String} status The status. Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
          * @param {String} [validatorName] The validator ydemo. If null, the method updates validity result for all validators
+=======
+         * Update all validating results of elements which have the same field name
+         *
+         * @param {String} field The field name
+         * @param {String} status The status. Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
+         * @param {String} [validatorName] The validator name. If null, the method updates validity result for all validators
+>>>>>>> yzw
          * @returns {BootstrapValidator}
          */
         updateStatus: function(field, status, validatorName) {
@@ -631,7 +678,11 @@
          *
          * @param {jQuery} $field The field element
          * @param {String} status The status. Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
+<<<<<<< HEAD
          * @param {String} [validatorName] The validator ydemo. If null, the method updates validity result for all validators
+=======
+         * @param {String} [validatorName] The validator name. If null, the method updates validity result for all validators
+>>>>>>> yzw
          * @returns {BootstrapValidator}
          */
         updateElementStatus: function($field, status, validatorName) {
@@ -827,7 +878,11 @@
         /**
          * Enable/Disable all validators to given field
          *
+<<<<<<< HEAD
          * @param {String} field The field ydemo
+=======
+         * @param {String} field The field name
+>>>>>>> yzw
          * @param {Boolean} enabled Enable/Disable field validators
          * @returns {BootstrapValidator}
          */
@@ -1464,7 +1519,11 @@
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options Consists of the following key:
+<<<<<<< HEAD
          * - field: The ydemo of field that will be used to compare with current one
+=======
+         * - field: The name of field that will be used to compare with current one
+>>>>>>> yzw
          * - message: The invalid message
          * @returns {Boolean}
          */
@@ -2664,7 +2723,11 @@
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options Consists of the following key:
+<<<<<<< HEAD
          * - field: The ydemo of field that will be used to compare with current one
+=======
+         * - field: The name of field that will be used to compare with current one
+>>>>>>> yzw
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
@@ -3235,7 +3298,11 @@
          *  {
          *      <fieldName>: <fieldValue>
          *  }
+<<<<<<< HEAD
          * - ydemo [optional]: Override the field ydemo for the request.
+=======
+         * - name [optional]: Override the field name for the request.
+>>>>>>> yzw
          * - message: The invalid message
          * @returns {Boolean|Deferred}
          */
@@ -3619,9 +3686,15 @@
                 "(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}" +
                 "(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))" +
                 "|" +
+<<<<<<< HEAD
                 // host ydemo
                 "(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)" +
                 // domain ydemo
+=======
+                // host name
+                "(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)" +
+                // domain name
+>>>>>>> yzw
                 "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*" +
                 // TLD identifier
                 "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))" +

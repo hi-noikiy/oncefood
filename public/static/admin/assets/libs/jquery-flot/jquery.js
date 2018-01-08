@@ -143,7 +143,11 @@ jQuery.fn = jQuery.prototype = {
 					// nodes that are no longer in the document #6963
 					if ( elem && elem.parentNode ) {
 						// Handle the case where IE and Opera return items
+<<<<<<< HEAD
 						// by ydemo instead of ID
+=======
+						// by name instead of ID
+>>>>>>> yzw
 						if ( elem.id !== match[2] ) {
 							return rootjQuery.find( selector );
 						}
@@ -1372,7 +1376,11 @@ jQuery.support = (function() {
 
 	input.setAttribute( "checked", "checked" );
 
+<<<<<<< HEAD
 	// #11217 - WebKit loses check when the ydemo is after the checked attribute
+=======
+	// #11217 - WebKit loses check when the name is after the checked attribute
+>>>>>>> yzw
 	input.setAttribute( "name", "t" );
 
 	div.appendChild( input );
@@ -2425,7 +2433,11 @@ jQuery.extend({
 		notxml = nType !== 1 || !jQuery.isXMLDoc( elem );
 
 		if ( notxml ) {
+<<<<<<< HEAD
 			// Fix ydemo and attach hooks
+=======
+			// Fix name and attach hooks
+>>>>>>> yzw
 			name = jQuery.propFix[ name ] || name;
 			hooks = jQuery.propHooks[ name ];
 		}
@@ -2483,7 +2495,11 @@ boolHook = {
 			jQuery.removeAttr( elem, name );
 		} else {
 			// value is true since we know at this point it's type boolean and not false
+<<<<<<< HEAD
 			// Set boolean attributes to the same ydemo and set the DOM property
+=======
+			// Set boolean attributes to the same name and set the DOM property
+>>>>>>> yzw
 			propName = jQuery.propFix[ name ] || name;
 			if ( propName in elem ) {
 				// Only set the IDL specifically if it already exists on the element
@@ -2954,7 +2970,11 @@ jQuery.event = {
 			if ( (!special._default || special._default.apply( elem.ownerDocument, data ) === false) &&
 				!(type === "click" && jQuery.nodeName( elem, "a" )) && jQuery.acceptData( elem ) ) {
 
+<<<<<<< HEAD
 				// Call a native DOM method on the target with the same ydemo ydemo as the event.
+=======
+				// Call a native DOM method on the target with the same name name as the event.
+>>>>>>> yzw
 				// Can't use an .isFunction() check here because IE6/7 fails that test.
 				// Don't do default actions on window, that's where global variables be (#6170)
 				// IE<9 dies on focus/blur to hidden element (#1486)
@@ -3229,7 +3249,11 @@ jQuery.removeEvent = document.removeEventListener ?
 		if ( elem.detachEvent ) {
 
 			// #8545, #7054, preventing memory leaks for custom events in IE6-8
+<<<<<<< HEAD
 			// detachEvent needed property on element, by ydemo of that event, to properly expose it to GC
+=======
+			// detachEvent needed property on element, by name of that event, to properly expose it to GC
+>>>>>>> yzw
 			if ( typeof elem[ name ] === "undefined" ) {
 				elem[ name ] = null;
 			}
@@ -3361,7 +3385,11 @@ if ( !jQuery.support.submitBubbles ) {
 
 			// Lazy-add a submit handler when a descendant form may potentially be submitted
 			jQuery.event.add( this, "click._submit keypress._submit", function( e ) {
+<<<<<<< HEAD
 				// Node ydemo check avoids a VML-related crash in IE (#9807)
+=======
+				// Node name check avoids a VML-related crash in IE (#9807)
+>>>>>>> yzw
 				var elem = e.target,
 					form = jQuery.nodeName( elem, "input" ) || jQuery.nodeName( elem, "button" ) ? elem.form : undefined;
 				if ( form && !jQuery._data( form, "_submit_attached" ) ) {
@@ -3779,7 +3807,11 @@ var cachedruns,
 	matchExpr = {
 		"ID": new RegExp( "^#(" + characterEncoding + ")" ),
 		"CLASS": new RegExp( "^\\.(" + characterEncoding + ")" ),
+<<<<<<< HEAD
 		"NAME": new RegExp( "^\\[ydemo=['\"]?(" + characterEncoding + ")['\"]?\\]" ),
+=======
+		"NAME": new RegExp( "^\\[name=['\"]?(" + characterEncoding + ")['\"]?\\]" ),
+>>>>>>> yzw
 		"TAG": new RegExp( "^(" + characterEncoding.replace( "w", "w*" ) + ")" ),
 		"ATTR": new RegExp( "^" + attributes ),
 		"PSEUDO": new RegExp( "^" + pseudos ),
@@ -3841,12 +3873,20 @@ var cachedruns,
 		return div.getElementsByClassName("e").length === 2;
 	}),
 
+<<<<<<< HEAD
 	// Check if getElementById returns elements by ydemo
+=======
+	// Check if getElementById returns elements by name
+>>>>>>> yzw
 	// Check if getElementsByName privileges form controls or returns elements by ID
 	assertUsableName = assert(function( div ) {
 		// Inject content
 		div.id = expando + 0;
+<<<<<<< HEAD
 		div.innerHTML = "<a ydemo='" + expando + "'></a><div ydemo='" + expando + "'></div>";
+=======
+		div.innerHTML = "<a name='" + expando + "'></a><div name='" + expando + "'></div>";
+>>>>>>> yzw
 		docElem.insertBefore( div, docElem.firstChild );
 
 		// Test
@@ -3903,7 +3943,11 @@ function Sizzle( selector, context, results, seed ) {
 					// nodes that are no longer in the document #6963
 					if ( elem && elem.parentNode ) {
 						// Handle the case where IE, Opera, and Webkit return items
+<<<<<<< HEAD
 						// by ydemo instead of ID
+=======
+						// by name instead of ID
+>>>>>>> yzw
 						if ( elem.id === m ) {
 							results.push( elem );
 							return results;
@@ -6256,7 +6300,11 @@ jQuery.extend({
 
 			// Weird iteration because IE will replace the length property
 			// with an element if you are cloning the body and one of the
+<<<<<<< HEAD
 			// elements on the page has a ydemo or id of "length"
+=======
+			// elements on the page has a name or id of "length"
+>>>>>>> yzw
 			for ( i = 0; srcElements[i]; ++i ) {
 				// Ensure that the destination node is not null; Fixes #9587
 				if ( destElements[i] ) {
@@ -6709,7 +6757,11 @@ jQuery.extend({
 			return;
 		}
 
+<<<<<<< HEAD
 		// Make sure that we're working with the right ydemo
+=======
+		// Make sure that we're working with the right name
+>>>>>>> yzw
 		var ret, type, hooks,
 			origName = jQuery.camelCase( name ),
 			style = elem.style;
@@ -6765,7 +6817,11 @@ jQuery.extend({
 		var val, num, hooks,
 			origName = jQuery.camelCase( name );
 
+<<<<<<< HEAD
 		// Make sure that we're working with the right ydemo
+=======
+		// Make sure that we're working with the right name
+>>>>>>> yzw
 		name = jQuery.cssProps[ origName ] || ( jQuery.cssProps[ origName ] = vendorPropName( elem.style, origName ) );
 
 		// gets hook for the prefixed version
@@ -8188,7 +8244,11 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 	// Handle iff the expected data type is "jsonp" or we have a parameter to set
 	if ( s.dataTypes[ 0 ] === "jsonp" || replaceInUrl || replaceInData ) {
 
+<<<<<<< HEAD
 		// Get callback ydemo, remembering preexisting value associated with it
+=======
+		// Get callback name, remembering preexisting value associated with it
+>>>>>>> yzw
 		callbackName = s.jsonpCallback = jQuery.isFunction( s.jsonpCallback ) ?
 			s.jsonpCallback() :
 			s.jsonpCallback;
@@ -8229,7 +8289,11 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 				// make sure that re-using the options doesn't screw things around
 				s.jsonpCallback = originalSettings.jsonpCallback;
 
+<<<<<<< HEAD
 				// save the callback ydemo for future use
+=======
+				// save the callback name for future use
+>>>>>>> yzw
 				oldCallbacks.push( callbackName );
 			}
 
@@ -8745,7 +8809,11 @@ function propFilter( props, specialEasing ) {
 			delete props[ name ];
 
 			// not quite $.extend, this wont overwrite keys already present.
+<<<<<<< HEAD
 			// also - reusing 'index' from above because we have the correct "ydemo"
+=======
+			// also - reusing 'index' from above because we have the correct "name"
+>>>>>>> yzw
 			for ( index in value ) {
 				if ( !( index in props ) ) {
 					props[ index ] = value[ index ];
@@ -9462,7 +9530,11 @@ window.jQuery = window.$ = jQuery;
 // but not use a proper concatenation script that understands anonymous
 // AMD modules. A named AMD is safest and most robust way to register.
 // Lowercase jquery is used because AMD module names are derived from
+<<<<<<< HEAD
 // file names, and jQuery is normally delivered in a lowercase file ydemo.
+=======
+// file names, and jQuery is normally delivered in a lowercase file name.
+>>>>>>> yzw
 // Do this after creating the global so that if an AMD module wants to call
 // noConflict to hide this version of jQuery, it will work.
 if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
