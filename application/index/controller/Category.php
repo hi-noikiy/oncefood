@@ -54,8 +54,12 @@ class Category extends Controller
     {
 
         $yshop = Db::name('yshop')->where(['id'=>$id])->find();
+//        商店轮播
         $yshop_banner = Db::name('yshop_banner')->field('icon')->where(['sid'=>$yshop['id'],'display'=>1])->select();
+//        商店室内环境
         $yshop_show = Db::name('yshop_show')->where(['sid'=>$yshop['id'],'display'=>1])->select();
+//        菜单
+
         return view('index@category/shop',[
             'ban' => $yshop_banner,
             'sh' => $yshop_show
