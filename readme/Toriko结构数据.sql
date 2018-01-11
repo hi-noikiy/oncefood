@@ -27,6 +27,14 @@ CREATE TABLE `lamp_attr` (
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of lamp_attr
+-- ----------------------------
+INSERT INTO `lamp_attr` VALUES ('1', '露台', '1');
+INSERT INTO `lamp_attr` VALUES ('2', '卡拉OK', '1');
+INSERT INTO `lamp_attr` VALUES ('3', '榻榻米', '1');
+INSERT INTO `lamp_attr` VALUES ('4', '日语服务', '1');
+
+-- ----------------------------
 -- Table structure for lamp_banner
 -- ----------------------------
 DROP TABLE IF EXISTS `lamp_banner`;
@@ -36,6 +44,12 @@ CREATE TABLE `lamp_banner` (
   `display` tinyint(1) DEFAULT '1' COMMENT '状态 1-显示 2-隐藏',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lamp_banner
+-- ----------------------------
+INSERT INTO `lamp_banner` VALUES ('16', '20180104/cd5de7402a3e4ead87ffd343c9f3c602.jpg', '1');
+INSERT INTO `lamp_banner` VALUES ('17', '20180104/74e948dc1cc75b98ee5a9f6e8438ab93.jpg', '1');
 
 -- ----------------------------
 -- Table structure for lamp_category
@@ -52,6 +66,27 @@ CREATE TABLE `lamp_category` (
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of lamp_category
+-- ----------------------------
+INSERT INTO `lamp_category` VALUES ('1', '中华盛宴', '0', '0,', '1');
+INSERT INTO `lamp_category` VALUES ('2', '日式料理', '0', '0,', '1');
+INSERT INTO `lamp_category` VALUES ('3', '韩式料理', '0', '0,', '1');
+INSERT INTO `lamp_category` VALUES ('4', '西式餐点', '0', '0,', '1');
+INSERT INTO `lamp_category` VALUES ('5', '异域风情', '0', '0,', '1');
+INSERT INTO `lamp_category` VALUES ('6', '鲁菜', '1', '0,1,', '1');
+INSERT INTO `lamp_category` VALUES ('7', '粤菜', '1', '0,1,', '1');
+INSERT INTO `lamp_category` VALUES ('8', '苏菜', '1', '0,1,', '1');
+INSERT INTO `lamp_category` VALUES ('9', '浙菜', '1', '0,1,', '1');
+INSERT INTO `lamp_category` VALUES ('10', '闽菜', '1', '0,1,', '1');
+INSERT INTO `lamp_category` VALUES ('11', '湘菜', '1', '0,1,', '1');
+INSERT INTO `lamp_category` VALUES ('12', '徽菜', '1', '0,1,', '1');
+INSERT INTO `lamp_category` VALUES ('13', '川菜', '1', '0,1,', '1');
+INSERT INTO `lamp_category` VALUES ('14', '日式小火锅', '2', '0,2,', '1');
+INSERT INTO `lamp_category` VALUES ('15', '部队火锅', '3', '0,3,', '1');
+INSERT INTO `lamp_category` VALUES ('16', '披萨', '4', '0,4,', '1');
+INSERT INTO `lamp_category` VALUES ('17', '冬阴功', '5', '0,5,', '1');
+
+-- ----------------------------
 -- Table structure for lamp_comment
 -- ----------------------------
 DROP TABLE IF EXISTS `lamp_comment`;
@@ -65,6 +100,11 @@ CREATE TABLE `lamp_comment` (
   KEY `zid` (`zid`),
   KEY `orid` (`orid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lamp_comment
+-- ----------------------------
+INSERT INTO `lamp_comment` VALUES ('1', '23', '1', '<p></p><p>xxx</p>', '1');
 
 -- ----------------------------
 -- Table structure for lamp_company
@@ -89,6 +129,12 @@ CREATE TABLE `lamp_company` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of lamp_company
+-- ----------------------------
+INSERT INTO `lamp_company` VALUES ('1', 'yzw', '上海食品商店', 'e10adc3949ba59abbe56e057f20f883e', '18291042861', '2713497141', 'yinzhanwei1008@163.com', '河北衡水', '2', null);
+INSERT INTO `lamp_company` VALUES ('2', 'we', '11', 'e10adc3949ba59abbe56e057f20f883e', '111111111', '11', '11', '11', '2', null);
+
+-- ----------------------------
 -- Table structure for lamp_menu_pic
 -- ----------------------------
 DROP TABLE IF EXISTS `lamp_menu_pic`;
@@ -99,6 +145,10 @@ CREATE TABLE `lamp_menu_pic` (
   `new` tinyint(1) DEFAULT '2' COMMENT '1-新 2-非新',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lamp_menu_pic
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for lamp_newarr
@@ -115,6 +165,10 @@ CREATE TABLE `lamp_newarr` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of lamp_newarr
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for lamp_node
 -- ----------------------------
 DROP TABLE IF EXISTS `lamp_node`;
@@ -127,6 +181,26 @@ CREATE TABLE `lamp_node` (
   PRIMARY KEY (`id`),
   KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lamp_node
+-- ----------------------------
+INSERT INTO `lamp_node` VALUES ('1', '浏览用户', 'Rabc', 'index', '1');
+INSERT INTO `lamp_node` VALUES ('2', '添加用户', 'Rabc', 'add', '1');
+INSERT INTO `lamp_node` VALUES ('3', '删除用户', 'Rabc', 'delete', '1');
+INSERT INTO `lamp_node` VALUES ('4', '修改用户', 'Rabc', 'edit', '1');
+INSERT INTO `lamp_node` VALUES ('5', '浏览角色', 'Role', 'index', '1');
+INSERT INTO `lamp_node` VALUES ('6', '添加角色', 'Role', 'add', '1');
+INSERT INTO `lamp_node` VALUES ('7', '删除角色', 'Role', 'delete', '1');
+INSERT INTO `lamp_node` VALUES ('8', '编辑角色', 'Role', 'edit', '1');
+INSERT INTO `lamp_node` VALUES ('9', '浏览节点', 'Jur', 'index', '1');
+INSERT INTO `lamp_node` VALUES ('10', '添加节点', 'Jur', 'add', '1');
+INSERT INTO `lamp_node` VALUES ('11', '删除节点', 'Jur', 'delete', '1');
+INSERT INTO `lamp_node` VALUES ('12', '修改节点', 'Jur', 'edit', '1');
+INSERT INTO `lamp_node` VALUES ('13', '浏览角色分配页', 'Role', 'read', '1');
+INSERT INTO `lamp_node` VALUES ('14', '执行分配权限', 'Role', 'UpdataNode', '1');
+INSERT INTO `lamp_node` VALUES ('15', '浏览分配角色页', 'Rabc', 'read', '1');
+INSERT INTO `lamp_node` VALUES ('16', '执行分配角色', 'Rabc', 'UpRole', '1');
 
 -- ----------------------------
 -- Table structure for lamp_order
@@ -148,6 +222,12 @@ CREATE TABLE `lamp_order` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of lamp_order
+-- ----------------------------
+INSERT INTO `lamp_order` VALUES ('1', '262431515639552', '23', '1', '1515639552', '55555555555555', '55555555555', '55555555555', '1', '4');
+INSERT INTO `lamp_order` VALUES ('6', '249101515641226', '23', '1', '1515641226', '123', '123', '55555555555', '0', '5');
+
+-- ----------------------------
 -- Table structure for lamp_role
 -- ----------------------------
 DROP TABLE IF EXISTS `lamp_role`;
@@ -161,6 +241,14 @@ CREATE TABLE `lamp_role` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of lamp_role
+-- ----------------------------
+INSERT INTO `lamp_role` VALUES ('1', '网站管理员', '1', '维护网站');
+INSERT INTO `lamp_role` VALUES ('2', '栏目编辑', '1', '负责网站栏目管理');
+INSERT INTO `lamp_role` VALUES ('3', '网站客服', '1', '负责客户管理');
+INSERT INTO `lamp_role` VALUES ('4', '普通员工', '1', '无');
+
+-- ----------------------------
 -- Table structure for lamp_role_node
 -- ----------------------------
 DROP TABLE IF EXISTS `lamp_role_node`;
@@ -170,6 +258,33 @@ CREATE TABLE `lamp_role_node` (
   KEY `groupId` (`rid`),
   KEY `nodeId` (`nid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lamp_role_node
+-- ----------------------------
+INSERT INTO `lamp_role_node` VALUES ('4', '1');
+INSERT INTO `lamp_role_node` VALUES ('4', '5');
+INSERT INTO `lamp_role_node` VALUES ('4', '9');
+INSERT INTO `lamp_role_node` VALUES ('7', '1');
+INSERT INTO `lamp_role_node` VALUES ('7', '5');
+INSERT INTO `lamp_role_node` VALUES ('7', '9');
+INSERT INTO `lamp_role_node` VALUES ('3', '1');
+INSERT INTO `lamp_role_node` VALUES ('3', '5');
+INSERT INTO `lamp_role_node` VALUES ('3', '9');
+INSERT INTO `lamp_role_node` VALUES ('2', '1');
+INSERT INTO `lamp_role_node` VALUES ('2', '2');
+INSERT INTO `lamp_role_node` VALUES ('2', '3');
+INSERT INTO `lamp_role_node` VALUES ('2', '4');
+INSERT INTO `lamp_role_node` VALUES ('2', '5');
+INSERT INTO `lamp_role_node` VALUES ('2', '6');
+INSERT INTO `lamp_role_node` VALUES ('2', '7');
+INSERT INTO `lamp_role_node` VALUES ('2', '8');
+INSERT INTO `lamp_role_node` VALUES ('2', '9');
+INSERT INTO `lamp_role_node` VALUES ('2', '10');
+INSERT INTO `lamp_role_node` VALUES ('2', '11');
+INSERT INTO `lamp_role_node` VALUES ('2', '12');
+INSERT INTO `lamp_role_node` VALUES ('2', '13');
+INSERT INTO `lamp_role_node` VALUES ('2', '15');
 
 -- ----------------------------
 -- Table structure for lamp_user
@@ -185,6 +300,12 @@ CREATE TABLE `lamp_user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of lamp_user
+-- ----------------------------
+INSERT INTO `lamp_user` VALUES ('1', 'admin', '超级管理员', 'e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO `lamp_user` VALUES ('2', 'sunma', '文斌', '202cb962ac59075b964b07152d234b70');
+
+-- ----------------------------
 -- Table structure for lamp_user_role
 -- ----------------------------
 DROP TABLE IF EXISTS `lamp_user_role`;
@@ -194,6 +315,14 @@ CREATE TABLE `lamp_user_role` (
   KEY `group_id` (`rid`),
   KEY `user_id` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lamp_user_role
+-- ----------------------------
+INSERT INTO `lamp_user_role` VALUES ('3', '5');
+INSERT INTO `lamp_user_role` VALUES ('7', '5');
+INSERT INTO `lamp_user_role` VALUES ('2', '1');
+INSERT INTO `lamp_user_role` VALUES ('2', '13');
 
 -- ----------------------------
 -- Table structure for lamp_yshop
@@ -217,6 +346,16 @@ CREATE TABLE `lamp_yshop` (
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of lamp_yshop
+-- ----------------------------
+INSERT INTO `lamp_yshop` VALUES ('1', '大渔烧烤', '6', '1', '32', null, '232222', '200', '2', '1', '徐汇区');
+INSERT INTO `lamp_yshop` VALUES ('6', '梅亭', '6', '1', '56068888', '', '长乐路', null, '2', '1', '12');
+INSERT INTO `lamp_yshop` VALUES ('7', '沪蝶', '9', '1', '56956444', '8点~21点', '新村路', null, '1', '2', '静安');
+INSERT INTO `lamp_yshop` VALUES ('8', '惠比寿', '14', '1', '21', '12', '21', null, '1', '2', '21');
+INSERT INTO `lamp_yshop` VALUES ('9', '釜山料理', '6', '2', '12', '21', '12', null, '1', '2', '21');
+INSERT INTO `lamp_yshop` VALUES ('11', '八海山', '14', '1', '13623372463', '21', '21', null, '1', '2', '普陀区');
+
+-- ----------------------------
 -- Table structure for lamp_yshop_attr
 -- ----------------------------
 DROP TABLE IF EXISTS `lamp_yshop_attr`;
@@ -226,6 +365,10 @@ CREATE TABLE `lamp_yshop_attr` (
   KEY `shopId` (`sid`),
   KEY `attrId` (`aid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lamp_yshop_attr
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for lamp_yshop_banner
@@ -241,6 +384,16 @@ CREATE TABLE `lamp_yshop_banner` (
 ) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of lamp_yshop_banner
+-- ----------------------------
+INSERT INTO `lamp_yshop_banner` VALUES ('28', '6', '20180105\\43c2df5501b98bd6b7b047e5b3286574.PNG', '1', '0');
+INSERT INTO `lamp_yshop_banner` VALUES ('29', '7', '20180105\\c03bbc7f7d0bcd23a29643d5d098d280.PNG', '1', '0');
+INSERT INTO `lamp_yshop_banner` VALUES ('36', '1', '20180107/a96ff5db4779d11b12b0f814bc61213e.jpg', '2', '2');
+INSERT INTO `lamp_yshop_banner` VALUES ('37', '1', '20180107/f62c2a1bc560986b625a01a7fb2052e1.jpg', '2', '2');
+INSERT INTO `lamp_yshop_banner` VALUES ('38', '1', '20180107/77729eb6ff4ce8dae71dce2b6eab22ca.jpg', '1', '2');
+INSERT INTO `lamp_yshop_banner` VALUES ('39', '1', '20180107/054f63a79e4dd015df59d105aa26c9d7.jpg', '1', '2');
+
+-- ----------------------------
 -- Table structure for lamp_yshop_comment
 -- ----------------------------
 DROP TABLE IF EXISTS `lamp_yshop_comment`;
@@ -253,6 +406,12 @@ CREATE TABLE `lamp_yshop_comment` (
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of lamp_yshop_comment
+-- ----------------------------
+INSERT INTO `lamp_yshop_comment` VALUES ('24', '1', '<p>55555555555555555555</p>', '1');
+INSERT INTO `lamp_yshop_comment` VALUES ('25', '1', '<p>32555555555555555555555555555555555555555555555555555555555555555555555555555555555</p>11111111111111111111', '2');
+
+-- ----------------------------
 -- Table structure for lamp_yshop_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `lamp_yshop_menu`;
@@ -263,6 +422,10 @@ CREATE TABLE `lamp_yshop_menu` (
   `price` int(11) DEFAULT NULL COMMENT '价格',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lamp_yshop_menu
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for lamp_yshop_show
@@ -278,6 +441,14 @@ CREATE TABLE `lamp_yshop_show` (
   `status` tinyint(1) DEFAULT '2' COMMENT '1-上线 2-未上线',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lamp_yshop_show
+-- ----------------------------
+INSERT INTO `lamp_yshop_show` VALUES ('24', '1', '日式铁板烧', '20180106/8508b066382ac05d3debbf5ca16ef124.jpg', '1', '1', '1');
+INSERT INTO `lamp_yshop_show` VALUES ('25', '6', '日式小火锅', '20180106/38e5325bb9f18f3c9e1d98b41f519af4.jpg', '1', '1', '1');
+INSERT INTO `lamp_yshop_show` VALUES ('26', '1', '环境优雅', '20180106/5063b573a59d49b1411a28300c4c8eaa.jpg', '1', '2', '2');
+INSERT INTO `lamp_yshop_show` VALUES ('30', '1', '1111', '20180108/4a32fa7be30c10dc47ee993637744faf.jpg', '2', '2', '2');
 
 -- ----------------------------
 -- Table structure for lamp_zuser
@@ -297,4 +468,9 @@ CREATE TABLE `lamp_zuser` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `tel` (`tel`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lamp_zuser
+-- ----------------------------
+INSERT INTO `lamp_zuser` VALUES ('23', '18621695842', 'e10adc3949ba59abbe56e057f20f883e', 'wst', '20180107/28f6c0bd1b4468d7b337e86bda3a344d.jpg', '2', '1', '1996-02-18', 'zmj321284', '676499058@qq.com');
 SET FOREIGN_KEY_CHECKS=1;
